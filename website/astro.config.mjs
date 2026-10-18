@@ -27,6 +27,17 @@ export default defineConfig({
         { slug: 'docs/install', label: 'Installation', translations: { en: 'Installation' } },
         { slug: 'docs/guide', label: 'Dein erster Auftrag', translations: { en: 'Your first task' } },
       ],
+    }, {
+      label: 'Workflow & Referenz',
+      translations: { en: 'Workflow & reference' },
+      items: [
+        { slug: 'docs/workflow', label: 'Ablauf & Profile', translations: { en: 'Lifecycle & profiles' } },
+        { slug: 'docs/approvals', label: 'Freigaben & Review', translations: { en: 'Approvals & review' } },
+        { slug: 'docs/memory', label: 'Zustände & Snapshots', translations: { en: 'State & snapshots' } },
+        { slug: 'docs/checks', label: 'Prüfbefehle', translations: { en: 'Validator commands' } },
+        { slug: 'docs/registry', label: 'Registry & externe Skills', translations: { en: 'Registry & external skills' } },
+        { slug: 'docs/limits', label: 'Grenzen & Wiederaufnahme', translations: { en: 'Limits & recovery' } },
+      ],
     }],
     editLink: { baseUrl: 'https://github.com/YoungJibbit95/ltd-skill/edit/main/website/' },
     lastUpdated: false,

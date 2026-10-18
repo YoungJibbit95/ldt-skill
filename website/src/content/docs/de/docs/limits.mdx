@@ -1,0 +1,39 @@
+---
+title: Grenzen und Wiederaufnahme
+description: Veraltete Reviews, fehlende Werkzeuge, manuelle Abdeckung und ehrliche Aussagen über den tatsächlichen Entwicklungsstand.
+---
+
+import SourceNote from '../../../../components/SourceNote.astro';
+
+<SourceNote file="references/approvals.md" />
+
+Der Skill ist ein Arbeitsablauf mit lokalen Prüfhilfen. Er ist kein Berechtigungssystem, keine permanente Agentenplattform und kein Nachweis für die Wahrheit gespeicherter Behauptungen.
+
+## Wenn sich die Quelle geändert hat
+
+1. Lies Zustand, referenzierten Vorschlag, Git-Stand und tatsächliche Änderungen.
+2. Bewahre die vorige Revision, Entscheidungen und Fehler-/Review-Zusammenfassung auf.
+3. Ein veralteter Review wird zurückgesetzt; betroffene Checks werden `not_run`, nicht stillschweigend erfolgreich. Frühere Ausnahmen bleiben als historische Entscheidungen nachvollziehbar.
+4. Prüfe, ob die Architekturfreigabe weiterhin denselben Umfang deckt. Eine wesentliche Änderung braucht einen neuen Vorschlag.
+5. Repariere im freigegebenen Umfang, führe die betroffenen Checks und den Review erneut durch und erfasse einen frischen Snapshot.
+6. Lege das neue konkrete Ergebnis zur Freigabe vor.
+
+Eine alte Freigabe mit einem anderen Quellstand-Snapshot darf die neue Revision nicht als bereits abgenommen darstellen.
+
+## Wenn menschliche Evidenz fehlt
+
+Eine lokal gespeicherte Zustimmung allein authentifiziert keine Person. Der Agent gleicht verfügbare Gesprächs- oder Review-Belege ab. Fehlt der tatsächliche Entscheid oder ist der Umfang unklar, wird die konkrete Fassung mit dir geklärt. Schweigen, Werkzeugrechte und Test-Erfolg sind kein Ersatz.
+
+## Wenn Tools oder Reviewer fehlen
+
+Fehlende Werkzeuge werden als **nicht verfügbar** ausgewiesen. Ein isolierter Kopiertest ist kein Codex-Erkennungstest. Ein nicht ausgeführter macOS-Test ist kein bestandenes macOS-Ergebnis. Eine Eigenprüfung ist kein unabhängiger Review. Die passende native Arbeitsweise ist möglich, solange vereinbarte Pflichtprüfungen und menschliche Entscheidungen eingehalten werden.
+
+Bei nicht unterstützten Snapshot-Eigenschaften ist automatische Freigabeprüfung nicht verfügbar. Eine menschlich vereinbarte manuelle Abdeckung benennt die erfassten Dateien, Revisionen, Prüfungen und verbleibenden Lücken. Sie wird nicht als erfolgreiches automatisches Gate ausgegeben.
+
+## Was noch kein fertiges Produktmerkmal ist
+
+CLI-, SDK-, Runtime-Adapter- und weitergehende Rollenentwürfe im Repository sind historische Vorschläge. Die Registry installiert keine Dritt-Skills. Diese Website führt keine Agenten für Besucher aus. Die [Demo](/ltd-skill/de/demo/) ist eine lokale Simulation; die [Fallstudie](/ltd-skill/de/built-with-littledevteam/) dokumentiert tatsächlich belegte Arbeit.
+
+## Warum lokale Daten lokal bleiben
+
+Projektzustände können interne Pfade und menschliche Entscheidungsbezüge enthalten. Diese Website übernimmt sie nicht automatisch. Für öffentliche Dokumentation werden nur bewusst ausgewählte Zusammenfassungen und passende öffentliche Artefakte verwendet. Zugangsdaten gehören nicht in Zustände, Screenshots oder Prüfprotokolle.

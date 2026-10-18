@@ -1,0 +1,58 @@
+---
+title: Prüfbefehle
+description: Die tatsächlichen read-only Python-Befehle für Pakete, Registry, Zustände, Digests und Snapshots.
+---
+
+import SourceNote from '../../../../components/SourceNote.astro';
+import CommandsTable from '../../../../components/CommandsTable.astro';
+
+<SourceNote file="scripts/validate.py" />
+
+Die Helfer benötigen Python ab 3.10 und verwenden die Standardbibliothek. Sie sind kein installiertes `ldt`-Programm. Starte sie aus dem Projektstamm oder verwende absolute Pfade zum vollständigen Skill-Ordner.
+
+## Übersicht
+
+<CommandsTable />
+
+Die Übersicht wird mit dem tatsächlichen `--help`-Befehl abgeglichen. Bei `registry` gibt `--migration-proposal` einen Entwurf auf stdout aus. Die Option gilt für Schema-1-Eingaben; sie ist keine automatische Schema-2-Installation.
+
+## Das Paket und beide Registry-Formate prüfen
+
+```sh
+python -B .agents/skills/architect-dev-team/scripts/validate.py package .agents/skills/architect-dev-team
+python -B .agents/skills/architect-dev-team/scripts/validate.py registry .agents/skills/architect-dev-team/registry/skills.json
+python -B .agents/skills/architect-dev-team/scripts/validate.py registry .agents/skills/architect-dev-team/registry/index.json
+```
+
+Erwartet werden `OK package` beziehungsweise `OK registry`. Nutze `python3` oder `py -3`, falls das dein Python-Befehl ist. Diese Prüfungen führen keine externen Kandidaten aus und kontaktieren keine Nachweis-URLs.
+
+## Zustand und Voraussetzungen prüfen
+
+Die folgenden Beispiele setzen einen bereits tatsächlich erzeugten Projektzustand und die darin referenzierten Dateien voraus. Für ein Gate brauchst du die zugehörigen echten Entscheidungen und Nachweise.
+
+```sh
+python -B .agents/skills/architect-dev-team/scripts/validate.py state .architect-dev-team/state.json --root .
+python -B .agents/skills/architect-dev-team/scripts/validate.py state .architect-dev-team/state.json --root . --gate implement
+python -B .agents/skills/architect-dev-team/scripts/validate.py scope .architect-dev-team/state.json
+python -B .agents/skills/architect-dev-team/scripts/validate.py digest .architect-dev-team/architecture.md
+python -B .agents/skills/architect-dev-team/scripts/validate.py snapshot .
+```
+
+Einige Phasen wenden Gates schon ohne explizite `--gate`-Option an. Ein leerer oder erfundener Zustand wird dadurch nicht zu einem freigegebenen Projekt.
+
+## Migrationsentwürfe ansehen
+
+```sh
+python -B .agents/skills/architect-dev-team/scripts/validate.py registry .agents/skills/architect-dev-team/registry/skills.json --migration-proposal
+python -B .agents/skills/architect-dev-team/scripts/validate.py migrate-state .architect-dev-team/legacy-state.json --root . --required-check "production build"
+```
+
+Der zweite Aufruf benötigt eine tatsächlich vorhandene Legacy-Datei; der Check-Name ist nur ein Beispiel und muss aus der abgestimmten Policy stammen. Wiederhole `--required-check` für jeden Pflichtcheck. Beide Befehle drucken JSON, wenden es aber nicht an. Beim Speichern sind UTF-8 ohne BOM und eine getrennte neue Datei wichtig; überschreibe das Original nicht mit einer pauschalen Shell-Umleitung.
+
+## Ausgaben und Fehler
+
+- Erfolgreiche Validierung oder Datenausgabe: Exitcode **0**.
+- Vom Helfer abgefangene ungültige Daten oder Dateifehler: `INVALID: …` auf stderr und Exitcode **1**.
+- Fehlerhafte Kommandozeilenargumente: argparse-Hilfe/Diagnose und Exitcode **2**.
+
+Unerwartete Laufzeitfehler sind kein erfolgreicher Check. Teile die konkrete Diagnose mit, ohne Zugangsdaten oder vollständige private Umgebungsvariablen zu veröffentlichen. Insbesondere Registry Schema 1 behält seine dokumentierten Parsergrenzen; nicht jeder mögliche alte API-Fehler wird zu einer Schema-2-Diagnose normalisiert.

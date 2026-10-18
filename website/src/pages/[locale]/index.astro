@@ -1,7 +1,7 @@
 ---
 import Page from '../../layouts/Page.astro';
 import OrbitMark from '../../components/OrbitMark.astro';
-import { pathFor, repository, type Locale } from '../../lib/site';
+import { pathFor, type Locale } from '../../lib/site';
 export function getStaticPaths() { return [{ params: { locale: 'de' } }, { params: { locale: 'en' } }]; }
 const locale = Astro.params.locale as Locale;
 const de = locale === 'de';
@@ -27,8 +27,8 @@ const t = de ? {
   steps: [['Verstehen', 'Auftrag & Projekt untersuchen'], ['Planen', 'Spezifikation & Architektur'], ['Entscheiden', 'Konkreten Vorschlag freigeben'], ['Entwickeln', 'Einen Meilenstein umsetzen'], ['Prüfen', 'Checks & Review durchführen'], ['Weitergehen', 'Ergebnis bewerten & fortsetzen']],
   guide: 'Zum praktischen Guide',
   builtLabel: 'DIESE WEBSITE IST DAS BEISPIEL.', builtTitle: 'Mit LittleDevTeam.', builtEnd: 'Für LittleDevTeam.',
-  builtText: 'Wir nutzen den Skill, um diese Website zu entwickeln. Der erste Schritt: ein freigegebener Plan, ein separater Arbeitsbereich und ein überschaubarer Meilenstein. Du siehst hier das Ergebnis dieses Einstiegs.',
-  builtLink: 'Plan und Entwicklung auf GitHub',
+  builtText: 'Wir nutzen den Skill, um diese Website zu entwickeln. Der erste Schritt: ein freigegebener Plan, ein separater Arbeitsbereich und ein überschaubarer Meilenstein. Der Einstieg wurde geprüft und freigegeben. Die Fallstudie verbindet die einzelnen Schritte mit echten Artefakten.',
+  builtLink: 'Die echte Entstehungsgeschichte',
   finalLabel: 'DEIN NÄCHSTES PROJEKT WARTET.', finalTitle: 'Eine Idee hast du schon?', finalText: 'Richte den Skill ein und starte mit einem Auftrag, den du gemeinsam mit deinem Agenten zu Ende denken kannst.',
   finalButton: 'Skill einrichten', finalSecondary: 'Erst die Dokumentation lesen',
 } : {
@@ -53,8 +53,8 @@ const t = de ? {
   steps: [['Understand', 'Inspect the task & project'], ['Plan', 'Specification & architecture'], ['Decide', 'Approve a concrete proposal'], ['Build', 'Implement one milestone'], ['Verify', 'Run checks & review'], ['Continue', 'Evaluate the result & iterate']],
   guide: 'Open the practical guide',
   builtLabel: 'THIS WEBSITE IS THE EXAMPLE.', builtTitle: 'Built with LittleDevTeam.', builtEnd: 'For LittleDevTeam.',
-  builtText: 'We use the skill to develop this website. The first step: an approved plan, a separate workspace, and a manageable milestone. This is the result of that initial slice.',
-  builtLink: 'Plan and development on GitHub',
+  builtText: 'We use the skill to develop this website. The first step: an approved plan, a separate workspace, and a manageable milestone. The entry experience was checked and approved. The case study connects each step to actual artifacts.',
+  builtLink: 'Read the actual project story',
   finalLabel: 'YOUR NEXT PROJECT IS WAITING.', finalTitle: 'Already have an idea?', finalText: 'Set up the skill and start with a task you and your agent can think through together.',
   finalButton: 'Set up the skill', finalSecondary: 'Read the documentation first',
 };
@@ -68,7 +68,7 @@ const t = de ? {
         <div class="eyebrow-pill"><span class="status-spark" aria-hidden="true"></span>{t.pill}<span class="pill-line" aria-hidden="true"></span><span class="pill-tag">LDT</span></div>
         <h1>{t.heading[0]}<br />{t.heading[1]}<br /><span class="gradient-text">{t.heading[2]}</span></h1>
         <p class="hero-intro">{t.intro}</p>
-        <div class="hero-buttons"><a class="button" href={pathFor(locale, 'docs/install')}>{t.start}<span aria-hidden="true">↗</span></a><a class="button button-ghost" href="#workflow">{t.explore}<span aria-hidden="true">↓</span></a></div>
+        <div class="hero-buttons"><a class="button" href={pathFor(locale, 'docs/install')}>{t.start}<span aria-hidden="true">↗</span></a><a class="button button-ghost" href={pathFor(locale, 'demo')}>{t.explore}<span aria-hidden="true">↓</span></a></div>
         <p class="hero-note"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2 3 5v5c0 4 7 8 7 8s7-4 7-8V5l-7-3Z" stroke="currentColor"/><path d="m6 10 3 3 5-6" stroke="currentColor"/></svg>{t.note}</p>
       </div>
       <div class="mission-scene">
@@ -99,6 +99,6 @@ const t = de ? {
       <a class="text-link" href={pathFor(locale, 'docs/guide')}>{t.guide}<span aria-hidden="true">↗</span></a>
     </div>
   </section>
-  <section class="built-section site-container section-space"><div class="built-visual" aria-hidden="true"><div class="built-ring ring-a"></div><div class="built-ring ring-b"></div><div class="built-ring ring-c"></div><div class="built-symbol"><OrbitMark /></div><span class="orbit-point point-a"></span><span class="orbit-point point-b"></span><span class="orbit-text">BUILT WITH THE WORKFLOW</span></div><div><p class="small-label section-label">{t.builtLabel}</p><h2 class="section-heading">{t.builtTitle}<br /><span class="muted-heading">{t.builtEnd}</span></h2><p class="body-copy">{t.builtText}</p><a class="text-link" href={`${repository}/blob/website/w1-nebula/docs/website-plan.md`}>{t.builtLink}<span aria-hidden="true">↗</span></a></div></section>
+  <section class="built-section site-container section-space"><div class="built-visual" aria-hidden="true"><div class="built-ring ring-a"></div><div class="built-ring ring-b"></div><div class="built-ring ring-c"></div><div class="built-symbol"><OrbitMark /></div><span class="orbit-point point-a"></span><span class="orbit-point point-b"></span><span class="orbit-text">BUILT WITH THE WORKFLOW</span></div><div><p class="small-label section-label">{t.builtLabel}</p><h2 class="section-heading">{t.builtTitle}<br /><span class="muted-heading">{t.builtEnd}</span></h2><p class="body-copy">{t.builtText}</p><a class="text-link" href={pathFor(locale, 'built-with-littledevteam')}>{t.builtLink}<span aria-hidden="true">↗</span></a></div></section>
   <section class="final-section site-container"><div class="final-glow" aria-hidden="true"></div><p class="small-label section-label">{t.finalLabel}</p><h2>{t.finalTitle}</h2><p>{t.finalText}</p><div class="hero-buttons"><a class="button" href={pathFor(locale, 'docs/install')}>{t.finalButton}<span aria-hidden="true">↗</span></a><a class="text-link" href={pathFor(locale, 'docs')}>{t.finalSecondary}<span aria-hidden="true">→</span></a></div></section>
 </Page>

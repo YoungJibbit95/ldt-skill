@@ -1,0 +1,45 @@
+---
+title: Lifecycle and effort profiles
+description: The complete LittleDevTeam lifecycle and its Lean, Balanced, and Rigorous profiles.
+---
+
+import SourceNote from '../../../../components/SourceNote.astro';
+
+<SourceNote file="SKILL.md" />
+
+LittleDevTeam organizes substantial engineering work into small, verifiable steps. It chooses the smallest useful plan and tool effort for the actual task.
+
+## The lifecycle
+
+| State phase | Purpose | Concrete output |
+| --- | --- | --- |
+| `INTAKE` | Receive the request | Goal and boundaries |
+| `DISCOVERY` | Inspect rules, sources, and working state | Actual state and open questions |
+| `SPECIFICATION` | Clarify desired behavior | Observable requirements |
+| `ARCHITECTURE` | Design the solution and milestone | Versioned proposal with required checks |
+| `APPROVAL` with `architecture` | Human architecture decision | Approval or revision request for the concrete scope |
+| `IMPLEMENTATION` | Implement one approved milestone | Bounded source change |
+| `VERIFICATION` | Execute relevant checks | Actual outcomes and limitations |
+| `PR_REVIEW` | Review and hand off the result | Concrete revision, review, and source snapshot |
+| `APPROVAL` with `iteration` | Evaluate the result | Human decision about this revision |
+| `NEXT_ITERATION` | Select the next step | A new concrete milestone |
+
+`APPROVAL` is one phase with two different `approval_stage` values. “PR REVIEW” is persisted as `PR_REVIEW` in JSON. Failed checks or rejected results lead to repair and renewed verification within the current scope. A material design change returns to the architecture decision.
+
+## Choose the appropriate profile
+
+| Profile | Typical use | Consequence |
+| --- | --- | --- |
+| **Lean** | A small, bounded change | Short proposal and targeted checks |
+| **Balanced** | Ordinary work across components | Proportionate architecture, small milestones, and relevant checks; the default |
+| **Rigorous** | Significant security, migration, or reliability risk | More evidence and actual independent-review requirements |
+
+Profiles adjust effort, not your authority. No profile replaces actual approval or turns a failed mandatory check into success. Changing the profile changes the scope fingerprint and may require renewed architecture approval.
+
+## Roles and tools
+
+One agent can perform several roles sequentially. Additional subagents are useful only when work can be separated cleanly and the session actually permits them. Without a separate reviewer, review remains self-review. The skill supplies neither a background service nor a fixed organization of bots.
+
+## From process to practice
+
+The [guide](/ltd-skill/en/docs/guide/) walks through a first task. The [demo](/ltd-skill/en/demo/) illustrates a fixed example. The [case study](/ltd-skill/en/built-with-littledevteam/) connects website development to actual public artifacts.

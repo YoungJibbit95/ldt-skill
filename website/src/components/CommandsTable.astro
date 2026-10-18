@@ -1,0 +1,7 @@
+---
+import commands from '../data/commands.json';
+const de = !Astro.url.pathname.includes('/en/');
+---
+<table><thead><tr><th>{de ? 'Befehl & Argumente' : 'Command & arguments'}</th><th>{de ? 'Verhalten' : 'Behavior'}</th><th>stdout</th></tr></thead><tbody>
+{commands.map(command => <tr><td><code>{command.name}</code><br /><small>{command.arguments}</small></td><td>{de ? command.de : command.en}</td><td><code>{command.output}</code></td></tr>)}
+</tbody></table>

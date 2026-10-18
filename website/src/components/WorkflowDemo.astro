@@ -1,0 +1,70 @@
+---
+import { demoCopy } from '../data/demo';
+import type { Locale } from '../lib/site';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = demoCopy[locale];
+---
+<ldt-demo>
+  <div class="demo-console-top"><span class="small-label">LDT / WORKFLOW LAB</span><span class="demo-simulation">{t.simulation}</span></div>
+  <p class="demo-scope">{t.scope}</p>
+  <nav class="demo-navigation" aria-label={t.nav}><ol>{t.steps.map((step, i) => <li><a href={`#stage-${step.id}`} data-stage-link={i}><span>0{i + 1}</span>{step.title}</a></li>)}</ol></nav>
+  <div class="demo-meta" aria-live="polite"><span data-progress>{t.progress} 1 {t.of} 8</span><span data-revision>{t.revision} 1</span><span data-approval>{t.pending}</span></div>
+  <div class="demo-stages">{t.steps.map((step, i) => <section id={`stage-${step.id}`} data-stage={i} aria-labelledby={`title-${step.id}`}>
+    <div class="demo-stage-number" aria-hidden="true">0{i + 1}<span> / 08</span></div>
+    <p class="small-label">{step.title}</p><h2 id={`title-${step.id}`} tabindex="-1">{step.label}</h2><p class="demo-stage-body">{step.body}</p>
+    <aside class="demo-artifact"><span class="small-label" data-artifact-title>{step.artifact}</span><p data-artifact-body>{step.detail}</p></aside>
+  </section>)}</div>
+  <noscript><p class="demo-nojs">{t.nojs}</p></noscript>
+  <p class="demo-feedback" data-feedback role="status" aria-live="polite"></p>
+  <div class="demo-controls"><button data-previous class="button button-ghost">← {t.previous}</button><div><button data-revise class="button button-ghost">{t.revise}</button><button data-approve class="button">{t.approve} ↗</button><button data-next class="button">{t.next} →</button></div></div>
+  <div class="demo-bottom"><span>{locale === 'de' ? 'Deine Entscheidungen bleiben in dieser Simulation.' : 'Your decisions stay within this simulation.'}</span><button data-reset>{t.reset} ↺</button></div>
+  <script type="application/json" data-demo-copy set:html={JSON.stringify(t).replace(/</g, '\u003c')} />
+</ldt-demo>
+
+<script>
+  import type { demoCopy } from '../data/demo';
+  type Copy = typeof demoCopy.de;
+  class WorkflowDemo extends HTMLElement {
+    connectedCallback() {
+      const t = JSON.parse(this.querySelector('[data-demo-copy]')!.textContent!) as Copy;
+      const panels = [...this.querySelectorAll<HTMLElement>('[data-stage]')];
+      const links = [...this.querySelectorAll<HTMLAnchorElement>('[data-stage-link]')];
+      const previous = this.querySelector<HTMLButtonElement>('[data-previous]')!;
+      const next = this.querySelector<HTMLButtonElement>('[data-next]')!;
+      const approve = this.querySelector<HTMLButtonElement>('[data-approve]')!;
+      const revise = this.querySelector<HTMLButtonElement>('[data-revise]')!;
+      const feedback = this.querySelector<HTMLElement>('[data-feedback]')!;
+      let stage = 0, revision = 1, approvedRevision: number | null = null;
+      const originalTitle = panels[2].querySelector('[data-artifact-title]')!.textContent;
+      const originalBody = panels[2].querySelector('[data-artifact-body]')!.textContent;
+      const render = () => {
+        panels.forEach((panel, i) => { panel.hidden = i !== stage; });
+        links.forEach((link, i) => { if (i === stage) link.setAttribute('aria-current', 'step'); else link.removeAttribute('aria-current'); });
+        this.querySelector('[data-progress]')!.textContent = `${t.progress} ${stage + 1} ${t.of} 8`;
+        this.querySelector('[data-revision]')!.textContent = `${t.revision} ${revision}`;
+        this.querySelector('[data-approval]')!.textContent = approvedRevision === revision ? t.approved : t.pending;
+        previous.disabled = stage === 0;
+        next.disabled = stage === 7;
+        next.hidden = stage === 3;
+        approve.hidden = stage !== 3;
+        revise.hidden = stage !== 2 && stage !== 3;
+        panels[2].querySelector('[data-artifact-title]')!.textContent = revision > 1 ? t.revisedHeading : originalTitle;
+        panels[2].querySelector('[data-artifact-body]')!.textContent = revision > 1 ? t.revisedBody : originalBody;
+      };
+      const go = (target: number) => {
+        feedback.textContent = '';
+        if (target >= 4 && approvedRevision !== revision) { feedback.textContent = t.locked; return; }
+        stage = Math.max(0, Math.min(7, target)); render();
+      };
+      links.forEach((link, i) => link.addEventListener('click', event => { event.preventDefault(); go(i); }));
+      previous.addEventListener('click', () => go(stage - 1));
+      next.addEventListener('click', () => go(stage + 1));
+      approve.addEventListener('click', () => { approvedRevision = revision; stage = 4; render(); feedback.textContent = t.approvedNotice; panels[stage].querySelector('h2')?.focus({ preventScroll: true }); });
+      revise.addEventListener('click', () => { revision = 2; approvedRevision = null; stage = 2; render(); feedback.textContent = t.revised; });
+      this.querySelector('[data-reset]')!.addEventListener('click', () => { stage = 0; revision = 1; approvedRevision = null; render(); feedback.textContent = t.resetNotice; });
+      this.setAttribute('data-enhanced', ''); render();
+    }
+  }
+  customElements.define('ldt-demo', WorkflowDemo);
+</script>

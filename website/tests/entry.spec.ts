@@ -51,8 +51,9 @@ for (const locale of ['de', 'en'] as const) {
   }
 
   test(`${locale}: no serious/critical accessibility violations`, async ({ page }) => {
+    test.setTimeout(90000);
     await page.setViewportSize({ width: 1440, height: 1000 });
-    for (const route of ['', 'docs/', 'docs/install/', 'docs/guide/']) {
+    for (const route of ['', 'docs/', 'docs/install/', 'docs/guide/', 'docs/workflow/', 'docs/approvals/', 'docs/memory/', 'docs/checks/', 'docs/registry/', 'docs/limits/', 'demo/', 'built-with-littledevteam/']) {
       await page.goto(`/ltd-skill/${locale}/${route}`);
       const result = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze();
       expect(result.violations.filter(v => ['serious', 'critical'].includes(v.impact ?? '')), JSON.stringify(result.violations, null, 2)).toEqual([]);

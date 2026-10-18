@@ -1,0 +1,57 @@
+---
+title: Zustände und Snapshots
+description: Projektgedächtnis, Schema 2, Umfangsfingerabdrücke und die Grenzen von Quellstand-Snapshots.
+---
+
+import SourceNote from '../../../../components/SourceNote.astro';
+
+<SourceNote file="references/project-memory.md" />
+
+Das Projektgedächtnis hält überprüfbare Fakten fest: aktiven Umfang, tatsächliche Entscheidungen, Prüfergebnisse, offene Punkte und den nächsten Schritt. Es speichert keine Zugangsdaten oder privaten Gedankengänge.
+
+## Dateien und Geltungsbereich
+
+```text
+.architect-dev-team/
+  state.json        aktiver Projektzustand
+  architecture.md   gespeicherter Vorschlag
+  review.json       Quellstand-Snapshot
+```
+
+Diese Pfade sind die Standardkonvention. Vorhandene passende Projektdokumente können wiederverwendet werden. Getrennte Arbeitsstränge brauchen getrennte Zustände: Die Website ersetzt beispielsweise nicht den Entwicklungszustand des Skills.
+
+## Der Zustandsvertrag
+
+Aktive automatische Gates verwenden **Schema 2**. Der Zustand bleibt unter 64 KiB und enthält:
+
+| Feld | Bedeutung |
+| --- | --- |
+| `schema_version`, `phase`, `approval_stage`, `profile` | Format, aktuelle Phase, Freigabestufe und Aufwandsprofil |
+| `architecture` | `null` oder Pfad und SHA-256 des Vorschlags |
+| `milestone` | `null` oder ID, Zusammenfassung, Abnahmekriterien und stabile Pflichtcheck-Namen |
+| `approvals` | Geordnete echte Entscheidungsnachweise mit Umfangs- und gegebenenfalls Review-Hash |
+| `checks` | Name, Pflichtstatus, tatsächliches Ergebnis, Evidenz und gegebenenfalls Ausnahme |
+| `review` | `null` oder Snapshot-Pfad/Hash, Unabhängigkeit und Review-Evidenz |
+| `completed`, `open_issues`, `constraints`, `next_action` | Kompakte Historie, Grenzen und nächster Schritt |
+
+Prüfergebnisse sind `passed`, `failed`, `not_run`, `unavailable` oder `waived`. Zeitstempel von Entscheidungen enthalten eine Zeitzone. Pfade für gebundene Artefakte sind reguläre Dateien relativ zum ausdrücklich angegebenen Projektstamm; keine Symlinks oder Pfadtraversierung.
+
+## Was ein Snapshot enthält
+
+Mit Git erfasst der Snapshot versionierte und nicht ignorierte neue Dateien, HEAD sowie Indexinformationen. Pro Datei enthält Schema 2 Pfad, Inhaltshash, Dateityp, relevante Ausführungsbits und gegebenenfalls Git-Modus, Blob und Stage. Fehlende versionierte Dateien bleiben als `missing` mit Indexbezug sichtbar.
+
+Auf Windows werden POSIX-Dateiausführungsbits als `null` angegeben. Aus Dateiendungen wird kein Linux-Ausführungsrecht erfunden; Git-Indexmodi werden weiterhin verglichen.
+
+Ohne Git erfolgt eine Dateisystem-Auflistung mit definierten Ausschlüssen. Verwaltete Zustände unter `.architect-dev-team` und generierte/versteckte Abhängigkeiten sind keine vollständige Deployment-Attestierung. Lege den Snapshot unter dem ausgeschlossenen verwalteten Verzeichnis ab, damit er sich nicht selbst hasht.
+
+## Wann die automatische Prüfung stoppt
+
+Unlesbare oder unvollständige Auflistungen, nicht unterstützte Dateinamen, Symlinks, Gitlinks/Submodule und ungelöste Indexkonflikte blockieren automatische Snapshots. Diese Diagnose darf nicht durch das Weglassen von Dateien versteckt werden. Behebe den Zustand oder vereinbare eine ausdrücklich menschlich bewertete manuelle Abdeckung und weise die Automatisierung als nicht verfügbar aus.
+
+Snapshots sind nicht atomar. Während der Erfassung und des Reviews darf sich die Quelle nicht parallel ändern. Nach einem neuen Commit ist auch HEAD anders; der Snapshot muss vor der Ergebnisfreigabe aktualisiert werden.
+
+## Ältere Zustände migrieren
+
+Schema 1 bleibt historisch lesbar, erfüllt aber keine aktiven automatischen Gates. `migrate-state` gibt einen **Entwurf auf stdout** aus. Es überschreibt nichts, übernimmt keine alte Freigabe für den neuen Umfang und ersetzt keine menschliche Entscheidung. Bewahre das Original und die alten Belege auf. Definiere die Pflichtcheck-Policy, prüfe den Entwurf und lasse den neuen konkreten Umfang freigeben, bevor du fortfährst.
+
+Die [Prüfbefehle](/ltd-skill/de/docs/checks/) zeigen den Aufruf. [Grenzen und Wiederaufnahme](/ltd-skill/de/docs/limits/) beschreiben den Umgang mit veralteten Belegen.

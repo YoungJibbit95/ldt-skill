@@ -1,0 +1,46 @@
+---
+title: Approvals and review
+description: Architecture, required checks, result approvals, and the distinction between review, merge, and deployment.
+---
+
+import SourceNote from '../../../../components/SourceNote.astro';
+
+<SourceNote file="references/approvals.md" />
+
+Approval is your decision about a concrete artifact. Tool permissions, an agent verdict, or a saved JSON file are not human consent.
+
+## Architecture approval
+
+Before implementation, the agent presents a versioned proposal with a milestone, acceptance criteria, profile, required checks, assumptions, and risks. The saved architecture reference contains a path and SHA-256. The scope fingerprint binds **that reference, the complete milestone including required-check policy, and the profile**.
+
+Your explicit agreement to that exact proposal is sufficient. Existing approval of an unchanged proposal does not need to be requested again. A material scope change is presented for a new decision before implementation.
+
+## Result approval
+
+Implementation and checks are followed by the concrete review state. It includes source revision, changes, actual check outcomes, review independence, open issues, and a current snapshot. Your result decision additionally binds the review snapshot hash. Subsequent source or HEAD changes make that snapshot stale.
+
+| Gate | Requires, in addition to valid state data |
+| --- | --- |
+| `implement` | Current architecture approval for the scope |
+| `review` | At least one required check, every required check satisfied, and a current snapshot |
+| `advance` | Current result approval for the same scope and review state |
+
+The latest decision of each kind applies. A later rejection supersedes an earlier approval; changed bindings are not covered by old consent.
+
+## Required checks and exceptions
+
+Required-check names are defined in the milestone before architecture approval. Removing, renaming, or demoting a check changes that policy. A failed mandatory check must be repaired.
+
+A genuinely unsuitable or unavailable required check can be recorded as `waived` only through an explicit human decision. The exception states its reason, evidence, and matching scope fingerprint. It is not a passed test. The result handoff must disclose the remaining limitation.
+
+## Self-review and independence
+
+Review by the implementing agent is **self-review**. Independent review comes from another actual agent or human. Rigorous requires independent review; its documented exception path needs a required `independent_review` check and an explicit, scope-bound human waiver. Other review requirements agreed in advance remain binding.
+
+## Merge and publication
+
+Approving a result permits moving to the next step. It does not automatically authorize merging or deployment. Each action needs authorization for the concrete revision.
+
+## Technical limit
+
+Local validation helpers check the consistency of records. They cannot authenticate a chat message or prevent external actions. Resuming a project means reconciling actual sources and available human decisions. Missing evidence is not replaced by editing approval files.

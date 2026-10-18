@@ -1,0 +1,16 @@
+---
+import { repository, sourceRevision } from '../lib/site';
+interface Props { file: string }
+const { file } = Astro.props;
+const de = !Astro.url.pathname.includes('/en/');
+---
+<aside class="source-note" aria-label={de ? 'Dokumentierter Quellstand' : 'Documented source revision'}>
+  <span>{de ? 'QUELLSTAND' : 'SOURCE REVISION'} · {sourceRevision.slice(0, 7)}</span>
+  <p>{de ? 'Diese Referenz beschreibt einen Entwicklungsstand. Die Quelle ist überprüfbar; daraus folgt keine abgeschlossene V2-Veröffentlichung.' : 'This reference describes a development snapshot. Its source is inspectable; this does not establish a finished V2 release.'}</p>
+  <a href={`${repository}/blob/${sourceRevision}/.agents/skills/architect-dev-team/${file}`}>{file} ↗</a>
+</aside>
+<style>
+  .source-note{padding:17px 20px;margin-block:24px;border:1px solid #ac8dc43b;border-radius:10px;background:#a679c308;font-size:12px;line-height:1.8}
+  .source-note>span{font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.06em;color:#c7a6e1}
+  .source-note>p{margin-block:7px;color:#b7a9c7}
+</style>

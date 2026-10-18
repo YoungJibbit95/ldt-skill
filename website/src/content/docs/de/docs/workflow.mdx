@@ -1,0 +1,45 @@
+---
+title: Ablauf und Aufwandsprofile
+description: Der vollständige LittleDevTeam-Lebenszyklus und die Profile Lean, Balanced und Rigorous.
+---
+
+import SourceNote from '../../../../components/SourceNote.astro';
+
+<SourceNote file="SKILL.md" />
+
+LittleDevTeam organisiert anspruchsvolle Entwicklungsarbeit in kleinen, überprüfbaren Schritten. Es wählt den kleinsten sinnvollen Plan und Werkzeugeinsatz für die tatsächliche Aufgabe.
+
+## Der Lebenszyklus
+
+| Phase im Zustand | Zweck | Konkretes Ergebnis |
+| --- | --- | --- |
+| `INTAKE` | Auftrag aufnehmen | Ziel und Grenzen |
+| `DISCOVERY` | Regeln, Quellen und Arbeitsstand untersuchen | Tatsächlicher Stand und offene Fragen |
+| `SPECIFICATION` | Gewünschtes Verhalten präzisieren | Überprüfbare Anforderungen |
+| `ARCHITECTURE` | Lösung und Meilenstein entwerfen | Versionierter Vorschlag mit Pflichtchecks |
+| `APPROVAL` mit `architecture` | Menschliche Architekturentscheidung | Freigabe oder Überarbeitungsauftrag für den konkreten Umfang |
+| `IMPLEMENTATION` | Einen freigegebenen Meilenstein umsetzen | Begrenzte Quelländerung |
+| `VERIFICATION` | Relevante Checks ausführen | Tatsächliche Ergebnisse und Grenzen |
+| `PR_REVIEW` | Ergebnis reviewen und übergeben | Konkrete Revision, Review und Quellstand-Snapshot |
+| `APPROVAL` mit `iteration` | Ergebnis bewerten | Menschliche Entscheidung über diese Revision |
+| `NEXT_ITERATION` | Nächsten Schritt auswählen | Neuer konkreter Meilenstein |
+
+`APPROVAL` ist dieselbe Phase mit zwei unterschiedlichen `approval_stage`-Werten. „PR REVIEW“ wird in JSON als `PR_REVIEW` gespeichert. Fehlgeschlagene Checks oder abgelehnte Ergebnisse führen zu Reparatur und erneuter Prüfung im aktuellen Umfang. Eine wesentliche Designänderung führt zurück zur Architekturentscheidung.
+
+## Das passende Profil
+
+| Profil | Typischer Einsatz | Konsequenz |
+| --- | --- | --- |
+| **Lean** | Kleine, klar abgegrenzte Änderung | Kurzer Vorschlag und gezielte Prüfung |
+| **Balanced** | Gewöhnliche Arbeit über mehrere Komponenten | Angemessene Architektur, kleine Meilensteine, relevante Checks; Standardprofil |
+| **Rigorous** | Wesentliche Sicherheits-, Migrations- oder Zuverlässigkeitsrisiken | Mehr Evidenz und tatsächliche unabhängige Review-Anforderungen |
+
+Das Profil steuert den Aufwand, nicht deine Autorität. Kein Profil ersetzt eine tatsächliche Freigabe oder macht einen fehlgeschlagenen Pflichtcheck erfolgreich. Ein Profilwechsel ändert den Umfangsfingerabdruck und kann eine erneute Architekturfreigabe erfordern.
+
+## Rollen und Werkzeuge
+
+Ein Agent kann mehrere Rollen nacheinander wahrnehmen. Zusätzliche Subagenten sind nur sinnvoll, wenn Aufgaben unabhängig und sauber abgrenzbar sind und die Sitzung sie tatsächlich erlaubt. Ohne getrennten Reviewer bleibt ein Review eine Eigenprüfung. Der Skill stellt weder einen Hintergrunddienst noch eine feste Bot-Organisation bereit.
+
+## Vom Ablauf zur Praxis
+
+Der [Guide](/ltd-skill/de/docs/guide/) führt einen ersten Auftrag durch diesen Prozess. Die [Demo](/ltd-skill/de/demo/) zeigt ein festes Beispiel. Die [Fallstudie](/ltd-skill/de/built-with-littledevteam/) verbindet die Website-Entwicklung mit tatsächlichen öffentlichen Artefakten.
