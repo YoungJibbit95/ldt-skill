@@ -17,7 +17,7 @@
   --sl-font:var(--font-body);
   --sl-font-system:var(--font-body);
   --sl-text-h1:2.7rem;
-  --sl-nav-height:7.4rem;
+  --sl-nav-height:8rem;
   --sl-content-width:50rem;
   --sl-sidebar-width:17.5rem
 }
@@ -38,7 +38,7 @@ header.header {
   gap:28px
 }
 .docs-search {
-  height:45px;
+  height:56px;
   display:flex;
   align-items:center;
   padding:0 24px 9px;
@@ -50,8 +50,8 @@ header.header {
   width:100%
 }
 .docs-search button[data-open-modal] {
-  height:30px;
-  font-size:11px!important;
+  min-height:44px;
+  font-size:14px!important;
   border-radius:7px;
   background:#161426;
   border-color:#54426760
@@ -66,10 +66,10 @@ header.header {
   gap:22px
 }
 .site-header.is-docs .desktop-nav a {
-  font-size:12px
+  font-size:14px
 }
 .sl-markdown-content {
-  font-size:15px;
+  font-size:16px;
   line-height:1.9
 }
 .sl-markdown-content h2,.sl-markdown-content h3 {
@@ -128,8 +128,8 @@ starlight-menu-button {
   z-index:60
 }
 starlight-menu-button button {
-  width:30px;
-  height:29px;
+  min-width:44px;
+  min-height:44px;
   background:#191527!important;
   border:1px solid #69517870!important;
   border-radius:5px
@@ -164,13 +164,13 @@ starlight-menu-button button {
     padding-right:20px
   }
   .sl-markdown-content {
-    font-size:14px
+    font-size:16px
   }
   .content-panel {
     padding-inline:1.25rem!important
   }
   .sl-markdown-content table {
-    font-size:12px
+    font-size:14px
   }
 }
 /* Keep site navigation and the documentation sidebar distinct on small screens. */
@@ -181,7 +181,7 @@ starlight-menu-button button {
     right:auto!important;
     inset-inline-end:auto!important;
     width:auto!important;
-    height:29px!important;
+    min-height:44px!important;
     gap:7px;
     padding:4px 10px!important;
     border:1px solid #69517870!important;
@@ -192,7 +192,7 @@ starlight-menu-button button {
   }
   .sl-menu-button:after {
     content:'Kapitel';
-    font-size:11px
+    font-size:14px
   }
   html[lang='en'] .sl-menu-button:after {
     content:'Chapters'
