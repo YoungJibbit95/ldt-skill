@@ -10,13 +10,46 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-88cfc7?style=flat&amp;labelColor=16152b" alt="Apache License 2.0" /></a>
 </p>
 
+
 <p align="center">
-  ![Repository Views](https://komarev.com/ghpvc/?username=YoungJibbit95&repo=ltd-skill&label=Repository%20Views&color=0e75b6&style=flat)
   <a href="https://youngjibbit95.github.io/ltd-skill/de/">Website</a> ·
   <a href="https://youngjibbit95.github.io/ltd-skill/de/docs/install/">Installation</a> ·
   <a href="https://youngjibbit95.github.io/ltd-skill/de/docs/guide/">Guide</a> ·
   <a href="https://youngjibbit95.github.io/ltd-skill/de/demo/">Demo</a> ·
-  <a href="https://youngjibbit95.github.io/ltd-skill/en/">English docs</a>
+  <a href="https://youngjibbit95.github.io/ltd-skill/en/">English docs</a> ·
+  <a href="https://github.com/youngjibbit95/ltd-skill/releases">Releases</a> ·
+  <a href="https://github.com/youngjibbit95/ltd-skill/issues">Report Bug</a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/youngjibbit95/ltd-skill/stargazers">
+    <img src="https://img.shields.io/github/stars/youngjibbit95/ltd-skill?style=flat-square&logo=github&label=Stars" alt="Stars">
+  </a>
+  <a href="https://github.com/youngjibbit95/ltd-skill/network/members">
+    <img src="https://img.shields.io/github/forks/youngjibbit95/ltd-skill?style=flat-square&logo=github&label=Forks" alt="Forks">
+  </a>
+  <a href="https://github.com/youngjibbit95/ltd-skill/issues">
+    <img src="https://img.shields.io/github/issues/youngjibbit95/ltd-skill?style=flat-square&logo=github&label=Issues" alt="Issues">
+  </a>
+  <a href="https://github.com/youngjibbit95/ltd-skill/releases">
+    <img src="https://img.shields.io/github/v/release/youngjibbit95/ltd-skill?style=flat-square&label=Release" alt="Release">
+  </a>
+</p>
+
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=youngjibbit95-ltd-skill&label=Repository%20Views&color=blueviolet&style=flat-square" alt="Repository Views">
+  <img src="https://img.shields.io/github/last-commit/youngjibbit95/ltd-skill?style=flat-square&label=Last%20Commit" alt="Last Commit">
+  <img src="https://img.shields.io/github/repo-size/youngjibbit95/ltd-skill?style=flat-square&label=Repo%20Size" alt="Repository Size">
+  <img src="https://img.shields.io/github/contributors/youngjibbit95/ltd-skill?style=flat-square&label=Contributors" alt="Contributors">
+</p>
+
+<p align="center">
+  <a href="https://github.com/youngjibbit95/ltd-skill">
+    <img src="https://img.shields.io/badge/GitHub-Source%20Code-181717?style=for-the-badge&logo=github" alt="Source Code">
+  </a>
+  <a href="https://youngjibbit95.github.io/ltd-skill/de/demo/">
+    <img src="https://img.shields.io/badge/Live-Demo-2ea44f?style=for-the-badge&logo=githubpages" alt="Live Demo">
+  </a>
 </p>
 
 ## 🚀 Direkt in deinem Projekt starten
