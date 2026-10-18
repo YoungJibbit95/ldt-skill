@@ -1,0 +1,85 @@
+{
+  "schema_version": 2,
+  "metadata": {
+    "id": "vercel-react-best-practices",
+    "name": "vercel-react-best-practices",
+    "description": "React and Next.js performance guidance for code review and refactoring.",
+    "author": "Vercel Engineering; skill README credits @shuding at Vercel.",
+    "maintainer": "vercel-labs (canonical repository owner; current support not established)",
+    "repository": "https://github.com/vercel-labs/agent-skills",
+    "path": "skills/react-best-practices",
+    "revision": "063bee94c3f4df8453406c830b0a7df0f2860278",
+    "license": {
+      "spdx": "MIT",
+      "url": "https://github.com/vercel-labs/agent-skills/blob/063bee94c3f4df8453406c830b0a7df0f2860278/skills/react-best-practices/SKILL.md",
+      "attribution": "Preserve vercel / Vercel Engineering and @shuding acknowledgments. Exact upstream MIT copyright-holder notice and full license text are unavailable in the inspected archive; do not fabricate them."
+    },
+    "use_cases": [
+      "Review existing React/Next.js application performance"
+    ],
+    "compatibility": [
+      "Selected manifest reads individual rules or compiled AGENTS.md; target React/Next.js project and tooling are task-dependent."
+    ],
+    "trust": "candidate",
+    "last_review_date": "2026-10-18",
+    "limitations": [
+      "Not installed, activated, executed, security-reviewed or tested in Codex.",
+      "No full audit of 70 rule bodies, example APIs, root build toolchain or transitive dependencies.",
+      "Codex integration, supported React/Next.js versions and Windows behavior were not tested.",
+      "Manifest says 70 rules; metadata.json says 40+ rules. Counts differ in upstream descriptions."
+    ],
+    "installation": {
+      "instructions": "Metadata only. No installation or activation authorized or implemented by M1b."
+    },
+    "evidence": [
+      {
+        "kind": "provenance",
+        "reference": "https://github.com/vercel-labs/agent-skills/blob/063bee94c3f4df8453406c830b0a7df0f2860278/skills/react-best-practices/SKILL.md",
+        "summary": "Pinned manifest identity and canonical repository verified by independent read-only source inspection; this is not safety or compatibility evidence.",
+        "date": "2026-10-18"
+      }
+    ]
+  },
+  "aliases": [
+    "react-best-practices"
+  ],
+  "verification": {
+    "status": "source-verified",
+    "manifest_url": "https://github.com/vercel-labs/agent-skills/blob/063bee94c3f4df8453406c830b0a7df0f2860278/skills/react-best-practices/SKILL.md",
+    "manifest_sha256": "71ed7794962fa6e803ee83030517b5b93a9f70fbfeb431ec4535c5480a8d8355",
+    "license_status": "declared",
+    "license_sha256": null,
+    "checked_at": "2026-10-18",
+    "alias_evidence": [
+      {
+        "alias": "react-best-practices",
+        "reference": "https://github.com/vercel-labs/agent-skills/blob/063bee94c3f4df8453406c830b0a7df0f2860278/skills/react-best-practices/SKILL.md",
+        "summary": "Directory label maps to the manifest frontmatter name; one skill identity, not two packages."
+      }
+    ],
+    "unknowns": [
+      "Individual authorship beyond documented publisher attribution is not established.",
+      "Full license notice and applicable copyright attribution for redistribution remain unresolved despite the MIT declaration."
+    ]
+  },
+  "runtime": {
+    "requirements": [
+      "Selected manifest reads individual rules or compiled AGENTS.md; target React/Next.js project and tooling are task-dependent."
+    ],
+    "effects": [
+      "Guides writing/reviewing/refactoring React and Next.js code; resulting source changes and build/test execution depend on task.",
+      "Skill README describes pnpm install/build/validate/extract-tests/dev for upstream authoring; root README describes installation/discovery build commands. None was run.",
+      "Selected-directory README mentions src build utilities, but no src directory or package manifest exists under the selected directory at this pin; authoring instructions alone do not prove standalone buildability."
+    ],
+    "unknowns": [
+      "No full audit of 70 rule bodies, example APIs, root build toolchain or transitive dependencies.",
+      "Codex integration, supported React/Next.js versions and Windows behavior were not tested.",
+      "Manifest says 70 rules; metadata.json says 40+ rules. Counts differ in upstream descriptions."
+    ]
+  },
+  "lifecycle": {
+    "status": "observed",
+    "reference": "https://github.com/vercel-labs/agent-skills/blob/063bee94c3f4df8453406c830b0a7df0f2860278/skills/react-best-practices/SKILL.md",
+    "reason": "Root README calls this an Agent Skills-format collection for AI coding agents."
+  }
+}

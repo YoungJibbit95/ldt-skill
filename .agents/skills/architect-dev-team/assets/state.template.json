@@ -1,0 +1,15 @@
+{
+  "schema_version": 2,
+  "phase": "INTAKE",
+  "approval_stage": null,
+  "profile": "balanced",
+  "architecture": null,
+  "milestone": null,
+  "approvals": [],
+  "checks": [],
+  "review": null,
+  "completed": [],
+  "open_issues": [],
+  "constraints": [],
+  "next_action": "Inspect the relevant project and clarify acceptance criteria."
+}

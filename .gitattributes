@@ -1,0 +1,3 @@
+# Golden test artifacts are byte-pinned in design/v2-proposal-manifest.json.
+# Preserve their exact line endings across Git checkouts on every platform.
+tests/fixtures/m1a-baseline/* -text

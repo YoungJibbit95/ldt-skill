@@ -1,0 +1,84 @@
+{
+  "schema_version": 2,
+  "metadata": {
+    "id": "openai-gh-fix-ci",
+    "name": "gh-fix-ci",
+    "description": "Inspect failing GitHub Actions PR checks and plan scoped repairs.",
+    "author": "OpenAI skills project; individual original authors not established by this provenance check",
+    "maintainer": "OpenAI (github.com/openai/skills repository owner)",
+    "repository": "https://github.com/openai/skills",
+    "path": "skills/.curated/gh-fix-ci",
+    "revision": "49f948faa9258a0c61caceaf225e179651397431",
+    "license": {
+      "spdx": "Apache-2.0",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/gh-fix-ci/LICENSE.txt",
+      "attribution": "OpenAI skills project. Preserve LICENSE.txt and upstream notices if installing or redistributing. No upstream code is bundled here."
+    },
+    "use_cases": [
+      "Diagnose failing GitHub Actions checks on an existing pull request"
+    ],
+    "compatibility": [
+      "Codex skill runtime",
+      "Authenticated GitHub CLI with target PR and Actions-log access",
+      "Python for the optional bundled inspection script"
+    ],
+    "trust": "candidate",
+    "last_review_date": "2026-10-18",
+    "limitations": [
+      "Only manifest and license provenance inspected; scripts/dependencies lack complete safety review.",
+      "Not installed or executed here; no successful test or compatibility claim.",
+      "External CI providers are outside upstream scope.",
+      "Upstream unconditionally requests another planning skill in one step; use its documented inline fallback when unavailable and reconcile approval requirements.",
+      "Repository ownership does not establish individual authorship or guarantee current maintenance."
+    ],
+    "installation": {
+      "instructions": "After explicit installation consent: inspect the installed skill-installer's supported repository/path/ref options. Use repository openai/skills, path skills/.curated/gh-fix-ci, full ref 49f948faa9258a0c61caceaf225e179651397431. Verify source/license, preserve notices, and refuse to overwrite an existing destination. Complete safety review and obtain execution consent before use."
+    },
+    "evidence": [
+      {
+        "kind": "provenance",
+        "reference": "https://github.com/openai/skills/tree/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/gh-fix-ci",
+        "summary": "GitHub commits/main resolved to this full commit. Fetched pinned SKILL.md (3651 bytes, SHA256 7b326b4a2f0f5f85122144628ec02077e48841e0e0e82efce88b3415bcfb7c26) and LICENSE.txt (10776 bytes, SHA256 4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9). Manifest names gh-fix-ci; license identifies Apache 2.0. Read-only inspection; no script execution.",
+        "date": "2026-10-18"
+      }
+    ]
+  },
+  "aliases": [],
+  "verification": {
+    "status": "source-verified",
+    "manifest_url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/gh-fix-ci/SKILL.md",
+    "manifest_sha256": "7b326b4a2f0f5f85122144628ec02077e48841e0e0e82efce88b3415bcfb7c26",
+    "license_status": "verified",
+    "license_sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
+    "checked_at": "2026-10-18",
+    "alias_evidence": [],
+    "unknowns": [
+      "Individual authorship beyond documented publisher attribution is not established."
+    ]
+  },
+  "runtime": {
+    "requirements": [
+      "Python 3; helper syntax requires Python 3.10 or newer (union type annotations).",
+      "Git executable and a Git working tree (helper invokes git rev-parse).",
+      "GitHub CLI gh on PATH; pre-existing authenticated GitHub session with appropriate repository/workflow access."
+    ],
+    "effects": [
+      "Invokes git rev-parse and gh auth status, pr view/checks, run view, repo view and API job-log endpoints through subprocess argument lists.",
+      "Reads GitHub Actions check status/logs over network and prints JSON or text failure snippets; no file-write or GitHub-write call observed in helper.",
+      "Helper exits nonzero when failures remain.",
+      "Calls for plan approval before implementing changes; missing create-plan may fall back to concise inline plan.",
+      "After approval, workflow applies local code fixes and tests; manual log fallback can redirect remote log output to a local file.",
+      "Non-GitHub Actions providers are URL-only; opening a PR is a separate ask."
+    ],
+    "unknowns": [
+      "Actual gh version/field compatibility, host auth scopes and Windows behavior were not tested.",
+      "CI logs can contain sensitive data; no real log access occurred.",
+      "No execution or security audit of helper performed."
+    ]
+  },
+  "lifecycle": {
+    "status": "catalog-deprecated",
+    "reference": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/README.md",
+    "reason": "Pinned README opens with an explicit repository deprecation notice pointing to openai/plugins. The gh-fix-ci manifest is present in this same pinned archive. This is not evidence that the skill is absent, deleted or migrated."
+  }
+}

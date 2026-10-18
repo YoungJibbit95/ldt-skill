@@ -1,0 +1,4 @@
+interface:
+  display_name: "Architect Dev Team"
+  short_description: "Architecture-first development with human approvals"
+  default_prompt: "Use $architect-dev-team to plan this change, present the architecture for approval, and deliver one verified milestone at a time."

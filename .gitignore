@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+
+# Local approvals, source snapshots and authoring evidence stay on this machine.
+/.architect-dev-team/
+/evaluation-results.md
+/evaluations/
+
+# Local credentials and generated output.
+.env
+.env.*
+!.env.example
+node_modules/
+.venv/
+venv/
+dist/
+build/
+.DS_Store
+Thumbs.db

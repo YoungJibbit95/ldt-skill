@@ -1,0 +1,125 @@
+{
+  "artifact_kind": "architecture-review-packet; not executable project state or an approval receipt",
+  "proposal_revision": 1,
+  "status": "PROPOSED",
+  "date": "2026-10-18",
+  "proposed_files": [
+    {
+      "path": "design/v2-architecture.md",
+      "sha256": "2c5213ce6b1d731e75df5107c0c4d1bbf803190175b5a0f6297c99dd99c291e0"
+    },
+    {
+      "path": "design/v2-skill-ecosystem.md",
+      "sha256": "b465ae01220ed9b74b76fcc5589ec6acf0c62466333c52ca38caa1da4402d261"
+    },
+    {
+      "path": "design/v2-cli.md",
+      "sha256": "efc59c87fe03d8cfda8b669c9ed85331693ccf8abb45ebd298bc2be047f8669d"
+    },
+    {
+      "path": "design/v2-security.md",
+      "sha256": "efe6180c10c99dce443fc7ebd900b2ebd941b97b99ffa8349da01a076abb94b8"
+    },
+    {
+      "path": "design/research/skills-a-d.md",
+      "sha256": "7a84bce1e1147a48ea8b568bee1aed3ee825aaa07639ddc2ec9dd26bef4cf439"
+    },
+    {
+      "path": "design/research/skills-e-i.md",
+      "sha256": "3f812c495f3b54bc4a083ac0b9cd30185a24ca416883c897bf9adca21f56ab2f"
+    },
+    {
+      "path": "design/research/runtime-cli.md",
+      "sha256": "86fbed0b9ed409ffced476312aa11ade8e968bcead175e31f30887c40a0e75f7"
+    }
+  ],
+  "current_implementation_baseline": [
+    {
+      "path": ".agents/skills/architect-dev-team/agents/openai.yaml",
+      "sha256": "7aea652b33609fac247cfc8d3fb3a99fa2bd352a1206d544c3924fac68932dfc"
+    },
+    {
+      "path": ".agents/skills/architect-dev-team/assets/architecture.template.md",
+      "sha256": "a8066a6189214aa1e3db3ba7fd68c19e8d07e7ed264024eb01c8f9f19525e4cf"
+    },
+    {
+      "path": ".agents/skills/architect-dev-team/assets/state.template.json",
+      "sha256": "0a81d00a2c4d664126ff73e935f512913c395cc02cdb279ee6194a58076b9ccc"
+    },
+    {
+      "path": ".agents/skills/architect-dev-team/references/approvals.md",
+      "sha256": "1f7785291b7b86a0412e164d774e1fd0686c0a9367d9ed69f020c8478e45b5c7"
+    },
+    {
+      "path": ".agents/skills/architect-dev-team/references/architecture.md",
+      "sha256": "0c9d707c6c3e52c70cfbda3b6d67d5fbdd32ef5fd8b1b57536c459cb9a5fa0da"
+    },
+    {
+      "path": ".agents/skills/architect-dev-team/references/delegation.md",
+      "sha256": "1b69459415ae53c9b13c9883f469a457aad5e58e9568b86a97f5093683268bca"
+    },
+    {
+      "path": ".agents/skills/architect-dev-team/references/delivery.md",
+      "sha256": "1300694a118265e8701e1082b2af7fadcaf15618c9ef470a47f5e74f2de31073"
+    },
+    {
+      "path": ".agents/skills/architect-dev-team/references/evaluation.md",
+      "sha256": "50de31a00c7606b8fe1129cf977976b69dc484396f33d59282c33fe24f89ec24"
+    },
+    {
+      "path": ".agents/skills/architect-dev-team/references/external-skills.md",
+      "sha256": "4ce96d8b0474695c62d51fbbf9e5df4382662d07355d7f63ff6efb81d51c50c7"
+    },
+    {
+      "path": ".agents/skills/architect-dev-team/references/project-memory.md",
+      "sha256": "1936f8b6a365f060aa63714e08649c4d9e733977599b974b6635d5a100bb4cf6"
+    },
+    {
+      "path": ".agents/skills/architect-dev-team/registry/skills.json",
+      "sha256": "f779ae06a902baa433197de7d25a3b18f5f18b87c39d4587cfde771dfa80618d"
+    },
+    {
+      "path": ".agents/skills/architect-dev-team/scripts/validate.py",
+      "sha256": "3d0978ac23662b0b38bfc6629f26734ef53ec0d2eff47642f46b47a0b07e9d51"
+    },
+    {
+      "path": ".agents/skills/architect-dev-team/SKILL.md",
+      "sha256": "b7d8a12852ea62ed3f8866da749fb4a3c39d6245ab03c0a3bc6ef601cba05b72"
+    },
+    {
+      "path": "tests/test_validate.py",
+      "sha256": "20b479b41002e4c5edf6c414f1df158286cee776419f2a14839c5cf99101aefe"
+    }
+  ],
+  "first_milestone": {
+    "id": "M1a",
+    "profile": "balanced",
+    "summary": "Extract existing deterministic validation logic into one canonical self-contained core, retaining validate.py as the backward-compatible facade.",
+    "allowed_paths": [
+      ".agents/skills/architect-dev-team/scripts/validate.py",
+      ".agents/skills/architect-dev-team/scripts/ldt_core/",
+      ".agents/skills/architect-dev-team/references/",
+      "tests/",
+      "evaluation-results.md"
+    ],
+    "acceptance": [
+      "Preserve existing command, JSON, diagnostic and schema behavior.",
+      "All 50 current tests retain outcomes; unsupported native cases remain explicit.",
+      "No duplicated approval semantics, external dependency, CLI, installer, role system or new registry/state schema.",
+      "Verify command/import parity and obtain separate consequential-change review.",
+      "Stop at result approval before M1b."
+    ],
+    "required_checks": [
+      "existing regression suite",
+      "official skill metadata validation",
+      "package, registry and template validation",
+      "command and import parity",
+      "independent review"
+    ]
+  },
+  "authorization_limits": [
+    "No approval is recorded by this manifest.",
+    "No later milestone, dependency/external skill installation, service, remote push, publication, merge or deployment is authorized by architecture approval."
+  ],
+  "packet_sha256": "5e3ce74dc099ce0f4830fb0562b6ba2223cf146a310a0e6ff88f1fe6cf9c3717"
+}

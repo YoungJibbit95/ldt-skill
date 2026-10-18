@@ -1,0 +1,73 @@
+{
+  "schema_version": 2,
+  "metadata": {
+    "id": "anthropic-frontend-design",
+    "name": "frontend-design",
+    "description": "Frontend visual planning, implementation and critique guidance.",
+    "author": "Anthropic skills project; individual authors not established by pinned provenance.",
+    "maintainer": "anthropics (canonical repository owner; current support not established)",
+    "repository": "https://github.com/anthropics/skills",
+    "path": "skills/frontend-design",
+    "revision": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+    "license": {
+      "spdx": "Apache-2.0",
+      "url": "https://github.com/anthropics/skills/blob/dbd4588f9e1033efb41dad4bef2f7947c8993d44/skills/frontend-design/LICENSE.txt",
+      "attribution": "No separate NOTICE file in selected directory and no specific copyright-holder notice identified there; publisher attribution comes from canonical repository identity. Preserve the supplied license and applicable notices; mark modifications when distributing derivatives."
+    },
+    "use_cases": [
+      "Plan and critique a user-facing frontend design"
+    ],
+    "compatibility": [
+      "Host capable of interpreting skill instructions; target frontend stack and any screenshot tool are task-dependent."
+    ],
+    "trust": "candidate",
+    "last_review_date": "2026-10-18",
+    "limitations": [
+      "Not installed, activated, executed, security-reviewed or tested in Codex.",
+      "Codex tool/trigger integration, actual screenshot support and frontend project dependencies untested.",
+      "Runtime commands and network effects depend on the host and subsequent task; guidance-only does not sandbox an agent."
+    ],
+    "installation": {
+      "instructions": "Metadata only. No installation or activation authorized or implemented by M1b."
+    },
+    "evidence": [
+      {
+        "kind": "provenance",
+        "reference": "https://github.com/anthropics/skills/blob/dbd4588f9e1033efb41dad4bef2f7947c8993d44/skills/frontend-design/SKILL.md",
+        "summary": "Pinned manifest identity and canonical repository verified by independent read-only source inspection; this is not safety or compatibility evidence.",
+        "date": "2026-10-18"
+      }
+    ]
+  },
+  "aliases": [],
+  "verification": {
+    "status": "source-verified",
+    "manifest_url": "https://github.com/anthropics/skills/blob/dbd4588f9e1033efb41dad4bef2f7947c8993d44/skills/frontend-design/SKILL.md",
+    "manifest_sha256": "d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3",
+    "license_status": "verified",
+    "license_sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+    "checked_at": "2026-10-18",
+    "alias_evidence": [],
+    "unknowns": [
+      "Individual authorship beyond documented publisher attribution is not established."
+    ]
+  },
+  "runtime": {
+    "requirements": [
+      "Host capable of interpreting skill instructions; target frontend stack and any screenshot tool are task-dependent."
+    ],
+    "effects": [
+      "Guidance asks for a design plan, UI implementation and critique; local frontend files and optional screenshots/notes may be produced.",
+      "No necessary remote service, credential or installation command identified in this selected manifest."
+    ],
+    "unknowns": [
+      "Codex tool/trigger integration, actual screenshot support and frontend project dependencies untested.",
+      "Runtime commands and network effects depend on the host and subsequent task; guidance-only does not sandbox an agent."
+    ]
+  },
+  "lifecycle": {
+    "status": "observed",
+    "reference": "https://github.com/anthropics/skills/blob/dbd4588f9e1033efb41dad4bef2f7947c8993d44/skills/frontend-design/SKILL.md",
+    "reason": "Repository README explicitly describes Anthropic skills for Claude. No Codex compatibility is established by that claim."
+  }
+}

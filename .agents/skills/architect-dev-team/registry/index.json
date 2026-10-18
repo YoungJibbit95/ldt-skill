@@ -1,0 +1,17 @@
+{
+  "schema_version": 2,
+  "records": [
+    {
+      "id": "openai-gh-fix-ci",
+      "path": "skills/openai-gh-fix-ci.json"
+    },
+    {
+      "id": "anthropic-frontend-design",
+      "path": "skills/anthropic-frontend-design.json"
+    },
+    {
+      "id": "vercel-react-best-practices",
+      "path": "skills/vercel-react-best-practices.json"
+    }
+  ]
+}
