@@ -1,0 +1,29 @@
+---
+import OrbitMark from './OrbitMark.astro';
+import { pathFor, repository, translatedPath, otherLocale, type Locale } from '../lib/site';
+interface Props { locale: Locale; docs?: boolean }
+const { locale, docs = false } = Astro.props;
+const de = locale === 'de';
+const t = de ? { docs: 'Dokumentation', guide: 'Guide', workflow: 'Workflow', install: 'Installieren', menu: 'Menü', nav: 'Hauptnavigation', switch: 'Switch to English' } : { docs: 'Documentation', guide: 'Guide', workflow: 'Workflow', install: 'Install', menu: 'Menu', nav: 'Main navigation', switch: 'Zu Deutsch wechseln' };
+const links = [
+  { href: pathFor(locale, 'docs'), label: t.docs },
+  { href: pathFor(locale, 'docs/guide'), label: t.guide },
+  { href: `${pathFor(locale)}#workflow`, label: t.workflow },
+];
+const languagePath = /\/(de|en)\//.test(Astro.url.pathname) ? translatedPath(Astro.url.pathname, locale) : pathFor(otherLocale(locale));
+---
+<div class:list={['site-header', { 'is-docs': docs }]}>
+  <a class="brand" href={pathFor(locale)} aria-label="LittleDevTeam Home"><OrbitMark /><span>Little<span class="brand-light">Dev</span>Team<span class="brand-dot">.</span></span></a>
+  <nav class="desktop-nav" aria-label={t.nav}>
+    {links.map(link => <a href={link.href} aria-current={Astro.url.pathname === link.href ? 'page' : undefined}>{link.label}</a>)}
+  </nav>
+  <div class="header-actions">
+    <a class="language-link" href={languagePath} lang={de ? 'en' : 'de'} aria-label={t.switch}>{de ? 'EN' : 'DE'}<span aria-hidden="true"> ↗</span></a>
+    <a class="github-link" href={repository} aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.77-.24.77-.54v-2.1c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.68.08-.68 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.93.1-.73.4-1.22.72-1.5-2.5-.29-5.13-1.25-5.13-5.57 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.43.11-2.98 0 0 .95-.3 3.08 1.15a10.65 10.65 0 0 1 5.6 0c2.14-1.45 3.08-1.15 3.08-1.15.62 1.55.23 2.7.12 2.98.72.79 1.15 1.79 1.15 3.02 0 4.33-2.63 5.28-5.14 5.56.4.35.76 1.03.76 2.08v3.1c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z"/></svg></a>
+    <a class="button button-small" href={pathFor(locale, 'docs/install')}>{t.install}<span aria-hidden="true">↗</span></a>
+    <details class="mobile-menu">
+      <summary aria-label={t.menu}><span class="menu-lines" aria-hidden="true"></span><span class="sr-only">{t.menu}</span></summary>
+      <nav aria-label={t.nav}>{links.map(link => <a href={link.href}>{link.label}</a>)}<a href={repository}>GitHub ↗</a></nav>
+    </details>
+  </div>
+</div>

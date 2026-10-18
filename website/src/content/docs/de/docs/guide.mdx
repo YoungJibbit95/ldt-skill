@@ -1,0 +1,90 @@
+---
+title: Dein erster Auftrag
+description: Ein konkreter Einstieg in LittleDevTeam — von der Idee über die Architektur bis zum geprüften Meilenstein.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Du hast den [Skill eingerichtet](/ltd-skill/de/docs/install/) und dein Projekt in Codex geöffnet. Jetzt formulierst du ein Ziel, das du tatsächlich beurteilen kannst. Das folgende Beispiel ist eine **Anleitung**, kein Protokoll eines bereits ausgeführten Agentenlaufs.
+
+## 1. Beschreibe das Ergebnis
+
+```text
+Nutze $architect-dev-team mit dem Profil Balanced.
+
+Ich möchte eine kleine Dokumentationswebsite für mein Projekt.
+Sie soll einen verständlichen Einstieg, eine Installation und einen Guide
+enthalten. Sie muss auf dem Smartphone gut lesbar und mit der Tastatur
+bedienbar sein. Untersuche zuerst den vorhandenen Stand.
+
+Lege mir anschließend eine Architektur und einen kleinen ersten Meilenstein
+mit konkreten Abnahmekriterien und notwendigen Prüfungen vor.
+Beginne die Umsetzung erst nach meiner Freigabe dieses Vorschlags.
+```
+
+Beschreibe die tatsächliche Zielgruppe und Einschränkungen. Ein vorhandener Technologie-Stack, ein Hostingziel oder ein bereits abgestimmtes Design gehören in den Auftrag. Unbekannte Details darf der Agent als Fragen oder ausdrücklich benannte Annahmen behandeln.
+
+## 2. Lass den Stand untersuchen
+
+Der Agent liest Projektregeln, prüft relevante Dateien und den Arbeitsstand und gleicht vorhandene Zustände mit der tatsächlichen Situation ab. Bestehende Änderungen gehören dir; eine Untersuchung berechtigt nicht dazu, sie zu überschreiben.
+
+Erwartbar ist eine kurze Zusammenfassung: Was ist vorhanden? Was soll anders werden? Welche Fragen verändern den Plan? Der Skill garantiert keine feste Teamgröße oder bestimmte Integrationen.
+
+## 3. Prüfe den konkreten Vorschlag
+
+Ein brauchbarer Vorschlag nennt Umfang, Architektur, einen kleinen ersten Meilenstein, beobachtbare Abnahmekriterien und die verbindlichen Prüfungen. Achte besonders darauf, dass er deine gewünschte Nutzung abdeckt.
+
+Wenn etwas fehlt, kannst du zum Beispiel antworten:
+
+```text
+Überarbeite den Vorschlag: Der erste Meilenstein soll bereits eine lesbare
+Installationsseite enthalten. Verschiebe die interaktive Demo in den
+nächsten Meilenstein und passe Abnahmekriterien und Prüfungen entsprechend an.
+```
+
+Eine Ablehnung oder Änderung ist keine Freigabe der alten Fassung. Lass dir die überarbeitete Fassung konkret zeigen.
+
+## 4. Gib einen klaren Umfang frei
+
+Erst wenn du den Vorschlag gelesen hast, beziehst du deine Entscheidung auf dessen tatsächliche Version und Meilenstein. Nutze die vom Agenten wirklich präsentierten Bezeichnungen, zum Beispiel:
+
+```text
+Freigegeben: Website-Architektur Revision 1 und Meilenstein W1
+mit den genannten Abnahmekriterien und verbindlichen Prüfungen.
+Setze zunächst nur W1 um.
+```
+
+Der Agent kann die Entscheidung im Projektzustand mit dem passenden Umfangsfingerabdruck festhalten. Diese lokale Aufzeichnung ersetzt deine tatsächliche Entscheidung nicht. Eine wesentliche Architekturänderung muss wieder mit dir abgestimmt werden.
+
+## 5. Lass den Meilenstein umsetzen und prüfen
+
+Der Agent arbeitet im freigegebenen Umfang und führt passende Prüfungen aus. Am Ende sollte er dir die konkreten Änderungen, ausgeführten Checks, Review-Ergebnisse, Grenzen und eine überprüfbare Revision zeigen.
+
+Unterscheide **bestanden**, **fehlgeschlagen**, **ausgelassen** und **nicht ausgeführt**. Ein Review durch denselben Agenten ist eine Eigenprüfung. Ein unabhängiger Review muss von einem anderen tatsächlichen Reviewer stammen.
+
+<Aside type="tip" title="Frag nach dem konkreten Ergebnis">
+„Welche Revision wurde geprüft, welche Checks liefen tatsächlich und welche Einschränkungen bleiben?“ ist hilfreicher als ein pauschales „Ist alles fertig?“.
+</Aside>
+
+## 6. Bewerte das Ergebnis
+
+Prüfe die übergebene Vorschau oder Änderungen. Wenn du einen Fehler bemerkst, beschreibe das beobachtete Verhalten; Reparaturen im aktuellen freigegebenen Umfang werden erneut geprüft.
+
+Wenn du das konkrete Ergebnis akzeptierst, kannst du den Meilensteinabschluss freigeben. Die nächste Iteration wird danach mit ihrem eigenen konkreten Umfang geplant. Eine Ergebnisfreigabe ist keine automatische Erlaubnis zum Merge oder zur Veröffentlichung.
+
+## 7. Später fortsetzen
+
+Projektgedächtnis liegt normalerweise unter `.architect-dev-team`. Es hält Umfang, Entscheidungen, Ergebnisse und den nächsten Schritt fest. Behandele Freigabedateien als lokale Projektdaten und entscheide bewusst über ihre Veröffentlichung.
+
+```text
+Nutze $architect-dev-team und setze dieses Projekt fort.
+Lies den aktuellen Zustand und die referenzierten Vorschläge.
+Gleiche sie mit Git-Stand, vorhandenen Änderungen und belegten Entscheidungen ab.
+Fasse zusammen, was noch gültig ist und welcher konkrete Schritt als Nächstes ansteht.
+```
+
+Eine gespeicherte Freigabe allein ist kein Beweis ihrer Gültigkeit. Veränderte Quellen können Checks oder Review veralten lassen. Fehlt ein belegbarer menschlicher Entscheid, soll der Agent den konkreten Umfang mit dir klären.
+
+## Die Website als reales Beispiel
+
+Auch diese Website folgt dem Ablauf: Der [veröffentlichte Projektbrief](https://github.com/YoungJibbit95/ltd-skill/blob/9a062eb9de0990ce1074dd677d26e5a528ee14a0/docs/website-brief.md) beschreibt den Auftrag; der [Website-Plan](https://github.com/YoungJibbit95/ltd-skill/blob/website/w1-nebula/docs/website-plan.md) trennt Einstieg, Vertiefung und Veröffentlichung in überprüfbare Meilensteine. Das ersetzt keine Belege für später noch auszuführende Arbeit.

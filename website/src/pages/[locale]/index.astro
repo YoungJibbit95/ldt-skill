@@ -1,0 +1,104 @@
+---
+import Page from '../../layouts/Page.astro';
+import OrbitMark from '../../components/OrbitMark.astro';
+import { pathFor, repository, type Locale } from '../../lib/site';
+export function getStaticPaths() { return [{ params: { locale: 'de' } }, { params: { locale: 'en' } }]; }
+const locale = Astro.params.locale as Locale;
+const de = locale === 'de';
+const t = de ? {
+  title: 'LittleDevTeam — Große Ideen. Klare nächste Schritte.',
+  description: 'Ein Architektur-first Skill für Codex. Plane bewusst, entwickle in kleinen Schritten und behalte Entscheidungen und Prüfungen im Blick.',
+  pill: 'Dein Coding-Agent. Mit einem Plan.',
+  heading: ['Große Ideen.', 'Klare nächste', 'Schritte.'],
+  intro: 'Gib deinem Coding-Agenten einen klaren Workflow. Von der ersten Idee über die Architektur bis zum geprüften Ergebnis — mit dir an den richtigen Entscheidungen.',
+  start: 'Jetzt loslegen', explore: 'Workflow entdecken', note: 'Native Codex Skill · Python-Tools ohne externe Abhängigkeiten',
+  preview: 'ILLUSTRATIVES WORKFLOW-BEISPIEL', task: 'Baue eine moderne Dokumentationswebsite.',
+  architecture: 'Architektur vor Umsetzung.', proposal: 'Ein Vorschlag, den du beurteilen kannst.',
+  stepLabel: 'NÄCHSTER SCHRITT', approval: 'Deine Entscheidung', approvalText: 'Vorschlag lesen. Anpassen. Freigeben.',
+  mini: ['Umfang geklärt', 'Architektur vorgeschlagen', 'Umsetzung nach Freigabe'],
+  strip: ['Erst verstehen.', 'Bewusst entscheiden.', 'Schritt für Schritt bauen.'],
+  promiseLabel: 'MEHR KLARHEIT. WENIGER UMWEGE.', promiseTitle: 'Eine Idee ist ein Anfang.', promiseEnd: 'Ein Workflow macht sie greifbar.',
+  features: [
+    ['01', 'Erst der Plan.', 'Der Skill untersucht dein Projekt, klärt Anforderungen und macht Architekturentscheidungen sichtbar, bevor die Umsetzung beginnt.'],
+    ['02', 'Du entscheidest.', 'Freigaben beziehen sich auf konkrete Vorschläge und Ergebnisse. Der nächste Schritt bleibt nachvollziehbar.'],
+    ['03', 'Mit Nachweisen.', 'Prüfungen, Review und Projektgedächtnis halten fest, was tatsächlich gemacht wurde — und was noch offen ist.'],
+  ],
+  workflowLabel: 'VON DER IDEE ZUM ERGEBNIS', workflowTitle: 'Ein klarer Weg durch dein Projekt.', workflowText: 'Kein starres Team von Bots. Ein Skill, der die Arbeit passend zur Aufgabe strukturiert und verfügbare Werkzeuge gezielt nutzt.',
+  steps: [['Verstehen', 'Auftrag & Projekt untersuchen'], ['Planen', 'Spezifikation & Architektur'], ['Entscheiden', 'Konkreten Vorschlag freigeben'], ['Entwickeln', 'Einen Meilenstein umsetzen'], ['Prüfen', 'Checks & Review durchführen'], ['Weitergehen', 'Ergebnis bewerten & fortsetzen']],
+  guide: 'Zum praktischen Guide',
+  builtLabel: 'DIESE WEBSITE IST DAS BEISPIEL.', builtTitle: 'Mit LittleDevTeam.', builtEnd: 'Für LittleDevTeam.',
+  builtText: 'Wir nutzen den Skill, um diese Website zu entwickeln. Der erste Schritt: ein freigegebener Plan, ein separater Arbeitsbereich und ein überschaubarer Meilenstein. Du siehst hier das Ergebnis dieses Einstiegs.',
+  builtLink: 'Plan und Entwicklung auf GitHub',
+  finalLabel: 'DEIN NÄCHSTES PROJEKT WARTET.', finalTitle: 'Eine Idee hast du schon?', finalText: 'Richte den Skill ein und starte mit einem Auftrag, den du gemeinsam mit deinem Agenten zu Ende denken kannst.',
+  finalButton: 'Skill einrichten', finalSecondary: 'Erst die Dokumentation lesen',
+} : {
+  title: 'LittleDevTeam — Big ideas. Clear next steps.',
+  description: 'An architecture-first skill for Codex. Plan deliberately, build in small steps, and keep decisions and verification in view.',
+  pill: 'Your coding agent. With a plan.',
+  heading: ['Big ideas.', 'Clear next', 'steps.'],
+  intro: 'Give your coding agent a clear workflow. From the first idea through architecture to a verified result — with you involved in the decisions that matter.',
+  start: 'Get started', explore: 'Explore the workflow', note: 'Native Codex skill · Python tools with no external dependencies',
+  preview: 'ILLUSTRATIVE WORKFLOW EXAMPLE', task: 'Build a modern documentation website.',
+  architecture: 'Architecture before implementation.', proposal: 'A proposal you can actually evaluate.',
+  stepLabel: 'NEXT STEP', approval: 'Your decision', approvalText: 'Read the proposal. Revise. Approve.',
+  mini: ['Scope understood', 'Architecture proposed', 'Implementation after approval'],
+  strip: ['Understand first.', 'Decide deliberately.', 'Build step by step.'],
+  promiseLabel: 'MORE CLARITY. FEWER DETOURS.', promiseTitle: 'An idea is a beginning.', promiseEnd: 'A workflow makes it tangible.',
+  features: [
+    ['01', 'Plan first.', 'The skill inspects your project, clarifies requirements, and makes architecture decisions visible before implementation starts.'],
+    ['02', 'You decide.', 'Approvals refer to concrete proposals and results. The next step stays understandable and intentional.'],
+    ['03', 'Show the evidence.', 'Checks, review, and project memory record what actually happened — and what remains unresolved.'],
+  ],
+  workflowLabel: 'FROM IDEA TO RESULT', workflowTitle: 'A clear path through your project.', workflowText: 'No fixed roster of bots. A skill that shapes the work around the task and uses available tools purposefully.',
+  steps: [['Understand', 'Inspect the task & project'], ['Plan', 'Specification & architecture'], ['Decide', 'Approve a concrete proposal'], ['Build', 'Implement one milestone'], ['Verify', 'Run checks & review'], ['Continue', 'Evaluate the result & iterate']],
+  guide: 'Open the practical guide',
+  builtLabel: 'THIS WEBSITE IS THE EXAMPLE.', builtTitle: 'Built with LittleDevTeam.', builtEnd: 'For LittleDevTeam.',
+  builtText: 'We use the skill to develop this website. The first step: an approved plan, a separate workspace, and a manageable milestone. This is the result of that initial slice.',
+  builtLink: 'Plan and development on GitHub',
+  finalLabel: 'YOUR NEXT PROJECT IS WAITING.', finalTitle: 'Already have an idea?', finalText: 'Set up the skill and start with a task you and your agent can think through together.',
+  finalButton: 'Set up the skill', finalSecondary: 'Read the documentation first',
+};
+---
+<Page locale={locale} title={t.title} description={t.description}>
+  <section class="hero">
+    <div class="nebula" aria-hidden="true"></div><div class="star-field" aria-hidden="true"></div>
+    <div class="hero-orbit" aria-hidden="true"><span></span></div>
+    <div class="site-container hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow-pill"><span class="status-spark" aria-hidden="true"></span>{t.pill}<span class="pill-line" aria-hidden="true"></span><span class="pill-tag">LDT</span></div>
+        <h1>{t.heading[0]}<br />{t.heading[1]}<br /><span class="gradient-text">{t.heading[2]}</span></h1>
+        <p class="hero-intro">{t.intro}</p>
+        <div class="hero-buttons"><a class="button" href={pathFor(locale, 'docs/install')}>{t.start}<span aria-hidden="true">↗</span></a><a class="button button-ghost" href="#workflow">{t.explore}<span aria-hidden="true">↓</span></a></div>
+        <p class="hero-note"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2 3 5v5c0 4 7 8 7 8s7-4 7-8V5l-7-3Z" stroke="currentColor"/><path d="m6 10 3 3 5-6" stroke="currentColor"/></svg>{t.note}</p>
+      </div>
+      <div class="mission-scene">
+        <div class="scene-coordinates" aria-hidden="true">LDT / MISSION 001<span>51° N · 013° E</span></div>
+        <div class="mission-panel">
+          <div class="panel-bar"><span><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span></span><span>littledevteam / workspace</span><span class="profile-badge">BALANCED</span></div>
+          <div class="mission-content">
+            <div class="mission-command"><span class="command-chevron">›</span><code>$architect-dev-team</code></div>
+            <p class="mission-task">{t.task}</p>
+            <div class="mission-plan"><div class="mission-icon"><OrbitMark /></div><div><h2>{t.architecture}</h2><p>{t.proposal}</p></div><span class="plan-arrow" aria-hidden="true">↗</span></div>
+            <div class="mission-trail">{t.mini.map((item, i) => <div><span class:list={['trail-dot', { active: i === 1 }]} aria-hidden="true">{i === 0 ? '✓' : i === 1 ? '◉' : '·'}</span><span>{item}</span><span class="trail-count" aria-hidden="true">0{i + 1}</span></div>)}</div>
+            <div class="decision-card"><span class="small-label">{t.stepLabel}</span><div><strong>{t.approval}</strong><span class="decision-orbit" aria-hidden="true">✧</span></div><p>{t.approvalText}</p></div>
+          </div>
+          <div class="panel-footer"><span class="status-spark" aria-hidden="true"></span>{t.preview}</div>
+        </div>
+        <div class="floating-label" aria-hidden="true"><span>✧</span>architecture first<span class="label-line"></span></div>
+      </div>
+    </div>
+  </section>
+  <div class="principles-strip site-container">{t.strip.map((text, i) => <div><span>0{i + 1}</span><p>{text}</p><span class="strip-star" aria-hidden="true">✧</span></div>)}</div>
+  <section class="promise-section site-container section-space">
+    <p class="small-label section-label">{t.promiseLabel}</p><h2 class="section-heading">{t.promiseTitle}<br /><span class="muted-heading">{t.promiseEnd}</span></h2>
+    <div class="feature-grid">{t.features.map(([n, title, text]) => <article class="feature"><span class="feature-number">{n}<span aria-hidden="true"> /</span></span><h3>{title}</h3><p>{text}</p></article>)}</div>
+  </section>
+  <section id="workflow" class="workflow-section section-space">
+    <div class="site-container"><div class="section-split"><div><p class="small-label section-label">{t.workflowLabel}</p><h2 class="section-heading">{t.workflowTitle}</h2></div><p>{t.workflowText}</p></div>
+      <ol class="workflow-grid">{t.steps.map(([title, text], i) => <li><span class="workflow-index">0{i + 1}</span><span class="workflow-line" aria-hidden="true"></span><h3>{title}</h3><p>{text}</p></li>)}</ol>
+      <a class="text-link" href={pathFor(locale, 'docs/guide')}>{t.guide}<span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+  <section class="built-section site-container section-space"><div class="built-visual" aria-hidden="true"><div class="built-ring ring-a"></div><div class="built-ring ring-b"></div><div class="built-ring ring-c"></div><div class="built-symbol"><OrbitMark /></div><span class="orbit-point point-a"></span><span class="orbit-point point-b"></span><span class="orbit-text">BUILT WITH THE WORKFLOW</span></div><div><p class="small-label section-label">{t.builtLabel}</p><h2 class="section-heading">{t.builtTitle}<br /><span class="muted-heading">{t.builtEnd}</span></h2><p class="body-copy">{t.builtText}</p><a class="text-link" href={`${repository}/blob/website/w1-nebula/docs/website-plan.md`}>{t.builtLink}<span aria-hidden="true">↗</span></a></div></section>
+  <section class="final-section site-container"><div class="final-glow" aria-hidden="true"></div><p class="small-label section-label">{t.finalLabel}</p><h2>{t.finalTitle}</h2><p>{t.finalText}</p><div class="hero-buttons"><a class="button" href={pathFor(locale, 'docs/install')}>{t.finalButton}<span aria-hidden="true">↗</span></a><a class="text-link" href={pathFor(locale, 'docs')}>{t.finalSecondary}<span aria-hidden="true">→</span></a></div></section>
+</Page>

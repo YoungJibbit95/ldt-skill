@@ -1,0 +1,54 @@
+---
+title: A clear place to start
+description: What LittleDevTeam does, what you need, and how to start your first project.
+---
+
+import { LinkCard, CardGrid, Aside } from '@astrojs/starlight/components';
+
+LittleDevTeam gives your coding agent a structured path from a request to a verified result. The skill's technical name is **`architect-dev-team`**. Use it for a new project, a substantial feature, or a complex refactor.
+
+<CardGrid>
+  <LinkCard title="Set up the skill" description="Windows, macOS, or Linux. For one project or your personal use." href="/ltd-skill/en/docs/install/" />
+  <LinkCard title="Your first task" description="From a clear goal to your first verified milestone." href="/ltd-skill/en/docs/guide/" />
+</CardGrid>
+
+## How the skill works
+
+1. **Understand:** inspect the request, project state, and actual capabilities.
+2. **Plan:** define requirements and a suitable architecture proposal.
+3. **Decide:** present you with a concrete proposal and observable goals.
+4. **Build:** implement one approved milestone.
+5. **Verify:** run relevant checks and review the result.
+6. **Continue:** present the concrete result for your evaluation before the next milestone.
+
+Lean, Balanced, and Rigorous profiles adapt effort to the task. Balanced is the default. Profiles do not change approval rules. When real subagents are useful, permitted, and available, the workflow can involve them. The skill does not create its own agent platform.
+
+## What you need
+
+- A configured, signed-in **Codex environment** that can read local skills.
+- **Git** to retrieve the documented source revision.
+- **Python 3.10 or later** to use the bundled validation helpers. They require no external Python packages.
+
+The skill is a folder of instructions, references, templates, and Python helpers. It does not install a separate `ldt` application. This native workflow does not require you to put your own API key into the skill; Codex manages its own sign-in.
+
+## This website is the demonstration
+
+We build this website with LittleDevTeam: an approved plan, a separate workspace, and small milestones. This initial website slice covers the introduction, installation, and guide.
+
+The interactive simulation, deeper technical reference, and detailed case study belong to the following milestone. Read the [approved website plan](https://github.com/YoungJibbit95/ltd-skill/blob/website/w1-nebula/docs/website-plan.md) in the repository.
+
+## Documented development snapshot
+
+This introductory documentation describes published development revision [`9a062eb`](https://github.com/YoungJibbit95/ltd-skill/tree/9a062eb9de0990ce1074dd677d26e5a528ee14a0). It does not establish a finished V2 release or blanket approval of all development work it contains.
+
+<Aside type="note" title="Instructions and validation have limits">
+Local tools check data consistency and source snapshots. They do not authenticate human decisions. Tool permissions, human approvals, and actual test results remain separate concerns.
+</Aside>
+
+External registry entries describe skill candidates. They do not install or activate additional skills. CLI and runtime designs in the repository remain proposals.
+
+## Further sources
+
+- [Skill instructions at the documented revision](https://github.com/YoungJibbit95/ltd-skill/blob/9a062eb9de0990ce1074dd677d26e5a528ee14a0/.agents/skills/architect-dev-team/SKILL.md)
+- [Official Codex skills documentation](https://learn.chatgpt.com/docs/build-skills)
+- [Repository and current development](https://github.com/YoungJibbit95/ltd-skill)

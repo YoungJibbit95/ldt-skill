@@ -1,0 +1,90 @@
+---
+title: Your first task
+description: A concrete introduction to LittleDevTeam — from an idea through architecture to a verified milestone.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+You have [set up the skill](/ltd-skill/en/docs/install/) and opened your project in Codex. Start with a goal you can actually evaluate. The following example is a **guide**, not a transcript of an agent run that has already happened.
+
+## 1. Describe the outcome
+
+```text
+Use $architect-dev-team with the Balanced profile.
+
+I want a small documentation website for my project.
+It should include a clear introduction, installation instructions, and a guide.
+It must be readable on a phone and usable with a keyboard.
+Inspect the existing project first.
+
+Then present an architecture and a small first milestone with concrete
+acceptance criteria and required checks. Begin implementation only
+after I approve that specific proposal.
+```
+
+Describe your actual audience and constraints. Include an existing technology stack, hosting destination, or agreed design in the request. Unknown details can become questions or explicitly identified assumptions.
+
+## 2. Inspect the current state
+
+The agent reads project instructions, checks relevant files and the working tree, and reconciles saved state with reality. Existing changes belong to you; inspection does not authorize overwriting them.
+
+Expect a short account of what exists, what should change, and which questions materially affect the plan. The skill does not promise a fixed team size or particular integrations.
+
+## 3. Review the concrete proposal
+
+A useful proposal describes scope, architecture, a small first milestone, observable acceptance criteria, and required checks. Make sure it covers how you intend to use the result.
+
+If something is missing, you could reply:
+
+```text
+Revise the proposal: the first milestone must already include a readable
+installation page. Move the interactive demo to the following milestone,
+and update the acceptance criteria and required checks accordingly.
+```
+
+A rejection or requested revision does not approve the old version. Ask to see the actual revised proposal.
+
+## 4. Approve a clear scope
+
+After reading the proposal, bind your decision to its actual revision and milestone. Use the identifiers the agent really presented, for example:
+
+```text
+Approved: website architecture revision 1 and milestone W1,
+including the listed acceptance criteria and required checks.
+Implement W1 only for now.
+```
+
+The agent can record your decision in project state with the matching scope fingerprint. That local record does not replace your actual decision. Material architecture changes must be discussed with you again.
+
+## 5. Implement and verify the milestone
+
+The agent works within the approved scope and runs appropriate checks. At the end, it should show concrete changes, executed checks, review findings, limitations, and an identifiable revision.
+
+Distinguish **passed**, **failed**, **skipped**, and **not run**. Review by the implementing agent is self-review. An independent review must come from another actual reviewer.
+
+<Aside type="tip" title="Ask about the concrete result">
+“Which revision was checked, which checks actually ran, and what limitations remain?” is more useful than a blanket “Is everything done?”.
+</Aside>
+
+## 6. Evaluate the result
+
+Inspect the delivered preview or changes. If you find a problem, describe the observed behavior; repairs within the current approved scope are checked again.
+
+When you accept the specific result, you can approve milestone completion. The following iteration is then planned with its own concrete scope. Result approval does not automatically authorize merging or publication.
+
+## 7. Resume later
+
+Project memory normally lives under `.architect-dev-team`. It records scope, decisions, results, and the next action. Treat approval records as local project data and deliberately decide whether to publish them.
+
+```text
+Use $architect-dev-team to resume this project.
+Read the current state and referenced proposals.
+Reconcile them with Git, existing changes, and evidenced decisions.
+Summarize what is still valid and the specific next action.
+```
+
+A stored approval alone does not prove it remains valid. Changed sources can invalidate checks or review. When an actual human decision cannot be established, the agent should clarify that concrete scope with you.
+
+## This website as a real example
+
+This website follows the same process: the [published project brief](https://github.com/YoungJibbit95/ltd-skill/blob/9a062eb9de0990ce1074dd677d26e5a528ee14a0/docs/website-brief.md) describes the task; the [website plan](https://github.com/YoungJibbit95/ltd-skill/blob/website/w1-nebula/docs/website-plan.md) separates the entry experience, deeper functionality, and publication into verifiable milestones. It does not serve as evidence of work that has yet to run.

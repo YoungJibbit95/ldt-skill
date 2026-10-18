@@ -35,7 +35,7 @@ Architekturvorschlag mit einem kleinen ersten Meilenstein. Zeige mir
 den konkreten Vorschlag zur Freigabe, bevor du ihn implementierst.
 ```
 
-Ein vollständiges Installationstutorial für andere Projekte und Umgebungen wird im Website-Projekt erarbeitet. Kopiere bei manueller Übernahme immer den gesamten Skill-Ordner einschließlich `scripts/ldt_core`.
+Das Website-Projekt enthält ein vollständiges [Installationstutorial](website/src/content/docs/de/docs/install.mdx) für Windows, macOS und Linux. Kopiere bei manueller Übernahme immer den gesamten Skill-Ordner einschließlich `scripts/ldt_core`.
 
 ## Lokal prüfen
 
@@ -56,7 +56,17 @@ Die GitHub-Actions-Checks führen diese Prüfungen auf Windows und Linux mit Pyt
 
 Geplant sind eine moderne Startseite, Dokumentation, ein praktischer Guide, ein Installationstutorial und eine Fallstudie zur Entstehung der Website. Die Fallstudie soll tatsächliche Planung, freigegebene Schritte und ausgeführte Prüfungen zeigen. Noch nicht umgesetzte Funktionen werden als geplant gekennzeichnet.
 
-Der [Projektbrief](docs/website-brief.md) hält den Auftrag fest. Design, Technik und Umsetzungsschritte werden anschließend gemeinsam in der Planungsphase festgelegt. Eine Website ist noch nicht implementiert oder veröffentlicht.
+Der [Projektbrief](docs/website-brief.md) hält den Auftrag fest; der [freigegebene Website-Plan](docs/website-plan.md) beschreibt Design, Technik und Meilensteine. **W1** implementiert die zweisprachige Nebula-Startseite, Installation und den ersten Praxisguide. Interaktive Demo und technische Vertiefung folgen in W2; eine Veröffentlichung auf GitHub Pages ist erst in W3 vorgesehen.
+
+Die lokale Website benötigt Node.js 24:
+
+```sh
+cd website
+npm ci
+npm run dev
+```
+
+Öffne die ausgegebene lokale Adresse mit `/ltd-skill/de/` oder `/ltd-skill/en/`. Die [Website-Anleitung](website/README.md) beschreibt Produktionsbuild, Linkprüfung und Browserchecks.
 
 ## Entwicklungsstand und Orientierung
 
