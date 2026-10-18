@@ -1,0 +1,58 @@
+---
+title: Validator commands
+description: The actual read-only Python commands for packages, registries, state, digests, and source snapshots.
+---
+
+import SourceNote from '../../../../components/SourceNote.astro';
+import CommandsTable from '../../../../components/CommandsTable.astro';
+
+<SourceNote file="scripts/validate.py" />
+
+The helpers need Python 3.10 or later and use the standard library. They are not an installed `ldt` application. Run them from your project root or use absolute paths to the complete skill folder.
+
+## Overview
+
+<CommandsTable />
+
+The table is checked against actual `--help` output. For `registry`, `--migration-proposal` emits a draft on stdout. The option accepts schema-1 inputs; it is not automatic schema-2 installation.
+
+## Validate the package and both registry formats
+
+```sh
+python -B .agents/skills/architect-dev-team/scripts/validate.py package .agents/skills/architect-dev-team
+python -B .agents/skills/architect-dev-team/scripts/validate.py registry .agents/skills/architect-dev-team/registry/skills.json
+python -B .agents/skills/architect-dev-team/scripts/validate.py registry .agents/skills/architect-dev-team/registry/index.json
+```
+
+Expect `OK package` or `OK registry`. Use `python3` or `py -3` if appropriate for your system. These checks do not execute external candidates or contact evidence URLs.
+
+## Validate state and prerequisites
+
+These examples assume a genuinely created project state and its referenced files already exist. Gates require the corresponding actual decisions and evidence.
+
+```sh
+python -B .agents/skills/architect-dev-team/scripts/validate.py state .architect-dev-team/state.json --root .
+python -B .agents/skills/architect-dev-team/scripts/validate.py state .architect-dev-team/state.json --root . --gate implement
+python -B .agents/skills/architect-dev-team/scripts/validate.py scope .architect-dev-team/state.json
+python -B .agents/skills/architect-dev-team/scripts/validate.py digest .architect-dev-team/architecture.md
+python -B .agents/skills/architect-dev-team/scripts/validate.py snapshot .
+```
+
+Some phases apply gates even without an explicit `--gate` option. This does not turn an empty or invented state into an approved project.
+
+## Inspect migration drafts
+
+```sh
+python -B .agents/skills/architect-dev-team/scripts/validate.py registry .agents/skills/architect-dev-team/registry/skills.json --migration-proposal
+python -B .agents/skills/architect-dev-team/scripts/validate.py migrate-state .architect-dev-team/legacy-state.json --root . --required-check "production build"
+```
+
+The second invocation needs an actual legacy file; the check name is illustrative and must come from the agreed policy. Repeat `--required-check` for every mandatory check. Both commands print JSON without applying it. When saving, use UTF-8 without a BOM and a separate new file; do not overwrite the original with a blanket shell redirect.
+
+## Output and errors
+
+- Successful validation or data output: exit code **0**.
+- Invalid data or filesystem errors caught by the helper: `INVALID: …` on stderr and exit code **1**.
+- Invalid command-line arguments: argparse help/diagnostics and exit code **2**.
+
+Unexpected runtime errors are not successful checks. Share the concrete diagnostic without credentials or complete private environment dumps. Registry schema 1, in particular, retains its documented parser limits; not every possible old API error is normalized into a schema-2 diagnostic.

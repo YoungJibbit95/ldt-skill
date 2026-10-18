@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import OrbitMark from '../components/OrbitMark.astro';
-import { base, pathFor, repository, otherLocale, type Locale } from '../lib/site';
+import { base, pathFor, repository, otherLocale, translatedPath, type Locale } from '../lib/site';
 interface Props { locale: Locale; title: string; description: string; noindex?: boolean }
 const { locale, title, description, noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -17,7 +17,7 @@ const de = locale === 'de';
     {noindex ? <meta name="robots" content="noindex" /> : <>
       <link rel="canonical" href={canonical} />
       <link rel="alternate" hreflang={locale} href={canonical} />
-      <link rel="alternate" hreflang={otherLocale(locale)} href={new URL(pathFor(otherLocale(locale)), Astro.site)} />
+      <link rel="alternate" hreflang={otherLocale(locale)} href={new URL(translatedPath(Astro.url.pathname, locale), Astro.site)} />
     </>}
     <meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:type" content="website" /><meta property="og:url" content={canonical} />
   </head>
@@ -27,7 +27,7 @@ const de = locale === 'de';
     <main id="main"><slot /></main>
     <footer class="site-footer site-container">
       <div><a class="brand" href={pathFor(locale)}><OrbitMark /><span>LittleDevTeam<span class="brand-dot">.</span></span></a><p>{de ? 'Große Ideen. Klare nächste Schritte.' : 'Big ideas. Clear next steps.'}</p></div>
-      <div class="footer-links"><a href={pathFor(locale, 'docs')}>{de ? 'Dokumentation' : 'Documentation'}</a><a href={pathFor(locale, 'docs/install')}>{de ? 'Installation' : 'Installation'}</a><a href={repository}>GitHub ↗</a></div>
+      <div class="footer-links"><a href={pathFor(locale, 'docs')}>{de ? 'Dokumentation' : 'Documentation'}</a><a href={pathFor(locale, 'built-with-littledevteam')}>{de ? 'Entstehung' : 'Built with LDT'}</a><a href={repository}>GitHub ↗</a></div>
       <p class="footer-note">{de ? 'Mit LittleDevTeam entwickelt. Öffentlich nachvollziehbar.' : 'Built with LittleDevTeam. Openly documented.'}<br /><span>{de ? 'Entwicklungsstand · Native Codex Skill' : 'Development snapshot · Native Codex skill'}</span></p>
     </footer>
   </body>

@@ -1,0 +1,39 @@
+---
+title: Limits and recovery
+description: Stale reviews, unavailable tools, manual coverage, and honest claims about the actual development state.
+---
+
+import SourceNote from '../../../../components/SourceNote.astro';
+
+<SourceNote file="references/approvals.md" />
+
+The skill is a workflow with local validation helpers. It is not a permission system, permanent agent platform, or proof that recorded assertions are true.
+
+## When sources have changed
+
+1. Read state, the referenced proposal, Git revision, and actual changes.
+2. Preserve the previous revision, decisions, and failure/review summary.
+3. Reset stale review; mark affected checks `not_run` instead of silently passing them. Retain previous waiver decisions as history.
+4. Check whether architecture approval still covers the same scope. A material change needs a new proposal.
+5. Repair within the approved scope, rerun affected checks and review, and capture a fresh snapshot.
+6. Present the new concrete result for approval.
+
+Old approval bound to a different source snapshot must not make the new revision appear accepted already.
+
+## When human evidence is missing
+
+A locally stored approval alone does not authenticate a person. The agent reconciles available conversation or review evidence. If an actual decision is missing or its scope is unclear, clarify the concrete revision with you. Silence, tool permissions, and passing tests are not substitutes.
+
+## When tools or reviewers are unavailable
+
+Missing tools are reported as **unavailable**. An isolated copy test is not a Codex-discovery test. A macOS test that did not run is not a passed macOS result. Self-review is not independent review. Appropriate native workflows remain possible as long as agreed mandatory checks and human decisions are respected.
+
+Unsupported snapshot properties make automatic gate verification unavailable. Human-agreed manual coverage identifies files, revisions, checks, and remaining gaps. It must not be reported as a passed automated gate.
+
+## What is not a shipped product feature
+
+CLI, SDK, runtime-adapter, and expanded-role designs in the repository are historical proposals. The registry does not install third-party skills. This website does not run agents for visitors. The [demo](/ltd-skill/en/demo/) is a local simulation; the [case study](/ltd-skill/en/built-with-littledevteam/) documents actually evidenced work.
+
+## Why local data stays local
+
+Project state can include internal paths and human-decision references. This website does not import it automatically. Public documentation uses only deliberately selected summaries and suitable public artifacts. Credentials do not belong in state, screenshots, or validation logs.

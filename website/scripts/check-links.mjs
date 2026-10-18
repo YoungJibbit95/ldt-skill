@@ -41,8 +41,9 @@ for (const [file, doc] of documents) {
     } else errors.push(`${pagePath}: unsafe target ${target}`);
   }
 }
-for (const page of ['index.html', ...['de', 'en'].flatMap(locale => [`${locale}/index.html`, `${locale}/docs/index.html`, `${locale}/docs/install/index.html`, `${locale}/docs/guide/index.html`])]) {
+const routes = ['', 'docs', 'docs/install', 'docs/guide', 'docs/workflow', 'docs/approvals', 'docs/memory', 'docs/checks', 'docs/registry', 'docs/limits', 'demo', 'built-with-littledevteam'];
+for (const page of ['index.html', ...['de', 'en'].flatMap(locale => routes.map(route => `${locale}/${route ? `${route}/` : ''}index.html`))]) {
   if (!documents.has(resolve(root, page))) errors.push(`Required route missing: ${page}`);
 }
 if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
-console.log(`OK: ${checked} internal links/assets/anchors across ${documents.size} built HTML pages; all W1 routes present.`);
+console.log(`OK: ${checked} internal links/assets/anchors across ${documents.size} built HTML pages; all W1/W2 routes present.`);

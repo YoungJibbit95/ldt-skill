@@ -1,0 +1,17 @@
+---
+import Page from '../../layouts/Page.astro';
+import WorkflowDemo from '../../components/WorkflowDemo.astro';
+import { demoCopy } from '../../data/demo';
+import { pathFor, type Locale } from '../../lib/site';
+import '../../styles/demo.css';
+export function getStaticPaths() { return ['de', 'en'].map(locale => ({ params: { locale } })); }
+const locale = Astro.params.locale as Locale;
+const t = demoCopy[locale];
+---
+<Page locale={locale} title={`${locale === 'de' ? 'Workflow-Demo' : 'Workflow demo'} — LittleDevTeam`} description={t.intro}>
+  <div class="demo-page site-container section-space" data-pagefind-body>
+    <p class="small-label section-label">{t.eyebrow}</p><h1>{t.title}</h1><p class="demo-intro">{t.intro}</p>
+    <WorkflowDemo locale={locale} />
+    <section class="demo-explanation"><h2>{t.real}</h2><p>{t.realBody}</p><div class="hero-buttons"><a class="text-link" href={pathFor(locale, 'docs/guide')}>{t.guide} ↗</a><a class="text-link" href={pathFor(locale, 'built-with-littledevteam')}>{t.caseStudy} ↗</a></div></section>
+  </div>
+</Page>

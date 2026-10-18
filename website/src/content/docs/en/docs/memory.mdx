@@ -1,0 +1,57 @@
+---
+title: State and snapshots
+description: Project memory, schema 2, scope fingerprints, and the limits of source snapshots.
+---
+
+import SourceNote from '../../../../components/SourceNote.astro';
+
+<SourceNote file="references/project-memory.md" />
+
+Project memory records inspectable facts: active scope, actual decisions, check outcomes, open issues, and the next action. It stores neither credentials nor private reasoning.
+
+## Files and scope
+
+```text
+.architect-dev-team/
+  state.json        active project state
+  architecture.md   saved proposal
+  review.json       source snapshot
+```
+
+These paths are defaults. Equivalent existing project documents can be reused. Separate workstreams need separate states: the website, for example, does not replace the skill-development state.
+
+## The state contract
+
+Active automated gates use **schema 2**. State remains below 64 KiB and includes:
+
+| Field | Meaning |
+| --- | --- |
+| `schema_version`, `phase`, `approval_stage`, `profile` | Format, current phase, approval stage, and effort profile |
+| `architecture` | `null` or proposal path and SHA-256 |
+| `milestone` | `null` or ID, summary, acceptance criteria, and stable required-check names |
+| `approvals` | Ordered actual decision evidence with scope and, where applicable, review hashes |
+| `checks` | Name, required status, actual outcome, evidence, and applicable waiver |
+| `review` | `null` or snapshot path/hash, independence, and review evidence |
+| `completed`, `open_issues`, `constraints`, `next_action` | Compact history, boundaries, and next step |
+
+Check statuses are `passed`, `failed`, `not_run`, `unavailable`, or `waived`. Decision timestamps include a timezone. Bound artifact paths refer to regular files relative to the explicit project root; no symlinks or path traversal.
+
+## What a snapshot contains
+
+With Git, a snapshot inventories tracked and nonignored new files, HEAD, and index metadata. Each schema-2 entry includes path, content hash, file type, relevant executable bits, and applicable Git mode, blob, and stage. Missing tracked files remain visible as `missing` with their index metadata.
+
+On Windows, POSIX filesystem executable bits are `null`. Linux execution permissions are not invented from file extensions; Git index modes are still compared.
+
+Without Git, the helper walks the filesystem with defined exclusions. Managed state under `.architect-dev-team` and generated/dependency content do not provide complete deployment attestation. Save the snapshot inside the excluded managed directory so it does not hash itself.
+
+## When automated validation stops
+
+Unreadable or incomplete inventories, unsupported filenames, symlinks, gitlinks/submodules, and unresolved index conflicts block automatic snapshots. Do not hide the diagnostic by omitting files. Resolve the condition or agree on explicit human-reviewed manual coverage and report automation as unavailable.
+
+Snapshots are not atomic. Sources must not change concurrently during capture and review. A new commit also changes HEAD; refresh the snapshot before result approval.
+
+## Migrate older state
+
+Schema 1 remains readable as history but cannot satisfy active automated gates. `migrate-state` emits a **draft on stdout**. It does not overwrite anything, transfer old approval to a new scope, or replace human decisions. Preserve the original and evidence. Define the required-check policy, inspect the draft, and obtain approval for the new concrete scope before continuing.
+
+The [command reference](/ltd-skill/en/docs/checks/) shows the invocation. [Limits and recovery](/ltd-skill/en/docs/limits/) covers stale evidence.

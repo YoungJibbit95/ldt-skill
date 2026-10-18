@@ -1,0 +1,52 @@
+---
+title: Registry and external skills
+description: Schemas 1 and 2, provenance, trust levels, and explicit read-only migration proposals.
+---
+
+import SourceNote from '../../../../components/SourceNote.astro';
+
+<SourceNote file="references/registry.md" />
+
+The registry describes external skill candidates and provenance. Passing validation establishes metadata consistency, not safety, compatibility, installation, or permission to execute.
+
+## Two separate formats
+
+**Schema 1** uses `registry/skills.json` with a list of entries. It remains supported for existing consumers. **Schema 2** uses `registry/index.json` pointing to individual `skills/<id>.json` files contained in the registry directory. Registry schemas are independent of project-state/snapshot schemas and the V2 product name.
+
+A schema-2 record contains `schema_version`, complete `metadata`, `aliases`, `verification`, `runtime`, and `lifecycle`. Metadata retains identity, source with a full commit, license/attribution, use cases, requirements, trust, limitations, and evidence. Additional fields expose source/license evidence and unknown runtime effects explicitly.
+
+## Existing candidates
+
+| Identity | Observation at the pinned source revision |
+| --- | --- |
+| `openai-gh-fix-ci` | Selected Apache-2.0 text verified; catalog README deprecation does not prove the pinned skill is absent. |
+| `anthropic-frontend-design` | Manifest name `frontend-design`; selected Apache-2.0 text verified. Individual authorship and Codex compatibility remain uncertain. |
+| `vercel-react-best-practices` | `react-best-practices` established as a directory alias. MIT declared in the manifest; full license text and copyright evidence remain unresolved. |
+
+All three remain **`candidate`**. The list is not a recommendation for your project. It does not install third-party skill code.
+
+## Evidence instead of automatic trust promotion
+
+| Status | Required claim |
+| --- | --- |
+| `candidate` | Evidenced provenance; inspection only, no execution implied |
+| `reviewed` | Additional actual inspection of relevant instructions, scripts, and dependencies |
+| `tested` | Additionally, a real isolated test with environment, commands, and outcomes |
+| `approved` | Additionally, an explicit maintainer decision for specified uses |
+| `deprecated` / `blocked` | Documented lifecycle or exclusion; do not execute |
+
+Schema 2 binds stronger source assertions to the same canonical source and revision and requires applicable evidence. The validator does not fetch those sources or prove their content. A new pin needs fresh relevant review. Even an `approved` entry does not replace your task-specific consent.
+
+## Installation and activation
+
+Architecture approval is not blanket consent for external skills. Inspect provenance, license, instructions, scripts, dependencies, and effects for the actual task. Installation needs distinct authorization; execution stays within the covered scope. If candidates are unavailable or unsuitable, use available native workflows or identify the concrete gap.
+
+## Read-only migration
+
+```sh
+python -B .agents/skills/architect-dev-team/scripts/validate.py registry .agents/skills/architect-dev-team/registry/skills.json --migration-proposal
+```
+
+The proposal preserves original metadata, evidence, trust, and uncertainty. `source_sha256`, `source_encoding`, `source`, proposed `index`/`records`, `validation_issues`, and `ready_for_validation` expose provenance and remaining issues. Unsupported legacy assertions remain problem drafts. `ready_for_validation` is neither approval nor installation. No input file is overwritten or candidate executed.
+
+Exact field limits, supported sources, and evidence prerequisites are in the pinned source linked above.

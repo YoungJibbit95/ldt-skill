@@ -8,7 +8,7 @@ const t = de ? { docs: 'Dokumentation', guide: 'Guide', workflow: 'Workflow', in
 const links = [
   { href: pathFor(locale, 'docs'), label: t.docs },
   { href: pathFor(locale, 'docs/guide'), label: t.guide },
-  { href: `${pathFor(locale)}#workflow`, label: t.workflow },
+  { href: pathFor(locale, 'demo'), label: 'Demo' },
 ];
 const languagePath = /\/(de|en)\//.test(Astro.url.pathname) ? translatedPath(Astro.url.pathname, locale) : pathFor(otherLocale(locale));
 ---

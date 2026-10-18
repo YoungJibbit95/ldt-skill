@@ -1,0 +1,52 @@
+---
+title: Registry und externe Skills
+description: Schema 1 und 2, Herkunftsnachweise, Vertrauensstufen und ausdrückliche read-only Migrationsvorschläge.
+---
+
+import SourceNote from '../../../../components/SourceNote.astro';
+
+<SourceNote file="references/registry.md" />
+
+Die Registry beschreibt externe Skill-Kandidaten und ihre Herkunft. Eine erfolgreiche Validierung bestätigt die Konsistenz der Metadaten — keine Sicherheit, Kompatibilität, Installation oder Ausführungserlaubnis.
+
+## Zwei getrennte Formate
+
+**Schema 1** verwendet `registry/skills.json` mit Einträgen in einer Liste. Es bleibt für bestehende Verbraucher unterstützt. **Schema 2** verwendet `registry/index.json` mit Verweisen auf einzelne `skills/<id>.json`-Dateien innerhalb des Registry-Verzeichnisses. Registry-Schemata sind unabhängig von den Projektzustands-/Snapshot-Schemata und der Produktbezeichnung V2.
+
+Ein Schema-2-Record enthält `schema_version`, vollständige `metadata`, `aliases`, `verification`, `runtime` und `lifecycle`. Metadaten behalten Identität, Quelle mit vollständigem Commit, Lizenz/Attribution, Einsatzgebiete, Voraussetzungen, Vertrauensstatus, Grenzen und Evidenz. Zusätzliche Felder machen Quell-/Lizenznachweise und unbekannte Laufzeiteffekte ausdrücklich sichtbar.
+
+## Die vorhandenen Kandidaten
+
+| Identität | Beobachtung am gepinnten Quellstand |
+| --- | --- |
+| `openai-gh-fix-ci` | Ausgewählter Apache-2.0-Text nachgewiesen; die Abkündigung des Katalog-README beweist nicht, dass der gepinnte Skill fehlt. |
+| `anthropic-frontend-design` | Manifestname `frontend-design`; ausgewählter Apache-2.0-Text nachgewiesen. Einzelautorschaft und Codex-Kompatibilität bleiben ungesichert. |
+| `vercel-react-best-practices` | `react-best-practices` als Verzeichnis-Alias belegt. MIT im Manifest deklariert; vollständiger Lizenztext und Copyright-Nachweis bleiben ungeklärt. |
+
+Alle drei bleiben **`candidate`**. Die Liste ist keine Empfehlung für dein Projekt. Es wird kein Dritt-Skill-Code mitinstalliert.
+
+## Evidenz statt automatischer Vertrauensaufwertung
+
+| Status | Erforderliche Aussage |
+| --- | --- |
+| `candidate` | Belegte Herkunft; nur Inspektion, keine Ausführung impliziert |
+| `reviewed` | Zusätzliche tatsächliche Prüfung relevanter Anweisungen, Skripte und Abhängigkeiten |
+| `tested` | Zusätzlich ein echter isolierter Test mit Umgebung, Befehlen und Ergebnissen |
+| `approved` | Zusätzlich eine ausdrückliche Maintainerentscheidung für benannte Einsätze |
+| `deprecated` / `blocked` | Dokumentierter Lebenszyklus beziehungsweise Ausschluss; nicht ausführen |
+
+Schema 2 bindet stärkere Quellbehauptungen an dieselbe kanonische Quelle und Revision und benötigt passende Evidenz. Der Validator lädt diese Quellen nicht und beweist ihren Inhalt nicht. Ein neuer Pin benötigt neue relevante Prüfung. Auch ein `approved`-Eintrag ersetzt deine situationsbezogene Zustimmung nicht.
+
+## Installation und Aktivierung
+
+Ein Architekturentscheid ist keine pauschale Zustimmung zu externen Skills. Herkunft, Lizenz, Anweisungen, Skripte, Abhängigkeiten und Effekte müssen für die tatsächliche Aufgabe geprüft werden. Installation braucht eine eigene Autorisierung; Ausführung nur im gedeckten Umfang. Bei nicht verfügbaren oder ungeeigneten Kandidaten wird die vorhandene native Arbeitsweise genutzt oder eine konkrete Lücke benannt.
+
+## Read-only Migration
+
+```sh
+python -B .agents/skills/architect-dev-team/scripts/validate.py registry .agents/skills/architect-dev-team/registry/skills.json --migration-proposal
+```
+
+Der Entwurf bewahrt die ursprünglichen Metadaten, Evidenz, Vertrauensstufe und Unsicherheit. `source_sha256`, `source_encoding`, `source`, vorgeschlagene `index`/`records`, `validation_issues` und `ready_for_validation` machen die Herkunft und verbleibende Probleme sichtbar. Nicht darstellbare Legacy-Angaben bleiben als problematische Entwürfe erhalten. `ready_for_validation` ist keine Freigabe und keine Installation. Es wird keine Eingabedatei überschrieben und kein Kandidat ausgeführt.
+
+Die genauen Feldgrenzen, zulässigen Quellen und Nachweisbedingungen stehen in der oben verlinkten gepinnten Quelle.

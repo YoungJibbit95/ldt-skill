@@ -1,0 +1,46 @@
+---
+title: Freigaben und Review
+description: Architektur, Prüfumfang, Ergebnisfreigaben und die Unterschiede zwischen Review, Merge und Deployment.
+---
+
+import SourceNote from '../../../../components/SourceNote.astro';
+
+<SourceNote file="references/approvals.md" />
+
+Eine Freigabe ist deine Entscheidung über ein konkretes Artefakt. Werkzeugberechtigungen, ein Agentenurteil oder eine gespeicherte JSON-Datei sind keine menschliche Zustimmung.
+
+## Architekturfreigabe
+
+Vor der Umsetzung zeigt der Agent einen versionierten Vorschlag mit Meilenstein, Abnahmekriterien, Profil, verbindlichen Prüfungen, Annahmen und Risiken. Der gespeicherte Architekturbezug enthält Pfad und SHA-256. Der Umfangsfingerabdruck bindet **diesen Bezug, den vollständigen Meilenstein einschließlich Pflichtchecks und das Profil**.
+
+Deine ausdrückliche Zustimmung zu genau diesem Vorschlag reicht aus. Eine unveränderte bereits erteilte Freigabe muss nicht erneut eingeholt werden. Ändert sich der Umfang wesentlich, wird die neue Fassung vor der Umsetzung zur Entscheidung vorgelegt.
+
+## Ergebnisfreigabe
+
+Nach Umsetzung und Checks folgt der konkrete Reviewstand. Er enthält Quellrevision, Änderungen, tatsächliche Prüfergebnisse, Review-Unabhängigkeit, offene Punkte und einen aktuellen Snapshot. Deine Ergebnisentscheidung bindet zusätzlich den Hash dieses Review-Snapshots. Nachträgliche Quell- oder HEAD-Änderungen machen ihn veraltet.
+
+| Gate | Prüft zusätzlich zu gültigen Zustandsdaten |
+| --- | --- |
+| `implement` | Aktuelle Architekturfreigabe für den Umfang |
+| `review` | Mindestens einen Pflichtcheck, alle Pflichtchecks erfüllt und aktuellen Snapshot |
+| `advance` | Aktuelle Ergebnisfreigabe für denselben Umfang und Reviewstand |
+
+Die letzte Entscheidung der jeweiligen Art ist maßgeblich. Eine spätere Ablehnung verdrängt eine ältere Zustimmung; veränderte Bindungen werden nicht durch die alte Freigabe gedeckt.
+
+## Pflichtchecks und Ausnahmen
+
+Pflichtcheck-Namen werden vor der Architekturfreigabe im Meilenstein festgelegt. Entfernen, Umbenennen oder Herabstufen eines Checks verändert diese Policy. Ein fehlgeschlagener Pflichtcheck muss repariert werden.
+
+Ein tatsächlich ungeeigneter oder nicht verfügbarer Pflichtcheck kann nur aufgrund einer ausdrücklichen menschlichen Entscheidung als `waived` dokumentiert werden. Diese Ausnahme nennt Grund, Nachweis und denselben Umfangsfingerabdruck. Sie ist kein bestandener Test. Die Ergebnisübergabe muss die verbleibende Grenze offenlegen.
+
+## Eigenprüfung und Unabhängigkeit
+
+Ein Review durch den implementierenden Agenten ist **Eigenprüfung**. Ein unabhängiger Review kommt von einem anderen tatsächlichen Agenten oder Menschen. Rigorous verlangt unabhängigen Review; der dokumentierte Ausnahmeweg benötigt den Pflichtcheck `independent_review` und eine ausdrückliche, umfangsgebundene menschliche Ausnahme. Andere zuvor vereinbarte Review-Anforderungen bleiben ebenfalls bindend.
+
+## Merge und Veröffentlichung
+
+Eine Ergebnisfreigabe erlaubt den Übergang zum nächsten Schritt. Sie autorisiert keinen automatischen Merge und kein Deployment. Diese Handlungen brauchen jeweils eine Autorisierung für den konkreten Stand.
+
+## Technische Grenze
+
+Die lokalen Prüfwerkzeuge prüfen die Konsistenz der Aufzeichnungen. Sie können weder eine Chat-Nachricht authentifizieren noch externe Handlungen verhindern. Bei einer Wiederaufnahme werden die tatsächlichen Quellen und verfügbaren menschlichen Entscheidungen abgeglichen. Fehlende Evidenz wird nicht durch das Bearbeiten von Freigabedateien ersetzt.

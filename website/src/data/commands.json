@@ -1,0 +1,9 @@
+[
+  { "name": "package", "arguments": "SKILL_DIRECTORY", "de": "Prüft vollständige Paketstruktur, Metadaten und enthaltene Markdown-Verweise.", "en": "Checks the complete package structure, metadata, and contained Markdown links.", "output": "OK package" },
+  { "name": "registry", "arguments": "REGISTRY_JSON [--migration-proposal]", "de": "Validiert Registry Schema 1/2 oder gibt einen ausdrücklichen Schema-1-Migrationsvorschlag aus.", "en": "Validates registry schema 1/2 or emits an explicit schema-1 migration proposal.", "output": "OK registry / JSON" },
+  { "name": "digest", "arguments": "FILE", "de": "Berechnet SHA-256 über die tatsächlichen Dateibytes.", "en": "Computes SHA-256 over the actual file bytes.", "output": "SHA-256" },
+  { "name": "scope", "arguments": "STATE_JSON", "de": "Berechnet den Umfangsfingerabdruck aus Architekturbezug, Meilenstein und Profil.", "en": "Computes the scope fingerprint from architecture reference, milestone, and profile.", "output": "SHA-256" },
+  { "name": "snapshot", "arguments": "PROJECT_ROOT", "de": "Gibt einen Quellstand-Snapshot einschließlich Git-Metadaten aus.", "en": "Emits a source snapshot including Git metadata.", "output": "JSON" },
+  { "name": "state", "arguments": "STATE_JSON --root PROJECT_ROOT [--gate implement|review|advance]", "de": "Prüft Zustand, Artefaktbezüge und die Voraussetzungen des gewählten Gates.", "en": "Checks state, artifact references, and prerequisites for the selected gate.", "output": "OK state" },
+  { "name": "migrate-state", "arguments": "LEGACY_STATE_JSON --root PROJECT_ROOT [--required-check NAME]", "de": "Gibt einen expliziten Legacy-Migrationsentwurf aus; wiederhole die Check-Option für jeden Pflichtcheck.", "en": "Emits an explicit legacy migration draft; repeat the check option for each required check.", "output": "JSON" }
+]
