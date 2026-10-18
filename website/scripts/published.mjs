@@ -84,9 +84,13 @@ try {
     await page.keyboard.press('Escape'); await expect(opener).toBeFocused();
     await page.setViewportSize({ width: 375, height: 950 });
     await page.goto(`${base}${locale}/docs/install/`);
-    const copy = page.locator('.expressive-code .copy button').first();
+    const codeBlock = page.locator('.expressive-code:visible').first();
+    const expectedCode = (await codeBlock.locator('pre code .ec-line .code').allTextContents()).join('\n').replace(/\r\n/g, '\n');
+    expect(expectedCode.trim(), 'The copied block contains visible code').not.toBe('');
+    const copy = codeBlock.locator('.copy button');
+    await page.evaluate(() => navigator.clipboard.writeText(''));
     await copy.focus(); await page.keyboard.press('Enter');
-    await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toMatch(/git clone/);
+    await expect.poll(async () => (await page.evaluate(() => navigator.clipboard.readText())).replace(/\r\n/g, '\n')).toBe(expectedCode);
     await page.goto(`${base}${locale}/demo/`);
     await page.locator('[data-stage-link="2"]').click(); await page.locator('[data-revise]').click();
     await page.locator('[data-stage-link="3"]').click();
