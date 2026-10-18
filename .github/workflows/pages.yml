@@ -1,0 +1,133 @@
+name: Publish approved website artifact
+
+on:
+  workflow_dispatch:
+    inputs:
+      approved_sha:
+        description: Full reviewed source SHA, reachable from main
+        required: true
+        type: string
+      candidate_run:
+        description: Successful Validate website run ID
+        required: true
+        type: string
+      artifact_id:
+        description: Unexpired website-candidate artifact ID from that run
+        required: true
+        type: string
+      archive_hash:
+        description: Approved site.tar.gz SHA-256
+        required: true
+        type: string
+      manifest_hash:
+        description: Optional approved manifest.json SHA-256
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: manual-pages-publication
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+    env:
+      APPROVED_SHA: ${{ inputs.approved_sha }}
+      CANDIDATE_RUN: ${{ inputs.candidate_run }}
+      ARTIFACT_ID: ${{ inputs.artifact_id }}
+      ARCHIVE_HASH: ${{ inputs.archive_hash }}
+      MANIFEST_HASH: ${{ inputs.manifest_hash }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      # Validation tools come from trusted main, never from a downloaded archive.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Validate GitHub provenance and download inert candidate
+        run: >-
+          python website/scripts/candidate-metadata.py --run "$CANDIDATE_RUN"
+          --artifact "$ARTIFACT_ID" --sha "$APPROVED_SHA" --output downloaded
+      - name: Verify approved hashes and complete inventory before extraction
+        shell: bash
+        run: |
+          optional=()
+          if [[ -n "$MANIFEST_HASH" ]]; then optional=(--manifest-hash "$MANIFEST_HASH"); fi
+          python website/scripts/release.py verify --archive downloaded/site.tar.gz \
+            --manifest downloaded/manifest.json --trusted downloaded/trusted.json \
+            --sha "$APPROVED_SHA" --archive-hash "$ARCHIVE_HASH" "${optional[@]}" --extract verified-site
+      - name: Preserve provenance and download receipt
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: publication-provenance
+          path: |
+            downloaded/manifest.json
+            downloaded/trusted.json
+          retention-days: 90
+      - name: Wrap verified bytes for Pages; do not rebuild
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+        with:
+          path: verified-site
+          retention-days: 90
+  deploy:
+    needs: validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish previously verified bytes
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+  public-evidence:
+    needs: deploy
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: read
+    env:
+      APPROVED_SHA: ${{ inputs.approved_sha }}
+      ASTRO_TELEMETRY_DISABLED: '1'
+    defaults:
+      run:
+        working-directory: website
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.approved_sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: website/.nvmrc
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Check actual release, all routes and browser behavior
+        run: npm run check:published -- --public --sha "$APPROVED_SHA" --output reports/public-urls
+      - name: Measure the separate public mobile series
+        run: npm run measure -- --public --origin https://youngjibbit95.github.io --sha "$APPROVED_SHA" --output reports/public-performance
+      - name: Preserve every public report, including failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: public-verification-evidence
+          path: website/reports
+          retention-days: 90
+          if-no-files-found: ignore

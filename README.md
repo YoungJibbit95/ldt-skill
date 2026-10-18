@@ -56,7 +56,7 @@ Die GitHub-Actions-Checks führen diese Prüfungen auf Windows und Linux mit Pyt
 
 Geplant sind eine moderne Startseite, Dokumentation, ein praktischer Guide, ein Installationstutorial und eine Fallstudie zur Entstehung der Website. Die Fallstudie soll tatsächliche Planung, freigegebene Schritte und ausgeführte Prüfungen zeigen. Noch nicht umgesetzte Funktionen werden als geplant gekennzeichnet.
 
-Der [Projektbrief](docs/website-brief.md) hält den Auftrag fest; der [freigegebene Website-Plan](docs/website-plan.md) beschreibt Design, Technik und Meilensteine. **W1** liefert den freigegebenen zweisprachigen Einstieg. **W2** ergänzt technische Referenz, lokalisierte Suche, interaktive Simulation und eine Fallstudie mit echten Belegen. Die Ergebnisbewertung von W2 steht aus; die Veröffentlichung auf GitHub Pages ist W3.
+Der [Projektbrief](docs/website-brief.md) hält den Auftrag fest; der [freigegebene Website-Plan](docs/website-plan.md) beschreibt Design, Technik und Meilensteine. **W1** liefert den freigegebenen zweisprachigen Einstieg. **W2** ergänzt technische Referenz, lokalisierte Suche, interaktive Simulation und eine Fallstudie mit echten Belegen; sein Ergebnis wurde angenommen. Der freigegebene [W3-Vorschlag](docs/website-w3-proposal.md) umfasst gezielten Feinschliff, Release-Vorbereitung und unabhängige Prüfung. Veröffentlichung und öffentliche Abnahme stehen noch aus.
 
 Die lokale Website benötigt Node.js 24:
 

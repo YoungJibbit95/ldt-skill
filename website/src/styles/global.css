@@ -144,12 +144,20 @@ svg {
   gap:24px
 }
 .language-link {
-  font-size:11px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:44px;
+  min-height:44px;
+  font-size:12px;
   letter-spacing:.08em
 }
 .github-link {
   display:flex;
-  align-items:center
+  align-items:center;
+  justify-content:center;
+  min-width:44px;
+  min-height:44px
 }
 .button {
   display:inline-flex;
@@ -174,11 +182,18 @@ svg {
   background:linear-gradient(125deg,#a273e5,#b779d0)
 }
 .button-small {
-  min-height:38px;
-  padding:8px 15px;
+  min-height:44px;
+  min-width:44px;
+  padding:10px 15px;
   font-size:12px;
   gap:18px;
   border-radius:8px
+}
+.hero-buttons>.text-link {
+  display:inline-flex;
+  align-items:center;
+  min-height:44px;
+  min-width:44px
 }
 .button-ghost {
   background:#ffffff04;
@@ -314,7 +329,7 @@ svg {
   align-items:flex-start;
   gap:7px;
   color:#a29ab3;
-  font-size:10px;
+  font-size:12px;
   line-height:1.8;
   margin-top:20px
 }
@@ -348,14 +363,16 @@ svg {
   overflow:hidden
 }
 .panel-bar {
-  height:45px;
+  min-height:48px;
+  flex-wrap:wrap;
+  gap:10px;
   border-bottom:1px solid #d2b1e31c;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 17px;
+  padding:12px 17px;
   font-family:ui-monospace,monospace;
-  font-size:9px;
+  font-size:12px;
   color:#a497b6
 }
 .panel-bar>span:first-child {
@@ -375,7 +392,7 @@ svg {
   background:#aa9277
 }
 .profile-badge {
-  font-size:7px;
+  font-size:12px;
   letter-spacing:.08em;
   border:1px solid #9ca7c130;
   color:#b7bcd8;
@@ -390,7 +407,7 @@ svg {
   display:flex;
   gap:9px;
   align-items:center;
-  font-size:12px;
+  font-size:14px;
   color:#d8c4f0
 }
 .command-chevron {
@@ -401,7 +418,7 @@ svg {
   font-family:ui-monospace,monospace
 }
 .mission-task {
-  font-size:12px;
+  font-size:14px;
   line-height:1.8;
   margin:10px 0 24px 21px;
   color:#c5bdd3
@@ -426,13 +443,16 @@ svg {
 .mission-icon svg {
   width:28px
 }
+.mission-plan>div:not(.mission-icon) {
+  min-width:0
+}
 .mission-plan h2 {
-  font-size:13px;
+  font-size:16px;
   letter-spacing:-.025em;
   font-weight:500
 }
 .mission-plan p {
-  font-size:10px;
+  font-size:14px;
   color:#a79bb6;
   line-height:1.7;
   margin-top:3px
@@ -449,7 +469,7 @@ svg {
   display:flex;
   align-items:center;
   gap:10px;
-  font-size:10px;
+  font-size:14px;
   color:#b5a9c3;
   padding:7px 0;
   position:relative
@@ -491,7 +511,7 @@ svg {
   line-height:1.6
 }
 .decision-card .small-label {
-  font-size:7px
+  font-size:14px
 }
 .decision-card>div {
   display:flex;
@@ -506,7 +526,7 @@ svg {
   font-weight:500
 }
 .decision-card p {
-  font-size:10px;
+  font-size:14px;
   color:#b6a4c5;
   margin-top:3px
 }
@@ -519,11 +539,13 @@ svg {
   align-items:center;
   justify-content:center;
   gap:7px;
-  height:32px;
+  min-height:40px;
+  padding:10px 14px;
+  text-align:center;
   border-top:1px solid #b99bda14;
   font-family:ui-monospace,monospace;
   color:#9f8caf;
-  font-size:7px;
+  font-size:12px;
   letter-spacing:.06em
 }
 .panel-footer .status-spark {
@@ -580,7 +602,7 @@ svg {
   color:#b7a0d1
 }
 .principles-strip p {
-  font-size:12px;
+  font-size:14px;
   color:#c6c0d5;
   letter-spacing:-.01em
 }
@@ -630,7 +652,7 @@ svg {
 .feature p,.body-copy {
   color:#aaa3bc;
   line-height:1.85;
-  font-size:13px
+  font-size:16px
 }
 .workflow-section {
   border-block:1px solid var(--line);
@@ -643,7 +665,7 @@ svg {
   gap:80px
 }
 .section-split>p {
-  font-size:13px;
+  font-size:16px;
   color:#a9a0b9;
   line-height:1.85;
   max-width:380px
@@ -690,18 +712,18 @@ svg {
   margin-top:18px
 }
 .workflow-grid p {
-  font-size:10px;
+  font-size:16px;
   color:#a59ab5;
   margin-top:6px;
   line-height:1.7;
-  max-width:150px
+  max-width:190px
 }
 .text-link {
   display:inline-flex;
   align-items:center;
   gap:18px;
   color:#d6bcec;
-  font-size:12px;
+  font-size:14px;
   font-weight:500
 }
 .text-link:hover {
@@ -817,7 +839,7 @@ svg {
 }
 .final-section>p:not(.small-label) {
   color:#b4a8c1;
-  font-size:13px;
+  font-size:16px;
   max-width:490px;
   margin:15px auto 0
 }
@@ -841,7 +863,7 @@ svg {
   width:26px
 }
 .site-footer>div:first-child>p {
-  font-size:11px;
+  font-size:14px;
   color:#a197b1;
   margin-top:9px
 }
@@ -849,12 +871,12 @@ svg {
   display:flex;
   align-items:center;
   gap:26px;
-  font-size:11px;
+  font-size:14px;
   color:#b2a6c1
 }
 .footer-note {
   grid-column:1/-1;
-  font-size:9px;
+  font-size:12px;
   color:#a196ae;
   line-height:1.9;
   margin-top:3px
@@ -902,16 +924,16 @@ svg {
     font-size:68px
   }
   .hero-intro {
-    font-size:14px
+    font-size:16px
   }
   .mission-content {
     padding:20px
   }
   .mission-plan h2 {
-    font-size:12px
+    font-size:16px
   }
   .mission-plan p {
-    font-size:9px
+    font-size:14px
   }
   .built-section {
     gap:45px
@@ -941,8 +963,8 @@ svg {
     display:block
   }
   .mobile-menu summary {
-    width:34px;
-    height:36px;
+    width:44px;
+    height:44px;
     display:grid;
     place-items:center;
     list-style:none
@@ -969,13 +991,16 @@ svg {
     gap:4px
   }
   .mobile-menu nav a {
-    padding:9px 0;
+    display:flex;
+    align-items:center;
+    min-height:44px;
+    padding:10px 0;
     color:#d5cbe3;
     font-size:14px
   }
   .hero-grid {
-    grid-template-columns:1fr 1fr;
-    gap:24px
+    grid-template-columns:1fr;
+    gap:28px
   }
   .hero {
     padding-top:60px;
@@ -985,6 +1010,9 @@ svg {
     font-size:59px
   }
   .mission-scene {
+    width:100%;
+    max-width:600px;
+    margin-inline:auto;
     padding:30px 0
   }
   .scene-coordinates span {
@@ -1001,18 +1029,18 @@ svg {
     padding:17px
   }
   .mission-plan h2 {
-    font-size:11px
+    font-size:16px
   }
   .mission-task {
-    font-size:10px;
+    font-size:14px;
     margin-left:0
   }
   .panel-bar {
     padding-inline:10px;
-    font-size:7px
+    font-size:12px
   }
   .profile-badge {
-    font-size:6px
+    font-size:12px
   }
   .floating-label {
     right:-7px;
@@ -1029,7 +1057,7 @@ svg {
   }
   .hero-note {
     max-width:260px;
-    font-size:9px
+    font-size:12px
   }
   .feature-grid {
     gap:24px
@@ -1058,7 +1086,7 @@ svg {
     font-size:30px
   }
   .principles-strip p {
-    font-size:10px
+    font-size:14px
   }
   .strip-star {
     display:none
@@ -1088,13 +1116,13 @@ svg {
     height:28px
   }
   .header-actions {
-    gap:12px
+    gap:6px
   }
   .header-actions .button-small,.github-link {
     display:none
   }
   .language-link {
-    font-size:10px
+    font-size:12px
   }
   .hero {
     padding:44px 0 50px
@@ -1112,7 +1140,7 @@ svg {
     font-size:10px
   }
   .hero-intro {
-    font-size:14px;
+    font-size:16px;
     line-height:1.85;
     max-width:490px
   }
@@ -1128,7 +1156,7 @@ svg {
   }
   .hero-note {
     max-width:none;
-    font-size:8px
+    font-size:12px
   }
   .mission-scene {
     max-width:440px;
@@ -1146,18 +1174,18 @@ svg {
     padding:21px
   }
   .panel-bar {
-    height:41px;
+    min-height:48px;
     padding-inline:15px;
-    font-size:8px
+    font-size:12px
   }
   .profile-badge {
-    font-size:7px
+    font-size:12px
   }
   .mission-command {
-    font-size:11px
+    font-size:14px
   }
   .mission-task {
-    font-size:11px;
+    font-size:14px;
     margin-left:19px;
     margin-bottom:18px
   }
@@ -1169,16 +1197,17 @@ svg {
     padding:13px 11px
   }
   .mission-plan h2 {
-    font-size:12px
+    font-size:16px
   }
   .mission-plan p {
-    font-size:9px
+    font-size:14px
   }
   .mission-trail {
     margin:15px 3px
   }
   .mission-trail>div {
-    font-size:10px
+    font-size:14px;
+    gap:8px
   }
   .decision-card {
     padding:12px 14px
@@ -1212,7 +1241,7 @@ svg {
     font-size:8px
   }
   .principles-strip p {
-    font-size:9px;
+    font-size:14px;
     max-width:110px
   }
   .section-space {
@@ -1239,7 +1268,7 @@ svg {
     margin:10px 0 8px
   }
   .feature p {
-    font-size:12px;
+    font-size:16px;
     max-width:480px
   }
   .section-split {
@@ -1247,12 +1276,12 @@ svg {
     gap:20px
   }
   .section-split>p {
-    font-size:12px;
+    font-size:16px;
     max-width:470px
   }
   .workflow-grid {
     grid-template-columns:1fr 1fr;
-    gap:25px 10px;
+    gap:30px 16px;
     margin-top:32px
   }
   .workflow-grid li:nth-child(3) .workflow-line {
@@ -1261,12 +1290,15 @@ svg {
   .workflow-grid li:nth-child(even) .workflow-line {
     display:none
   }
+  .workflow-grid li {
+    padding-right:0
+  }
   .workflow-grid h3 {
     font-size:17px;
     margin-top:13px
   }
   .workflow-grid p {
-    font-size:10px
+    font-size:16px
   }
   .built-section {
     grid-template-columns:1fr;
@@ -1283,7 +1315,7 @@ svg {
     font-size:32px
   }
   .built-section .body-copy {
-    font-size:12px
+    font-size:16px
   }
   .final-section {
     border-radius:16px;
@@ -1294,7 +1326,7 @@ svg {
     font-size:32px
   }
   .final-section>p:not(.small-label) {
-    font-size:12px
+    font-size:16px
   }
   .final-section .hero-buttons {
     gap:20px;
@@ -1307,15 +1339,15 @@ svg {
   }
   .footer-links {
     gap:22px;
-    font-size:10px;
+    font-size:14px;
     flex-wrap:wrap
   }
   .footer-note {
-    font-size:8px;
+    font-size:12px;
     margin:0
   }
   .site-footer>div:first-child>p {
-    font-size:10px
+    font-size:14px
   }
 }
 @media(prefers-reduced-motion:reduce) {

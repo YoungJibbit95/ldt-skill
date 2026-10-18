@@ -2,10 +2,10 @@ name: Validate website
 
 on:
   pull_request:
-    paths: ['website/**', 'docs/website-plan.md', '.github/workflows/website.yml']
+    paths: ['website/**', 'docs/website-*.md', '.github/workflows/website.yml', '.github/workflows/pages.yml']
   push:
     branches: [main, 'website/**']
-    paths: ['website/**', 'docs/website-plan.md', '.github/workflows/website.yml']
+    paths: ['website/**', 'docs/website-*.md', '.github/workflows/website.yml', '.github/workflows/pages.yml']
   workflow_dispatch:
 
 permissions:
@@ -14,7 +14,7 @@ permissions:
 jobs:
   website:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 45
     defaults:
       run:
         working-directory: website
@@ -34,11 +34,43 @@ jobs:
         with:
           python-version: '3.12'
       - run: npm run check:content
+      - run: npm run test:release
       - run: npm run check
       - run: npm run build
       - run: npm run check:links
       - run: npx playwright install --with-deps chromium
       - run: npm test
+      - name: Measure the complete local mobile series
+        shell: bash
+        run: |
+          npm run preview -- --port 4321 > /tmp/ldt-preview.log 2>&1 &
+          PREVIEW_PID=$!
+          trap 'kill "$PREVIEW_PID" || true' EXIT
+          for attempt in $(seq 1 60); do
+            if curl --fail --silent http://127.0.0.1:4321/ltd-skill/de/ > /dev/null; then break; fi
+            sleep 1
+          done
+          npm run measure -- --sha "$GITHUB_SHA" --output reports/performance
+      - name: Preserve validated build and all twelve measurements
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: website-validated-build
+          path: |
+            website/dist
+            website/reports/performance
+          retention-days: 90
+          if-no-files-found: error
+      - name: Preserve failure diagnostics separately
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: website-failure-diagnostics
+          path: |
+            website/reports
+            website/playwright-report
+            website/test-results
+          retention-days: 90
+          if-no-files-found: ignore
   installation:
     name: Installation / ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
@@ -53,3 +85,56 @@ jobs:
         with:
           python-version: '3.12'
       - run: python website/scripts/smoke-install.py
+  # The existing Validate skill workflow stays unchanged. This matching matrix
+  # supplies candidate-dependent evidence on branch pushes, at exactly this SHA.
+  skill:
+    name: Candidate skill / ${{ matrix.os }} / Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-latest]
+        python: ['3.10', '3.12']
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -B .agents/skills/architect-dev-team/scripts/validate.py package .agents/skills/architect-dev-team
+      - run: python -B .agents/skills/architect-dev-team/scripts/validate.py registry .agents/skills/architect-dev-team/registry/skills.json
+      - run: python -B .agents/skills/architect-dev-team/scripts/validate.py registry .agents/skills/architect-dev-team/registry/index.json
+      - run: python -B -m unittest discover -s tests -v
+  candidate:
+    if: github.event_name != 'pull_request'
+    needs: [website, installation, skill]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      REQUIRED_JOBS: ${{ toJSON(needs) }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: website/.nvmrc
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: website-validated-build
+          path: validated
+      - run: node website/scripts/candidate-evidence.mjs validated
+      - name: Package exact checked bytes
+        run: >-
+          python website/scripts/release.py pack --dist validated/dist --output candidate
+          --sha "$GITHUB_SHA" --run-id "$GITHUB_RUN_ID" --attempt "$GITHUB_RUN_ATTEMPT"
+          --tools validated/tools.json --evidence validated/evidence.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: website-candidate
+          path: candidate/
+          retention-days: 90
+          if-no-files-found: error

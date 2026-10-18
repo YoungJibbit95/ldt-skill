@@ -14,7 +14,7 @@ The website/GitHub agent owns repository setup and the future website project. T
 
 The website must explicitly explain that it was developed with the LittleDevTeam skill as a demonstration. Record real planning, human decisions, implementation and verification. Do not fabricate independent reviews, test results, performance benefits or feature availability.
 
-The user explicitly approved the Nebula website plan with “PLEASE IMPLEMENT THIS PLAN” on 2026-10-18. The proposal is preserved in `docs/website-plan.md`. The user subsequently replied “ja” to accepting the reviewed W1 result and proceeding to W2. W1 is accepted; implement W2 and present its concrete result before W3. Merge and deployment remain separate decisions. Keep website work in its own worktree/branch and preserve the skill's existing development milestones.
+The original Nebula plan is preserved in `docs/website-plan.md`. W1 and the exact W2 result (`db71e831f3345767282bf12ffd47c9898ab6aca9`) were accepted. The user explicitly approved W3 Revision 1 in `docs/website-w3-proposal.md`, SHA-256 `8a499db3f1ccc24b4f18a453708333d8b614f1b2583a7d663864a5a427e0df9f`, for bounded refinement, release preparation and verification. Use the verified installed writing skill for human-facing changes. Merge, Pages/environment settings and deployment require separate concrete authorization. Public URL and public performance checks remain incomplete until authorized publication; do not report W3 as fully complete beforehand. Keep website work in its own worktree/branch and preserve the skill's existing development milestones.
 
 ## Verification and publication
 
