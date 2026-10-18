@@ -1,0 +1,39 @@
+---
+import Search from '@astrojs/starlight/components/Search.astro';
+---
+<labeled-site-search data-input-label={Astro.locals.t('search.label')}>
+  <Search />
+</labeled-site-search>
+
+<script>
+  class LabeledSiteSearch extends HTMLElement {
+    private observer?: MutationObserver;
+
+    connectedCallback() {
+      const addLabel = () => {
+        const input = this.querySelector<HTMLInputElement>('.pagefind-ui__search-input');
+        const search = this.querySelector<HTMLElement>('#starlight__search');
+        if (!input || !search) return;
+        if (!input.id) input.id = 'littledevteam-search-input';
+        let label = this.querySelector<HTMLLabelElement>('.search-input-label');
+        if (!label) {
+          label = document.createElement('label');
+          label.className = 'search-input-label';
+          label.textContent = this.dataset.inputLabel ?? '';
+          // Keep the label outside the subtree rendered by Pagefind.
+          search.before(label);
+        }
+        label.htmlFor = input.id;
+        this.observer?.disconnect();
+      };
+      this.observer = new MutationObserver(addLabel);
+      this.observer.observe(this, { childList: true, subtree: true });
+      addLabel();
+    }
+
+    disconnectedCallback() {
+      this.observer?.disconnect();
+    }
+  }
+  customElements.define('labeled-site-search', LabeledSiteSearch);
+</script>

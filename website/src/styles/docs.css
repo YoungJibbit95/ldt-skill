@@ -49,6 +49,22 @@ header.header {
 .docs-search site-search {
   width:100%
 }
+.docs-search labeled-site-search {
+  display:contents
+}
+.docs-search .search-input-label {
+  display:block;
+  margin-block-end:.5rem;
+  color:var(--sl-color-white);
+  font-size:1rem;
+  line-height:1.5;
+  font-weight:500
+}
+@media(max-width:799px) {
+  .docs-search button[data-close-modal] {
+    margin-block-start:2rem
+  }
+}
 .docs-search button[data-open-modal] {
   min-height:44px;
   font-size:14px!important;
