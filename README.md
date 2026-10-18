@@ -45,6 +45,7 @@ Beginne die Umsetzung nach meiner Freigabe des konkreten Vorschlags.
 
 Der Prompt verwendet den dokumentierten Entwicklungsstand der [Installationsanleitung](https://youngjibbit95.github.io/ltd-skill/de/docs/install/). Codex erkennt neue Skills automatisch; falls der Skill nicht erscheint, starte Codex neu. Der Projektpfad `.agents/skills` ist in den [offiziellen Codex-Skill-Hinweisen](https://learn.chatgpt.com/docs/build-skills) beschrieben.
 
+
 ## 🪐 Was ist LittleDevTeam?
 
 LittleDevTeam hilft dir, größere Entwicklungsaufgaben mit einem Coding-Agenten in prüfbare Schritte aufzuteilen. Du klärst Anforderungen, bewertest einen Architekturvorschlag und gibst einen konkreten Meilenstein frei. Nach der Umsetzung prüfst du das Ergebnis, bevor die nächste Iteration beginnt.
@@ -57,6 +58,7 @@ Der Skill heißt technisch `architect-dev-team`. Seine Anweisungen und Python-Pr
 | Übersicht nach einer Unterbrechung | Lokale Aufzeichnungen zu Umfang, Entscheidungen und Prüfungen |
 | Belege für ein Ergebnis | Prüfbefehle, Quellcode-Snapshots und Review mit benannten Grenzen |
 | Unterstützung bei größeren Aufgaben | Begrenzte Agentenaufträge, sofern die Umgebung sie erlaubt und unterstützt |
+
 
 ## 🧭 Erst im Beispiel-Repository ausprobieren
 
@@ -86,6 +88,7 @@ Prüfe Umfang, Annahmen und Abnahmekriterien. Bitte bei Bedarf um eine Überarbe
 
 Der [Praxisguide](https://youngjibbit95.github.io/ltd-skill/de/docs/guide/) führt dich durch diesen Ablauf. Die [interaktive Demo](https://youngjibbit95.github.io/ltd-skill/de/demo/) zeigt Freigabe, Überarbeitung und Review als lokale Simulation; sie führt keine Agenten aus.
 
+
 ## 🛠️ So läuft ein Meilenstein ab
 
 <p align="center">
@@ -107,6 +110,7 @@ flowchart LR
 Lean, Balanced und Rigorous passen den Planungs- und Prüfaufwand an die Aufgabe an. Balanced ist der Standard. Freigaben bleiben in jedem Profil erforderlich.
 
 Die Python-Hilfen prüfen unter anderem Pakete, Registry-Daten, lokale Zustände und die Bindung von Reviews an Quellcode-Snapshots. Sie können keine menschliche Entscheidung authentifizieren oder Systemberechtigungen durchsetzen. Externe Skills bleiben optionale Kandidaten: Ein Registry-Eintrag installiert oder aktiviert sie nicht.
+
 
 ## 🌌 Mit LittleDevTeam gebaut
 
@@ -131,6 +135,7 @@ npm run dev
 
 </details>
 
+
 ## ✅ Skill lokal prüfen
 
 Führe die Befehle im Repository-Stamm aus. Auf macOS und Linux heißt Python häufig `python3`; verwende den bei dir verfügbaren Python-3.10+-Befehl.
@@ -144,6 +149,7 @@ python -B -m unittest discover -s tests -v
 
 GitHub Actions prüft den Skill unter Windows und Linux mit Python 3.10 und 3.12. Plattformabhängige Auslassungen erscheinen im Testprotokoll. Kopiere bei manueller Installation immer den gesamten Skill-Ordner einschließlich `scripts/ldt_core`.
 
+
 ## 🗂️ Im Repository zurechtfinden
 
 | Bereich | Einstieg |
@@ -156,6 +162,7 @@ GitHub Actions prüft den Skill unter Windows und Linux mit Python 3.10 und 3.12
 | Regressionstests | [tests/](tests/) |
 | Website-Quellcode | [website/](website/) |
 | V2-Entwürfe und Recherche | [design/](design/) |
+
 
 ## 📌 Entwicklungsstand und Lizenz
 
