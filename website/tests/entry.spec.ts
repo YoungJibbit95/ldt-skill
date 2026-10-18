@@ -33,6 +33,15 @@ for (const locale of ['de', 'en'] as const) {
       }
       await page.goto(`/ltd-skill/${locale}/docs/install/`);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+      const firstCodeBlock = page.locator('.expressive-code:visible').first();
+      const expectedCode = (await firstCodeBlock.locator('pre code .ec-line .code').allTextContents()).join('\n').replace(/\r\n/g, '\n');
+      expect(expectedCode.trim(), 'The first copied block contains visible code').not.toBe('');
+      const firstCopy = firstCodeBlock.locator('.copy button');
+      await page.evaluate(() => navigator.clipboard.writeText(''));
+      await firstCopy.focus();
+      await expect(firstCopy).toBeFocused();
+      await page.keyboard.press('Enter');
+      await expect.poll(async () => (await page.evaluate(() => navigator.clipboard.readText())).replace(/\r\n/g, '\n')).toBe(expectedCode);
       const bashTab = page.getByRole('tab', { name: 'macOS / Linux · Bash' }).first();
       await bashTab.click();
       await expect(bashTab).toHaveAttribute('aria-selected', 'true');
