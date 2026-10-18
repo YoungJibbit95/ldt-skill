@@ -1,45 +1,105 @@
-# LittleDevTeam
+<p align="center">
+  <img src="docs/assets/readme-banner.svg" alt="LittleDevTeam. Architecture first. Build in steps." width="1280" />
+</p>
 
-LittleDevTeam ist ein Skill für die strukturierte Zusammenarbeit mit einem Coding-Agenten: erst Anforderungen und Architektur klären, dann einen überschaubaren Schritt umsetzen, prüfen und gemeinsam bewerten.
+<p align="center">
+  <a href="https://github.com/YoungJibbit95/ltd-skill/actions/workflows/validate.yml"><img src="https://github.com/YoungJibbit95/ltd-skill/actions/workflows/validate.yml/badge.svg?branch=main" alt="Skill-Prüfungen auf main" /></a>
+  <a href="https://github.com/YoungJibbit95/ltd-skill/actions/workflows/website.yml"><img src="https://github.com/YoungJibbit95/ltd-skill/actions/workflows/website.yml/badge.svg?branch=main" alt="Website-Prüfungen auf main" /></a>
+  <a href="https://youngjibbit95.github.io/ltd-skill/de/docs/install/"><img src="https://img.shields.io/badge/Python-3.10%2B-ae91ed?style=flat&amp;logo=python&amp;logoColor=white&amp;labelColor=16152b" alt="Python 3.10 oder neuer" /></a>
+  <a href="https://youngjibbit95.github.io/ltd-skill/en/"><img src="https://img.shields.io/badge/Docs-DE%20%7C%20EN-d99dc4?style=flat&amp;labelColor=16152b" alt="Dokumentation auf Deutsch und Englisch" /></a>
+</p>
 
-Der technische Skill-Name lautet **`architect-dev-team`**. Das Projekt und seine geplante Dokumentationswebsite heißen **LittleDevTeam**.
+<p align="center">
+  <a href="https://youngjibbit95.github.io/ltd-skill/de/">Website</a> ·
+  <a href="https://youngjibbit95.github.io/ltd-skill/de/docs/install/">Installation</a> ·
+  <a href="https://youngjibbit95.github.io/ltd-skill/de/docs/guide/">Guide</a> ·
+  <a href="https://youngjibbit95.github.io/ltd-skill/de/demo/">Demo</a> ·
+  <a href="https://youngjibbit95.github.io/ltd-skill/en/">English docs</a>
+</p>
 
-## Wie der Skill arbeitet
+## Was ist LittleDevTeam?
 
-```text
-Auftrag → Untersuchung → Spezifikation → Architektur → Freigabe
-       → Umsetzung → Prüfung → Review → Freigabe → nächste Iteration
-```
+LittleDevTeam hilft dir, größere Entwicklungsaufgaben mit einem Coding-Agenten in prüfbare Schritte aufzuteilen. Du klärst Anforderungen, bewertest einen Architekturvorschlag und gibst einen konkreten Meilenstein frei. Nach der Umsetzung prüfst du das Ergebnis, bevor die nächste Iteration beginnt.
 
-- Lean, Balanced und Rigorous passen den Aufwand an die Aufgabe an.
-- Versionierte Vorschläge und konkrete Meilensteine machen Entscheidungen nachvollziehbar.
-- Lokale Zustandsdateien halten Umfang, Entscheidungen und Prüfergebnisse fest.
-- Python-Werkzeuge prüfen unter anderem Pakete, Zustände, Freigabebezüge und Quellcode-Snapshots.
-- Zusätzliche Agenten werden nur eingesetzt, wenn sie verfügbar, erlaubt und für die Aufgabe sinnvoll sind.
-- Externe Skills sind optionale Kandidaten mit Herkunftsnachweisen; ein Registry-Eintrag installiert oder aktiviert sie nicht.
+Der Skill heißt technisch `architect-dev-team`. Seine Anweisungen und Python-Prüfwerkzeuge liegen vollständig in diesem Repository.
 
-Die Prüfwerkzeuge kontrollieren die Konsistenz lokaler Daten. Sie authentifizieren keine menschlichen Entscheidungen und ersetzen keine Berechtigungen des ausführenden Systems.
+| Was du brauchst | Was der Skill dafür vorsieht |
+| --- | --- |
+| Einen nachvollziehbaren Plan | Versionierte Architekturvorschläge und begrenzte Meilensteine |
+| Übersicht nach einer Unterbrechung | Lokale Aufzeichnungen zu Umfang, Entscheidungen und Prüfungen |
+| Belege für ein Ergebnis | Prüfbefehle, Quellcode-Snapshots und Review mit benannten Grenzen |
+| Unterstützung bei größeren Aufgaben | Begrenzte Agentenaufträge, sofern die Umgebung sie erlaubt und unterstützt |
 
-## Im Repository ausprobieren
+## In wenigen Minuten ausprobieren
+
+Du brauchst Git und eine Coding-Agent-Umgebung mit Skill-Unterstützung. Für die Prüfhilfen ist Python ab 3.10 nötig; zusätzliche Python-Pakete brauchst du nicht.
+
+### 1. Repository öffnen
 
 ```sh
 git clone https://github.com/YoungJibbit95/ltd-skill.git
 cd ltd-skill
 ```
 
-Der vollständige Skill liegt unter [`.agents/skills/architect-dev-team`](.agents/skills/architect-dev-team/SKILL.md). In dieser Arbeitsumgebung ist er als `architect-dev-team` verfügbar. Ein möglicher Auftrag lautet:
+Öffne diesen Ordner in Codex. Der vollständige Skill liegt unter [`.agents/skills/architect-dev-team`](.agents/skills/architect-dev-team/SKILL.md). Lies vor dem ersten Einsatz seine Anweisungen. Für die Übernahme in ein anderes Projekt oder dein persönliches Skill-Verzeichnis nutze das [Installationstutorial für Windows, macOS und Linux](https://youngjibbit95.github.io/ltd-skill/de/docs/install/).
+
+### 2. Einen kleinen Auftrag geben
 
 ```text
-Nutze $architect-dev-team. Untersuche das Projekt und erstelle einen
-Architekturvorschlag mit einem kleinen ersten Meilenstein. Zeige mir
-den konkreten Vorschlag zur Freigabe, bevor du ihn implementierst.
+Nutze $architect-dev-team mit dem Profil Balanced.
+Untersuche das Projekt und plane eine kleine Verbesserung an der Dokumentation.
+Erstelle einen Architekturvorschlag mit einem ersten Meilenstein und passenden
+Prüfungen. Zeige mir den konkreten Vorschlag zur Freigabe, bevor du ihn umsetzt.
 ```
 
-Das Website-Projekt enthält ein vollständiges [Installationstutorial](website/src/content/docs/de/docs/install.mdx) für Windows, macOS und Linux. Kopiere bei manueller Übernahme immer den gesamten Skill-Ordner einschließlich `scripts/ldt_core`.
+### 3. Vorschlag bewerten und Ergebnis prüfen
 
-## Lokal prüfen
+Prüfe Umfang, Annahmen und Abnahmekriterien. Bitte bei Bedarf um eine Überarbeitung. Nach deiner Freigabe setzt der Agent den vereinbarten Schritt um und legt Änderungen, Prüfergebnisse und offene Punkte vor. Die nächste Iteration, ein Merge und eine Veröffentlichung benötigen jeweils die dafür geltende Freigabe.
 
-Voraussetzungen: Python ab 3.10 und Git. Die Prüfwerkzeuge und Tests verwenden die Python-Standardbibliothek.
+Der [Praxisguide](https://youngjibbit95.github.io/ltd-skill/de/docs/guide/) führt dich durch diesen Ablauf. Die [interaktive Demo](https://youngjibbit95.github.io/ltd-skill/de/demo/) zeigt Freigabe, Überarbeitung und Review als lokale Simulation; sie führt keine Agenten aus.
+
+## So läuft ein Meilenstein ab
+
+```mermaid
+flowchart LR
+    A[Auftrag untersuchen] --> B[Architektur vorschlagen]
+    B --> C{Deine Freigabe}
+    C -->|Überarbeiten| B
+    C -->|Freigeben| D[Meilenstein umsetzen]
+    D --> E[Prüfen und reviewen]
+    E --> F[Ergebnis gemeinsam bewerten]
+```
+
+Lean, Balanced und Rigorous passen den Planungs- und Prüfaufwand an die Aufgabe an. Balanced ist der Standard. Freigaben bleiben in jedem Profil erforderlich.
+
+Die Python-Hilfen prüfen unter anderem Pakete, Registry-Daten, lokale Zustände und die Bindung von Reviews an Quellcode-Snapshots. Sie können keine menschliche Entscheidung authentifizieren oder Systemberechtigungen durchsetzen. Externe Skills bleiben optionale Kandidaten: Ein Registry-Eintrag installiert oder aktiviert sie nicht.
+
+## Mit LittleDevTeam gebaut
+
+Die Dokumentationswebsite entstand mit dem LittleDevTeam-Skill und demonstriert seine Arbeitsweise. Die [Fallstudie](https://youngjibbit95.github.io/ltd-skill/de/built-with-littledevteam/) zeigt tatsächliche Planung, Entscheidungen, Umsetzung und Prüfbelege.
+
+Die Website enthält eine deutsche und englische Einführung, Installationsanleitungen, technische Referenz, Suche und die interaktive Simulation. Sie nutzt Astro, Starlight und lokal eingebundene Schriften im dunklen Nebula-Design. Die Dokumentation benennt den Skill-Quellstand, auf den sie sich bezieht.
+
+Den Auftrag findest du im [Projektbrief](docs/website-brief.md), die Meilensteine im [Website-Plan](docs/website-plan.md). Die [Anleitung für Release und Wiederherstellung](docs/website-release.md) beschreibt den manuellen Veröffentlichungsweg und seine Grenzen. Veröffentlichung und vollständige W3-Abnahme sind getrennte Entscheidungen.
+
+<details>
+<summary>Website lokal starten</summary>
+
+Voraussetzung: Node.js 24.
+
+```sh
+cd website
+npm ci
+npm run dev
+```
+
+Öffne die ausgegebene Adresse mit `/ltd-skill/de/` oder `/ltd-skill/en/`. Die [Website-Anleitung](website/README.md) beschreibt Produktionsbuild, Linkprüfung und Browserchecks.
+
+</details>
+
+## Skill lokal prüfen
+
+Führe die Befehle im Repository-Stamm aus. Auf macOS und Linux heißt Python häufig `python3`; verwende den bei dir verfügbaren Python-3.10+-Befehl.
 
 ```sh
 python -B .agents/skills/architect-dev-team/scripts/validate.py package .agents/skills/architect-dev-team
@@ -48,40 +108,25 @@ python -B .agents/skills/architect-dev-team/scripts/validate.py registry .agents
 python -B -m unittest discover -s tests -v
 ```
 
-Die GitHub-Actions-Checks führen diese Prüfungen auf Windows und Linux mit Python 3.10 und 3.12 aus. Plattformabhängige Auslassungen werden im Testprotokoll ausgewiesen.
+GitHub Actions prüft den Skill unter Windows und Linux mit Python 3.10 und 3.12. Plattformabhängige Auslassungen erscheinen im Testprotokoll. Kopiere bei manueller Installation immer den gesamten Skill-Ordner einschließlich `scripts/ldt_core`.
 
-## Die Website als Demonstration
-
-**Die LittleDevTeam-Website wird mit dem LittleDevTeam-Skill entwickelt und dient als nachvollziehbares Demonstrationsprojekt für seine Arbeitsweise.**
-
-Geplant sind eine moderne Startseite, Dokumentation, ein praktischer Guide, ein Installationstutorial und eine Fallstudie zur Entstehung der Website. Die Fallstudie soll tatsächliche Planung, freigegebene Schritte und ausgeführte Prüfungen zeigen. Noch nicht umgesetzte Funktionen werden als geplant gekennzeichnet.
-
-Der [Projektbrief](docs/website-brief.md) hält den Auftrag fest; der [freigegebene Website-Plan](docs/website-plan.md) beschreibt Design, Technik und Meilensteine. **W1** liefert den freigegebenen zweisprachigen Einstieg. **W2** ergänzt technische Referenz, lokalisierte Suche, interaktive Simulation und eine Fallstudie mit echten Belegen; sein Ergebnis wurde angenommen. Der freigegebene [W3-Vorschlag](docs/website-w3-proposal.md) umfasst gezielten Feinschliff, Release-Vorbereitung und unabhängige Prüfung. Veröffentlichung und öffentliche Abnahme stehen noch aus.
-
-Die lokale Website benötigt Node.js 24:
-
-```sh
-cd website
-npm ci
-npm run dev
-```
-
-Öffne die ausgegebene lokale Adresse mit `/ltd-skill/de/` oder `/ltd-skill/en/`. Die [Website-Anleitung](website/README.md) beschreibt Produktionsbuild, Linkprüfung und Browserchecks.
-
-## Entwicklungsstand und Orientierung
-
-Dieses Repository startet als **Entwicklungsstand**, nicht als freigegebene V2-Veröffentlichung. Es enthält bereits den Skill, den gemeinsamen Python-Kern, Registry-Validierung für Schema 1 und 2 sowie Regressionstests. Vorhandener Code allein belegt keinen abgeschlossenen Review oder freigegebenen Meilenstein.
+## Im Repository zurechtfinden
 
 | Bereich | Einstieg |
 | --- | --- |
-| Skill und Arbeitsweise | [SKILL.md](.agents/skills/architect-dev-team/SKILL.md) |
+| Skill-Anweisungen | [SKILL.md](.agents/skills/architect-dev-team/SKILL.md) |
 | Python-Prüfwerkzeuge | [scripts/](.agents/skills/architect-dev-team/scripts/) |
-| Vorlagen | [assets/](.agents/skills/architect-dev-team/assets/) |
+| Architektur- und Zustandsvorlagen | [assets/](.agents/skills/architect-dev-team/assets/) |
 | Arbeitsabläufe und Zustandsmodell | [references/](.agents/skills/architect-dev-team/references/) |
 | Herkunft externer Skill-Kandidaten | [registry/](.agents/skills/architect-dev-team/registry/) |
-| Regressionstests und historische Test-Orakel | [tests/](tests/) |
-| Frühere V2-Entwürfe und Recherche | [design/](design/) |
+| Regressionstests | [tests/](tests/) |
+| Website-Quellcode | [website/](website/) |
+| V2-Entwürfe und Recherche | [design/](design/) |
 
-Die Dokumente unter `design/` sind historische Vorschläge. Insbesondere CLI, Runtime-Adapter und erweiterte Rollenbeschreibungen dürfen nicht als vorhandene Produktfunktionen dargestellt werden. Lokale Entwicklungsprotokolle, Freigabeaufzeichnungen und Auswertungsläufe werden nicht mit veröffentlicht.
+## Entwicklungsstand und Lizenz
 
-Eine Projektlizenz wurde noch nicht festgelegt. Lizenzangaben in der Registry betreffen die jeweils referenzierten Drittquellen und lizenzieren dieses Repository nicht.
+Der Skill ist ein Entwicklungsstand. Die Dokumente unter `design/` sind Vorschläge und historische Recherche; die dort beschriebene CLI, Runtime-Adapter und erweiterten Rollen sind keine freigegebene V2. Ein vorhandenes Modul allein belegt keinen abgeschlossenen Review.
+
+Lokale Freigabedateien, Entwicklungsprotokolle und Auswertungsläufe bleiben außerhalb von Git. Tatsächliche Codex-Erkennung wurde in den dokumentierten Installations-Smokes nicht geprüft.
+
+Eine Projektlizenz wurde noch nicht festgelegt. Lizenzangaben in der Registry betreffen die referenzierten Drittquellen; die Website liefert die Lizenzen ihrer mitgelieferten Schriften mit.
