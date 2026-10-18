@@ -7,6 +7,7 @@
   <a href="https://github.com/YoungJibbit95/ltd-skill/actions/workflows/website.yml"><img src="https://github.com/YoungJibbit95/ltd-skill/actions/workflows/website.yml/badge.svg?branch=main" alt="Website-Prüfungen auf main" /></a>
   <a href="https://youngjibbit95.github.io/ltd-skill/de/docs/install/"><img src="https://img.shields.io/badge/Python-3.10%2B-ae91ed?style=flat&amp;logo=python&amp;logoColor=white&amp;labelColor=16152b" alt="Python 3.10 oder neuer" /></a>
   <a href="https://youngjibbit95.github.io/ltd-skill/en/"><img src="https://img.shields.io/badge/Docs-DE%20%7C%20EN-d99dc4?style=flat&amp;labelColor=16152b" alt="Dokumentation auf Deutsch und Englisch" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-88cfc7?style=flat&amp;labelColor=16152b" alt="Apache License 2.0" /></a>
 </p>
 
 <p align="center">
@@ -17,7 +18,34 @@
   <a href="https://youngjibbit95.github.io/ltd-skill/en/">English docs</a>
 </p>
 
-## Was ist LittleDevTeam?
+## 🚀 Direkt in deinem Projekt starten
+
+Öffne dein bestehendes Projekt in Codex und kopiere diesen Prompt in einen Chat. Codex übernimmt damit den vollständigen Skill in dein Projekt, prüft die Installation und beginnt anschließend mit der Planung deines Auftrags.
+
+> [!TIP]
+> Du brauchst keine Shell-Befehle anzupassen. Gib dein Ziel direkt unter dem Prompt an oder lass Codex danach fragen. Für die Paketprüfung braucht deine Umgebung Python ab 3.10.
+
+```text
+Richte LittleDevTeam in diesem Projekt ein.
+Quelle: https://github.com/YoungJibbit95/ltd-skill
+Commit: 9a062eb9de0990ce1074dd677d26e5a528ee14a0
+
+Lies die Projektregeln und die Skill-Anweisungen. Übernimm den vollständigen
+Ordner .agents/skills/architect-dev-team aus diesem Commit in denselben Pfad
+meines Projekts, einschließlich scripts/ldt_core und aller Begleitdateien.
+Wenn das Ziel bereits existiert, zeige mir die Unterschiede vor Änderungen.
+Prüfe das Paket mit Python 3.10+ vom Projektstamm aus:
+python -B .agents/skills/architect-dev-team/scripts/validate.py package .agents/skills/architect-dev-team
+
+Nutze danach $architect-dev-team mit dem Profil Balanced für meinen Auftrag.
+Frage nach meinem Ziel, falls es noch fehlt. Untersuche das Projekt und lege
+mir einen Architekturvorschlag mit erstem Meilenstein und Prüfungen vor.
+Beginne die Umsetzung nach meiner Freigabe des konkreten Vorschlags.
+```
+
+Der Prompt verwendet den dokumentierten Entwicklungsstand der [Installationsanleitung](https://youngjibbit95.github.io/ltd-skill/de/docs/install/). Codex erkennt neue Skills automatisch; falls der Skill nicht erscheint, starte Codex neu. Der Projektpfad `.agents/skills` ist in den [offiziellen Codex-Skill-Hinweisen](https://learn.chatgpt.com/docs/build-skills) beschrieben.
+
+## 🪐 Was ist LittleDevTeam?
 
 LittleDevTeam hilft dir, größere Entwicklungsaufgaben mit einem Coding-Agenten in prüfbare Schritte aufzuteilen. Du klärst Anforderungen, bewertest einen Architekturvorschlag und gibst einen konkreten Meilenstein frei. Nach der Umsetzung prüfst du das Ergebnis, bevor die nächste Iteration beginnt.
 
@@ -30,7 +58,7 @@ Der Skill heißt technisch `architect-dev-team`. Seine Anweisungen und Python-Pr
 | Belege für ein Ergebnis | Prüfbefehle, Quellcode-Snapshots und Review mit benannten Grenzen |
 | Unterstützung bei größeren Aufgaben | Begrenzte Agentenaufträge, sofern die Umgebung sie erlaubt und unterstützt |
 
-## In wenigen Minuten ausprobieren
+## 🧭 Erst im Beispiel-Repository ausprobieren
 
 Du brauchst Git und eine Coding-Agent-Umgebung mit Skill-Unterstützung. Für die Prüfhilfen ist Python ab 3.10 nötig; zusätzliche Python-Pakete brauchst du nicht.
 
@@ -58,7 +86,13 @@ Prüfe Umfang, Annahmen und Abnahmekriterien. Bitte bei Bedarf um eine Überarbe
 
 Der [Praxisguide](https://youngjibbit95.github.io/ltd-skill/de/docs/guide/) führt dich durch diesen Ablauf. Die [interaktive Demo](https://youngjibbit95.github.io/ltd-skill/de/demo/) zeigt Freigabe, Überarbeitung und Review als lokale Simulation; sie führt keine Agenten aus.
 
-## So läuft ein Meilenstein ab
+## 🛠️ So läuft ein Meilenstein ab
+
+<p align="center">
+  <a href="https://youngjibbit95.github.io/ltd-skill/de/docs/workflow/"><img src="https://img.shields.io/badge/Lean-kleiner%20Umfang-88cfc7?style=flat&amp;labelColor=16152b" alt="Lean für kleinen Umfang" /></a>
+  <a href="https://youngjibbit95.github.io/ltd-skill/de/docs/workflow/"><img src="https://img.shields.io/badge/Balanced-Standard-ae91ed?style=flat&amp;labelColor=16152b" alt="Balanced als Standard" /></a>
+  <a href="https://youngjibbit95.github.io/ltd-skill/de/docs/workflow/"><img src="https://img.shields.io/badge/Rigorous-mehr%20Pr%C3%BCftiefe-d99dc4?style=flat&amp;labelColor=16152b" alt="Rigorous mit mehr Prüftiefe" /></a>
+</p>
 
 ```mermaid
 flowchart LR
@@ -74,7 +108,7 @@ Lean, Balanced und Rigorous passen den Planungs- und Prüfaufwand an die Aufgabe
 
 Die Python-Hilfen prüfen unter anderem Pakete, Registry-Daten, lokale Zustände und die Bindung von Reviews an Quellcode-Snapshots. Sie können keine menschliche Entscheidung authentifizieren oder Systemberechtigungen durchsetzen. Externe Skills bleiben optionale Kandidaten: Ein Registry-Eintrag installiert oder aktiviert sie nicht.
 
-## Mit LittleDevTeam gebaut
+## 🌌 Mit LittleDevTeam gebaut
 
 Die Dokumentationswebsite entstand mit dem LittleDevTeam-Skill und demonstriert seine Arbeitsweise. Die [Fallstudie](https://youngjibbit95.github.io/ltd-skill/de/built-with-littledevteam/) zeigt tatsächliche Planung, Entscheidungen, Umsetzung und Prüfbelege.
 
@@ -97,7 +131,7 @@ npm run dev
 
 </details>
 
-## Skill lokal prüfen
+## ✅ Skill lokal prüfen
 
 Führe die Befehle im Repository-Stamm aus. Auf macOS und Linux heißt Python häufig `python3`; verwende den bei dir verfügbaren Python-3.10+-Befehl.
 
@@ -110,7 +144,7 @@ python -B -m unittest discover -s tests -v
 
 GitHub Actions prüft den Skill unter Windows und Linux mit Python 3.10 und 3.12. Plattformabhängige Auslassungen erscheinen im Testprotokoll. Kopiere bei manueller Installation immer den gesamten Skill-Ordner einschließlich `scripts/ldt_core`.
 
-## Im Repository zurechtfinden
+## 🗂️ Im Repository zurechtfinden
 
 | Bereich | Einstieg |
 | --- | --- |
@@ -123,10 +157,10 @@ GitHub Actions prüft den Skill unter Windows und Linux mit Python 3.10 und 3.12
 | Website-Quellcode | [website/](website/) |
 | V2-Entwürfe und Recherche | [design/](design/) |
 
-## Entwicklungsstand und Lizenz
+## 📌 Entwicklungsstand und Lizenz
 
 Der Skill ist ein Entwicklungsstand. Die Dokumente unter `design/` sind Vorschläge und historische Recherche; die dort beschriebene CLI, Runtime-Adapter und erweiterten Rollen sind keine freigegebene V2. Ein vorhandenes Modul allein belegt keinen abgeschlossenen Review.
 
 Lokale Freigabedateien, Entwicklungsprotokolle und Auswertungsläufe bleiben außerhalb von Git. Tatsächliche Codex-Erkennung wurde in den dokumentierten Installations-Smokes nicht geprüft.
 
-Eine Projektlizenz wurde noch nicht festgelegt. Lizenzangaben in der Registry betreffen die referenzierten Drittquellen; die Website liefert die Lizenzen ihrer mitgelieferten Schriften mit.
+Das Repository steht unter der [Apache License 2.0](LICENSE). Lizenzangaben in der Registry betreffen die referenzierten Drittquellen; die Website liefert die Lizenzen ihrer mitgelieferten Schriften mit.
