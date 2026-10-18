@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-labelledby="title desc">
+  <title id="title">LittleDevTeam</title>
+  <desc id="desc">Dunkler Nebula-Hintergrund mit violettem Orbitzeichen. Architecture first. Build in steps.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#0b1024"/><stop offset="1" stop-color="#140e26"/></linearGradient>
+    <radialGradient id="nebula"><stop stop-color="#8055d9" stop-opacity=".32"/><stop offset="1" stop-color="#8055d9" stop-opacity="0"/></radialGradient>
+    <radialGradient id="red"><stop stop-color="#d44579" stop-opacity=".2"/><stop offset="1" stop-color="#d44579" stop-opacity="0"/></radialGradient>
+    <linearGradient id="orbit"><stop stop-color="#b79aff"/><stop offset="1" stop-color="#f39ac6"/></linearGradient>
+  </defs>
+  <rect width="1280" height="320" rx="22" fill="url(#bg)"/>
+  <ellipse cx="980" cy="115" rx="350" ry="230" fill="url(#nebula)"/>
+  <ellipse cx="1190" cy="300" rx="320" ry="240" fill="url(#red)"/>
+  <rect x=".5" y=".5" width="1279" height="319" rx="22" fill="none" stroke="#a99bc3" stroke-opacity=".2"/>
+  <g fill="none" stroke="#bfa4ef" stroke-opacity=".08"><path d="M840 0v320M920 0v320M1000 0v320M1080 0v320M1160 0v320M1240 0v320M800 80h480M800 160h480M800 240h480"/></g>
+  <text x="64" y="65" fill="#bea6ef" font-family="ui-monospace,Consolas,monospace" font-size="13" letter-spacing="3">ARCHITECTURE FIRST</text>
+  <text x="60" y="151" fill="#f6f2ff" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="64" font-weight="650" letter-spacing="-2">LittleDevTeam</text>
+  <text x="64" y="199" fill="#c7bfd9" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="22">Build in steps. Review the result.</text>
+  <path d="M64 243h45" stroke="#ac86ee" stroke-width="3"/>
+  <text x="125" y="248" fill="#a99cbf" font-family="ui-monospace,Consolas,monospace" font-size="13">architect-dev-team</text>
+  <g transform="translate(1045 158)" fill="none" stroke="url(#orbit)">
+    <circle r="62" stroke-opacity=".28"/><circle r="96" stroke-opacity=".12"/>
+    <ellipse rx="128" ry="41" transform="rotate(-32)" stroke-width="2"/>
+    <ellipse rx="128" ry="41" transform="rotate(32)" stroke-opacity=".4"/>
+    <circle r="9" fill="#d2baff" stroke="none"/><circle cx="98" cy="-57" r="6" fill="#f3b4d8" stroke="none"/>
+  </g>
+  <g fill="#d7caef"><circle cx="811" cy="51" r="1.5"/><circle cx="1195" cy="52" r="1.5"/><circle cx="1208" cy="261" r="1.5"/><circle cx="858" cy="274" r="1"/></g>
+</svg>
