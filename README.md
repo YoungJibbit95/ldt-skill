@@ -11,6 +11,7 @@
 </p>
 
 <p align="center">
+  ![Repository Views](https://komarev.com/ghpvc/?username=YoungJibbit95&repo=ltd-skill&label=Repository%20Views&color=0e75b6&style=flat)
   <a href="https://youngjibbit95.github.io/ltd-skill/de/">Website</a> ·
   <a href="https://youngjibbit95.github.io/ltd-skill/de/docs/install/">Installation</a> ·
   <a href="https://youngjibbit95.github.io/ltd-skill/de/docs/guide/">Guide</a> ·
