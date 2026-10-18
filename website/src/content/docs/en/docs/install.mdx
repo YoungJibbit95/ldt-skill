@@ -1,0 +1,154 @@
+---
+title: Set up the skill
+description: Complete LittleDevTeam setup for Codex on Windows, macOS, and Linux, including verification, updates, and removal.
+---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+
+Copy the complete `architect-dev-team` folder. There is no additional LittleDevTeam service or separate installer.
+
+## 1. Check prerequisites
+
+Set up Codex using its [official quickstart](https://developers.openai.com/codex/quickstart/) and sign in there. The following steps install the skill, not Codex itself. Use a terminal on the machine where Codex accesses your project files.
+
+```sh
+git --version
+python --version
+```
+
+Validation helpers need **Python 3.10 or later**. On macOS/Linux, the command is often `python3`; Windows may offer `py -3`. Use the command that works on your machine below. No `pip` installations are needed.
+
+## 2. Retrieve a named source revision
+
+Run the appropriate block in a working folder outside your target project. The name `ltd-skill-source` must not already exist there. The pinned commit makes this guide reproducible; it is a development snapshot, not an approved finished V2 release.
+
+<Tabs>
+  <TabItem label="Windows · PowerShell">
+```powershell
+git clone https://github.com/YoungJibbit95/ltd-skill.git ltd-skill-source
+if ($LASTEXITCODE -ne 0) { throw 'Clone failed.' }
+git -C ltd-skill-source checkout --detach 9a062eb9de0990ce1074dd677d26e5a528ee14a0
+if ($LASTEXITCODE -ne 0) { throw 'Source revision unavailable.' }
+$skillSource = (Resolve-Path -LiteralPath '.\ltd-skill-source\.agents\skills\architect-dev-team').Path
+```
+  </TabItem>
+  <TabItem label="macOS / Linux · Bash">
+```bash
+git clone https://github.com/YoungJibbit95/ltd-skill.git ltd-skill-source &&
+git -C ltd-skill-source checkout --detach 9a062eb9de0990ce1074dd677d26e5a528ee14a0 &&
+# Continue only after a successful checkout.
+skill_source="$(cd ltd-skill-source/.agents/skills/architect-dev-team && pwd)"
+```
+  </TabItem>
+</Tabs>
+
+Before copying, read at least `SKILL.md` and its linked workflows. Inspect the complete [source at the pinned commit](https://github.com/YoungJibbit95/ltd-skill/tree/9a062eb9de0990ce1074dd677d26e5a528ee14a0/.agents/skills/architect-dev-team) as needed.
+
+## 3. Choose the scope
+
+<Tabs>
+  <TabItem label="For one project">
+
+In the same terminal, change to your **existing target project**. The source variable you set above remains available. The destination is `.agents/skills/architect-dev-team` in your project root.
+
+**Windows · PowerShell** — replace the example path:
+```powershell
+Set-Location -LiteralPath 'C:\path\to\your\project'
+$skillDestination = Join-Path (Get-Location).Path '.agents\skills\architect-dev-team'
+if (Test-Path -LiteralPath $skillDestination) { throw 'Destination already exists. Not overwritten.' }
+New-Item -ItemType Directory -Force -Path (Split-Path -Parent $skillDestination) | Out-Null
+Copy-Item -LiteralPath $skillSource -Destination $skillDestination -Recurse
+```
+
+**macOS / Linux · Bash** — replace the example path:
+```bash
+cd '/path/to/your/project' &&
+skill_destination="$PWD/.agents/skills/architect-dev-team" &&
+test ! -e "$skill_destination" &&
+mkdir -p "$PWD/.agents/skills" &&
+cp -R "$skill_source" "$skill_destination"
+```
+
+If the destination exists, copying stops. You can then version the skill folder with your project. Existing project instructions and approvals still apply.
+  </TabItem>
+  <TabItem label="For your personal use">
+
+According to the [official Codex documentation](https://learn.chatgpt.com/docs/build-skills), the personal skill location is `.agents/skills` in your home directory. This makes the skill available across projects.
+
+**Windows · PowerShell:**
+```powershell
+$skillDestination = Join-Path $HOME '.agents\skills\architect-dev-team'
+if (Test-Path -LiteralPath $skillDestination) { throw 'Destination already exists. Not overwritten.' }
+New-Item -ItemType Directory -Force -Path (Split-Path -Parent $skillDestination) | Out-Null
+Copy-Item -LiteralPath $skillSource -Destination $skillDestination -Recurse
+```
+
+**macOS / Linux · Bash:**
+```bash
+skill_destination="$HOME/.agents/skills/architect-dev-team"
+test ! -e "$skill_destination" &&
+mkdir -p "$HOME/.agents/skills" &&
+cp -R "$skill_source" "$skill_destination"
+```
+
+Avoid simultaneous personal and project copies of the same skill unless you deliberately want two separate versions. Codex can show both.
+  </TabItem>
+</Tabs>
+
+## 4. Verify the package and discovery
+
+Check the installed copy in the same terminal. It must include `scripts/ldt_core`.
+
+<Tabs>
+  <TabItem label="Windows · PowerShell">
+```powershell
+python -B (Join-Path $skillDestination 'scripts\validate.py') package $skillDestination
+```
+  </TabItem>
+  <TabItem label="macOS / Linux · Bash">
+```bash
+python3 -B "$skill_destination/scripts/validate.py" package "$skill_destination"
+```
+  </TabItem>
+</Tabs>
+
+Expected output: **`OK package`** with exit code 0. This confirms structural package validation, not Codex discovery or approval of a development milestone.
+
+Open your target project in Codex. Check whether `architect-dev-team` appears in the skill selector. If a running session has not discovered the new copy, start a new session or reload Codex. Then invoke it explicitly:
+
+```text
+Use $architect-dev-team. Read the project instructions and inspect this project.
+Summarize the goal, current state, and open questions. Start with an
+architecture proposal and a small first milestone.
+```
+
+The [first-task guide](/ltd-skill/en/docs/guide/) explains what comes next.
+
+## Update
+
+1. Record the currently installed commit and preserve local modifications.
+2. Run `git fetch origin` in the source repository and select a **specific reviewed commit**. Compare it with your previous revision; run `git checkout --detach <COMMIT>` only in that separate source repository.
+3. Copy the complete new skill into a **new temporary directory** first and validate that copy.
+4. Back up the existing installation outside every `.agents/skills` directory, remove the old copy from the active skill location, and copy the verified new version to the same destination. Do not mix files from different versions.
+5. Validate the installed copy again and check discovery in a new Codex session. Restore the backup if needed.
+
+Existing project states are not automatically migrated or reapproved. Read changes to state formats and approval rules before continuing an ongoing project.
+
+## Remove
+
+Check the absolute path and use your file manager to remove only the installed `architect-dev-team` folder. Do not remove the parent `.agents` directory. Project state under `.architect-dev-team` is separate project data; decide separately whether to retain it. Then open a new Codex session.
+
+## Troubleshooting
+
+| Observation | Next step |
+| --- | --- |
+| Python command not found | Check `python3` or `py -3`; install Python 3.10 or later if needed. |
+| `INVALID` or missing shared core | Copy the complete folder including `scripts/ldt_core`; read the exact diagnostic. |
+| Skill does not appear | Check the project/user path and `SKILL.md`; open the correct project and a new Codex session. |
+| Skill appears twice | Inspect personal and project copies; remove only the unwanted copy. |
+| Existing project state does not match | Reconcile actual sources and evidenced decisions. Do not invent approval by editing a JSON file. |
+| A tool or subagent is unavailable | Use available native workflows. The skill does not guarantee a specific integration. |
+
+<Aside type="note" title="What verification establishes">
+A package check and successful copy do not establish Codex discovery on every operating system. Platform and discovery tests are reported separately in project documentation. This guide does not claim that every Codex environment has already been exercised.
+</Aside>

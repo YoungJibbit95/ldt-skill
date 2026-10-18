@@ -1,0 +1,54 @@
+---
+title: Ein klarer Einstieg
+description: Was LittleDevTeam macht, welche Voraussetzungen du brauchst und wie du mit deinem ersten Projekt startest.
+---
+
+import { LinkCard, CardGrid, Aside } from '@astrojs/starlight/components';
+
+LittleDevTeam gibt deinem Coding-Agenten einen strukturierten Weg vom Auftrag zum geprüften Ergebnis. Der technische Name des Skills ist **`architect-dev-team`**. Du kannst ihn für ein neues Projekt, eine größere Funktion oder eine anspruchsvolle Überarbeitung verwenden.
+
+<CardGrid>
+  <LinkCard title="Skill einrichten" description="Windows, macOS oder Linux. Für ein Projekt oder persönlich." href="/ltd-skill/de/docs/install/" />
+  <LinkCard title="Dein erster Auftrag" description="Vom verständlichen Ziel zum ersten geprüften Meilenstein." href="/ltd-skill/de/docs/guide/" />
+</CardGrid>
+
+## So arbeitet der Skill
+
+1. **Verstehen:** Auftrag, Projektstand und tatsächliche Möglichkeiten untersuchen.
+2. **Planen:** Anforderungen und einen passenden Architekturvorschlag formulieren.
+3. **Entscheiden:** Dir einen konkreten Vorschlag mit überprüfbaren Zielen vorlegen.
+4. **Entwickeln:** Einen freigegebenen Meilenstein umsetzen.
+5. **Prüfen:** Relevante Checks durchführen und das Ergebnis reviewen.
+6. **Fortsetzen:** Dir das konkrete Ergebnis zur Bewertung vorlegen, bevor der nächste Meilenstein beginnt.
+
+Die Profile Lean, Balanced und Rigorous passen den Aufwand an die Aufgabe an. Balanced ist der Ausgangspunkt. Sie ändern die Freigaberegeln nicht. Wenn echte Subagenten sinnvoll, erlaubt und verfügbar sind, kann der Workflow sie einbeziehen. Der Skill erzeugt keine eigene Agentenplattform.
+
+## Was du brauchst
+
+- Eine eingerichtete und angemeldete **Codex-Umgebung**, die lokale Skills lesen kann.
+- **Git**, um den dokumentierten Quellstand zu beziehen.
+- **Python ab 3.10**, wenn du die mitgelieferten Prüfhilfen verwendest. Sie benötigen keine externen Python-Pakete.
+
+Der Skill ist ein Ordner mit Anweisungen, Referenzen, Vorlagen und Python-Helfern. Ein separates `ldt`-Programm wird nicht installiert. Für diesen nativen Workflow musst du keinen eigenen API-Schlüssel in den Skill eintragen; Codex verwaltet seine eigene Anmeldung.
+
+## Diese Website ist die Demonstration
+
+Wir entwickeln diese Website mit LittleDevTeam: mit einem freigegebenen Plan, getrenntem Arbeitsbereich und kleinen Meilensteinen. Die hier sichtbare erste Website-Etappe umfasst den Einstieg, die Installation und den Guide.
+
+Die interaktive Simulation, die vertiefte technische Referenz und die ausführliche Fallstudie gehören zum anschließenden Meilenstein. Den [freigegebenen Website-Plan](https://github.com/YoungJibbit95/ltd-skill/blob/website/w1-nebula/docs/website-plan.md) kannst du im Repository lesen.
+
+## Beschriebener Entwicklungsstand
+
+Diese Einstiegsdokumentation beschreibt den veröffentlichten Entwicklungsstand [`9a062eb`](https://github.com/YoungJibbit95/ltd-skill/tree/9a062eb9de0990ce1074dd677d26e5a528ee14a0). Sie belegt keine fertige V2-Veröffentlichung und keine pauschale Freigabe aller enthaltenen Entwicklungsschritte.
+
+<Aside type="note" title="Anweisungen und Prüfungen haben Grenzen">
+Die lokalen Werkzeuge prüfen Datenkonsistenz und Quellstände. Sie authentifizieren keine menschlichen Entscheidungen. Werkzeugberechtigungen, menschliche Freigaben und tatsächliche Testergebnisse bleiben unterschiedliche Dinge.
+</Aside>
+
+Externe Registry-Einträge sind Metadaten zu Kandidaten. Sie installieren oder aktivieren keine weiteren Skills. CLI- und Runtime-Entwürfe im Repository sind als Vorschläge einzuordnen.
+
+## Weiterführende Quellen
+
+- [Skill-Anweisungen am beschriebenen Stand](https://github.com/YoungJibbit95/ltd-skill/blob/9a062eb9de0990ce1074dd677d26e5a528ee14a0/.agents/skills/architect-dev-team/SKILL.md)
+- [Offizielle Dokumentation zu Codex-Skills](https://learn.chatgpt.com/docs/build-skills)
+- [Repository und aktueller Entwicklungsstand](https://github.com/YoungJibbit95/ltd-skill)

@@ -1,0 +1,9 @@
+---
+import SiteHeader from './SiteHeader.astro';
+import Search from '@astrojs/starlight/components/Search.astro';
+import type { Locale } from '../lib/site';
+const locale: Locale = Astro.url.pathname.includes('/en/') ? 'en' : 'de';
+---
+<SiteHeader locale={locale} docs />
+<div class="docs-search"><Search /></div>
+<noscript><style>starlight-tabs [role="tablist"]{display:none!important}starlight-tabs [role="tabpanel"][hidden]{display:block!important}starlight-tabs [role="tabpanel"]{margin-block:1.5rem}</style></noscript>

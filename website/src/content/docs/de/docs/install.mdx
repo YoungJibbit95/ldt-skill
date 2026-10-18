@@ -1,0 +1,154 @@
+---
+title: Skill einrichten
+description: Vollständige Installation von LittleDevTeam in Codex auf Windows, macOS und Linux, mit Verifikation, Aktualisierung und Entfernung.
+---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+
+Du übernimmst den vollständigen Ordner `architect-dev-team`. Es gibt keinen zusätzlichen LittleDevTeam-Dienst und keinen separaten Installer.
+
+## 1. Voraussetzungen prüfen
+
+Richte Codex über den [offiziellen Einstieg](https://developers.openai.com/codex/quickstart/) ein und melde dich dort an. Die folgenden Schritte installieren den Skill, nicht Codex selbst. Nutze anschließend ein Terminal auf dem Rechner, auf dem Codex auf deine Projektdateien zugreift.
+
+```sh
+git --version
+python --version
+```
+
+Die Prüfhilfen benötigen Python **3.10 oder neuer**. Auf macOS und Linux heißt der Befehl häufig `python3`, unter Windows kann `py -3` verfügbar sein. Verwende im Folgenden den bei dir funktionierenden Befehl. Es sind keine `pip`-Installationen nötig.
+
+## 2. Einen benannten Quellstand beziehen
+
+Führe den passenden Block in einem Arbeitsordner außerhalb deines Zielprojekts aus. Der Name `ltd-skill-source` muss dort noch frei sein. Der festgelegte Commit macht die Anleitung reproduzierbar; er ist ein Entwicklungsstand, keine als fertig freigegebene V2-Version.
+
+<Tabs>
+  <TabItem label="Windows · PowerShell">
+```powershell
+git clone https://github.com/YoungJibbit95/ltd-skill.git ltd-skill-source
+if ($LASTEXITCODE -ne 0) { throw 'Klonen fehlgeschlagen.' }
+git -C ltd-skill-source checkout --detach 9a062eb9de0990ce1074dd677d26e5a528ee14a0
+if ($LASTEXITCODE -ne 0) { throw 'Quellstand nicht verfügbar.' }
+$skillSource = (Resolve-Path -LiteralPath '.\ltd-skill-source\.agents\skills\architect-dev-team').Path
+```
+  </TabItem>
+  <TabItem label="macOS / Linux · Bash">
+```bash
+git clone https://github.com/YoungJibbit95/ltd-skill.git ltd-skill-source &&
+git -C ltd-skill-source checkout --detach 9a062eb9de0990ce1074dd677d26e5a528ee14a0 &&
+# Nur nach erfolgreichem Checkout fortfahren.
+skill_source="$(cd ltd-skill-source/.agents/skills/architect-dev-team && pwd)"
+```
+  </TabItem>
+</Tabs>
+
+Lies vor der Übernahme mindestens `SKILL.md` und die referenzierten Arbeitsabläufe. Prüfe die vollständige Quelle bei Bedarf im [Repository am festgelegten Commit](https://github.com/YoungJibbit95/ltd-skill/tree/9a062eb9de0990ce1074dd677d26e5a528ee14a0/.agents/skills/architect-dev-team).
+
+## 3. Geltungsbereich wählen
+
+<Tabs>
+  <TabItem label="Für ein Projekt">
+
+Wechsle im selben Terminal in dein **vorhandenes Zielprojekt**. Die zuvor gesetzte Quellvariable bleibt erhalten. Der Zielpfad ist `.agents/skills/architect-dev-team` im Projektstamm.
+
+**Windows · PowerShell** — ersetze den Beispielpfad:
+```powershell
+Set-Location -LiteralPath 'C:\Pfad\zu\deinem\Projekt'
+$skillDestination = Join-Path (Get-Location).Path '.agents\skills\architect-dev-team'
+if (Test-Path -LiteralPath $skillDestination) { throw 'Ziel existiert bereits. Nicht überschrieben.' }
+New-Item -ItemType Directory -Force -Path (Split-Path -Parent $skillDestination) | Out-Null
+Copy-Item -LiteralPath $skillSource -Destination $skillDestination -Recurse
+```
+
+**macOS / Linux · Bash** — ersetze den Beispielpfad:
+```bash
+cd '/pfad/zu/deinem/projekt' &&
+skill_destination="$PWD/.agents/skills/architect-dev-team" &&
+test ! -e "$skill_destination" &&
+mkdir -p "$PWD/.agents/skills" &&
+cp -R "$skill_source" "$skill_destination"
+```
+
+Existiert das Ziel schon, hält der Kopierschritt an. Der Skill-Ordner kann anschließend zusammen mit deinem Projekt versioniert werden. Bestehende Projektregeln und Freigaben bleiben maßgeblich.
+  </TabItem>
+  <TabItem label="Für dich persönlich">
+
+Der persönliche Skill-Pfad ist gemäß [offizieller Codex-Dokumentation](https://learn.chatgpt.com/docs/build-skills) `.agents/skills` in deinem Benutzerverzeichnis. So ist der Skill für mehrere Projekte verfügbar.
+
+**Windows · PowerShell:**
+```powershell
+$skillDestination = Join-Path $HOME '.agents\skills\architect-dev-team'
+if (Test-Path -LiteralPath $skillDestination) { throw 'Ziel existiert bereits. Nicht überschrieben.' }
+New-Item -ItemType Directory -Force -Path (Split-Path -Parent $skillDestination) | Out-Null
+Copy-Item -LiteralPath $skillSource -Destination $skillDestination -Recurse
+```
+
+**macOS / Linux · Bash:**
+```bash
+skill_destination="$HOME/.agents/skills/architect-dev-team"
+test ! -e "$skill_destination" &&
+mkdir -p "$HOME/.agents/skills" &&
+cp -R "$skill_source" "$skill_destination"
+```
+
+Vermeide eine gleichzeitige persönliche und projektbezogene Kopie desselben Skills, wenn du keine zwei bewusst getrennten Versionen verwalten möchtest. Codex kann beide anzeigen.
+  </TabItem>
+</Tabs>
+
+## 4. Paket und Erkennung prüfen
+
+Prüfe die installierte Kopie im selben Terminal. `scripts/ldt_core` muss enthalten sein.
+
+<Tabs>
+  <TabItem label="Windows · PowerShell">
+```powershell
+python -B (Join-Path $skillDestination 'scripts\validate.py') package $skillDestination
+```
+  </TabItem>
+  <TabItem label="macOS / Linux · Bash">
+```bash
+python3 -B "$skill_destination/scripts/validate.py" package "$skill_destination"
+```
+  </TabItem>
+</Tabs>
+
+Erwartete Ausgabe: **`OK package`** und Exitcode 0. Das bestätigt die strukturelle Paketprüfung, nicht die Erkennung durch Codex oder die Freigabe eines Entwicklungsmeilensteins.
+
+Öffne dein Zielprojekt in Codex. Prüfe, ob `architect-dev-team` in der Skill-Auswahl verfügbar ist. Falls eine laufende Sitzung die neue Kopie noch nicht erkennt, starte eine neue Sitzung beziehungsweise lade Codex neu. Verwende dann ausdrücklich:
+
+```text
+Nutze $architect-dev-team. Lies die Projektregeln und untersuche das Projekt.
+Fasse Ziel, aktuellen Stand und offene Fragen zusammen. Beginne mit einem
+Architekturvorschlag und einem kleinen ersten Meilenstein.
+```
+
+Die [Anleitung für den ersten Auftrag](/ltd-skill/de/docs/guide/) zeigt den weiteren Ablauf.
+
+## Aktualisieren
+
+1. Behalte den bisher verwendeten Commit und lokale Anpassungen fest.
+2. Hole im Quell-Repository mit `git fetch origin` neue Referenzen und wähle einen **konkreten geprüften Commit**. Prüfe den Unterschied zum bisherigen Stand; `git checkout --detach <COMMIT>` erfolgt nur im separaten Quell-Repository.
+3. Kopiere den neuen vollständigen Skill-Ordner zunächst in ein **neues temporäres Verzeichnis** und führe dort die Paketprüfung durch.
+4. Sichere die bestehende Installation außerhalb aller `.agents/skills`-Verzeichnisse, entferne die bisherige Kopie aus dem aktiven Skill-Pfad und kopiere die geprüfte neue Version an denselben Zielpfad. Vermische keine alten und neuen Dateien.
+5. Prüfe die installierte Kopie erneut und kontrolliere die Erkennung in einer neuen Codex-Sitzung. Bei Problemen stelle die gesicherte Version wieder her.
+
+Bereits laufende Projektzustände werden nicht automatisch migriert oder neu freigegeben. Lies Änderungen an Zustandsformaten und Freigaberegeln, bevor du damit weiterarbeitest.
+
+## Entfernen
+
+Kontrolliere den absoluten Pfad und entferne ausschließlich den installierten Ordner `architect-dev-team` mit deinem Dateimanager. Entferne nicht den übergeordneten `.agents`-Ordner. Projektbezogene Zustände unter `.architect-dev-team` sind eigene Projektdaten; entscheide über deren Aufbewahrung separat. Öffne danach eine neue Codex-Sitzung.
+
+## Wenn etwas nicht funktioniert
+
+| Beobachtung | Nächster Schritt |
+| --- | --- |
+| Python wird nicht gefunden | Prüfe `python3` oder `py -3` und installiere bei Bedarf Python ab 3.10. |
+| `INVALID` oder fehlender gemeinsamer Kern | Übernimm den vollständigen Ordner inklusive `scripts/ldt_core`; lies die genaue Fehlermeldung. |
+| Skill erscheint nicht | Prüfe den gewählten Projekt-/Benutzerpfad und `SKILL.md`; öffne das richtige Projekt und eine neue Codex-Sitzung. |
+| Skill erscheint doppelt | Prüfe persönliche und projektbezogene Kopien; entferne nur die nicht gewünschte Kopie. |
+| Vorhandener Projektzustand passt nicht | Lass den tatsächlichen Quellstand und die belegten Entscheidungen abgleichen. Erfinde keine Freigabe durch Bearbeiten einer JSON-Datei. |
+| Ein Werkzeug oder Subagent fehlt | Verwende die verfügbare native Arbeitsweise. Der Skill garantiert keine bestimmte Integration. |
+
+<Aside type="note" title="Was als geprüft gilt">
+Eine Paketprüfung und ein erfolgreicher Kopiervorgang sind keine Bestätigung der Codex-Erkennung auf allen Betriebssystemen. Plattform- und Erkennungstests werden in der Projektdokumentation getrennt ausgewiesen. Diese Anleitung enthält keine Behauptung, dass sämtliche Codex-Umgebungen bereits praktisch getestet wurden.
+</Aside>

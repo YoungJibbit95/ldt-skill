@@ -1,0 +1,222 @@
+:root,[data-theme='dark'] {
+  --sl-color-bg:#0c0e1b;
+  --sl-color-bg-nav:#0c0e1b;
+  --sl-color-bg-sidebar:#0d0f1d;
+  --sl-color-hairline:#2a253c;
+  --sl-color-hairline-light:#252036;
+  --sl-color-accent-low:#292039;
+  --sl-color-accent:#ad8bdd;
+  --sl-color-accent-high:#e1c7fa;
+  --sl-color-white:#f4f1fc;
+  --sl-color-gray-1:#e3ddeb;
+  --sl-color-gray-2:#c3bace;
+  --sl-color-gray-3:#a298af;
+  --sl-color-gray-4:#655b73;
+  --sl-color-gray-5:#302b40;
+  --sl-color-gray-6:#171626;
+  --sl-font:var(--font-body);
+  --sl-font-system:var(--font-body);
+  --sl-text-h1:2.7rem;
+  --sl-nav-height:7.4rem;
+  --sl-content-width:50rem;
+  --sl-sidebar-width:17.5rem
+}
+header.header {
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  padding:0!important;
+  gap:0;
+  background:#0c0e1bf5!important;
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line)
+}
+.site-header.is-docs {
+  height:72px;
+  min-height:72px;
+  width:calc(100% - 48px);
+  gap:28px
+}
+.docs-search {
+  height:45px;
+  display:flex;
+  align-items:center;
+  padding:0 24px 9px;
+  max-width:460px;
+  width:100%;
+  margin-left:auto
+}
+.docs-search site-search {
+  width:100%
+}
+.docs-search button[data-open-modal] {
+  height:30px;
+  font-size:11px!important;
+  border-radius:7px;
+  background:#161426;
+  border-color:#54426760
+}
+.site-header.is-docs .brand {
+  font-size:21px
+}
+.site-header.is-docs .brand svg {
+  width:30px
+}
+.site-header.is-docs .desktop-nav {
+  gap:22px
+}
+.site-header.is-docs .desktop-nav a {
+  font-size:12px
+}
+.sl-markdown-content {
+  font-size:15px;
+  line-height:1.9
+}
+.sl-markdown-content h2,.sl-markdown-content h3 {
+  font-family:var(--font-display);
+  font-weight:500;
+  letter-spacing:-.035em
+}
+.sl-markdown-content h2 {
+  margin-top:2.5rem
+}
+.sl-markdown-content a:not(.sl-anchor-link) {
+  text-underline-offset:4px
+}
+.sl-markdown-content code {
+  border-radius:5px
+}
+.sl-markdown-content .expressive-code {
+  margin-block:1.5rem
+}
+.expressive-code {
+  --ec-brdRad:10px!important;
+  font-size:12px
+}
+.sl-markdown-content .starlight-aside {
+  border-radius:0 10px 10px 0
+}
+main .content-panel {
+  border-color:#282139
+}
+h1#_top {
+  font-family:var(--font-display);
+  line-height:1.15;
+  font-weight:500;
+  letter-spacing:-.05em
+}
+.sidebar-content a[aria-current=page] {
+  background:#392844!important;
+  color:#f3deff!important
+}
+.sidebar-content {
+  font-size:13px
+}
+.content-panel h1 {
+  scroll-margin-top:9rem
+}
+.right-sidebar-panel {
+  font-size:12px
+}
+.mobile-menu-toggle {
+  margin-top:0
+}
+starlight-menu-button {
+  position:fixed;
+  top:80px;
+  left:22px;
+  z-index:60
+}
+starlight-menu-button button {
+  width:30px;
+  height:29px;
+  background:#191527!important;
+  border:1px solid #69517870!important;
+  border-radius:5px
+}
+.sl-link-button {
+  border-radius:8px
+}
+@media(max-width:860px) {
+  .site-header.is-docs {
+    width:calc(100% - 36px)
+  }
+  .is-docs .mobile-menu nav {
+    top:72px
+  }
+  .docs-search {
+    max-width:340px;
+    padding-right:20px
+  }
+  .sidebar-content {
+    padding-top:1rem
+  }
+}
+@media(max-width:640px) {
+  :root {
+    --sl-text-h1:2.1rem
+  }
+  .site-header.is-docs .brand {
+    font-size:20px
+  }
+  .docs-search {
+    max-width:260px;
+    padding-right:20px
+  }
+  .sl-markdown-content {
+    font-size:14px
+  }
+  .content-panel {
+    padding-inline:1.25rem!important
+  }
+  .sl-markdown-content table {
+    font-size:12px
+  }
+}
+/* Keep site navigation and the documentation sidebar distinct on small screens. */
+@media(max-width:799px) {
+  .sl-menu-button {
+    top:80px!important;
+    left:20px!important;
+    right:auto!important;
+    inset-inline-end:auto!important;
+    width:auto!important;
+    height:29px!important;
+    gap:7px;
+    padding:4px 10px!important;
+    border:1px solid #69517870!important;
+    border-radius:6px!important;
+    background:#191527!important;
+    color:#ded1ed!important;
+    box-shadow:none!important
+  }
+  .sl-menu-button:after {
+    content:'Kapitel';
+    font-size:11px
+  }
+  html[lang='en'] .sl-menu-button:after {
+    content:'Chapters'
+  }
+  .sl-menu-button svg {
+    width:14px;
+    height:14px
+  }
+  .docs-search {
+    width:calc(100% - 140px);
+    max-width:none;
+    padding-left:0
+  }
+  .docs-search button[data-open-modal] {
+    display:flex!important;
+    justify-content:flex-start;
+    width:100%!important;
+    gap:8px;
+    padding-inline:10px
+  }
+  .docs-search button[data-open-modal]>span {
+    display:inline!important
+  }
+  .docs-search button[data-open-modal]>kbd {
+    display:none!important
+  }
+}

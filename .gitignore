@@ -17,3 +17,8 @@ dist/
 build/
 .DS_Store
 Thumbs.db
+
+# Website caches and local QA artifacts.
+.astro/
+playwright-report/
+test-results/

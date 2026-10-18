@@ -1,0 +1,12 @@
+---
+import Page from '../layouts/Page.astro';
+import { pathFor } from '../lib/site';
+---
+<Page locale="de" title="404 — LittleDevTeam" description="Diese Seite wurde nicht gefunden. This page could not be found." noindex>
+  <section class="site-container section-space">
+    <p class="small-label section-label">404 · OUTSIDE THE ORBIT</p>
+    <h1 class="section-heading">Diese Seite liegt außerhalb unserer Umlaufbahn.</h1>
+    <p class="body-copy" lang="en">This page could not be found. Pick a starting point below.</p>
+    <div class="hero-buttons"><a class="button" href={pathFor('de')}>Zur deutschen Startseite ↗</a><a class="button button-ghost" lang="en" href={pathFor('en')}>Open English homepage ↗</a></div>
+  </section>
+</Page>
