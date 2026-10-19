@@ -42,3 +42,9 @@ test('all source pages and components avoid the obsolete Pages prefix', async ()
   };
   await inspect(source);
 });
+
+test('release candidate evidence accepts the renamed base and rejects the obsolete one', async () => {
+  const body = await read('../candidate-evidence.mjs');
+  assert.match(body, /\/ldt-skill\//);
+  assert.doesNotMatch(body, /\/ltd-skill\//);
+});

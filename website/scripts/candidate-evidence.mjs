@@ -9,7 +9,7 @@ if (Object.keys(needs).sort().join(',') !== 'installation,skill,website' || Obje
 if (summary.source_sha !== process.env.GITHUB_SHA || summary.mode !== 'local' || summary.status !== 'passed' || summary.results.length !== 12 || summary.medians.length !== 4 || summary.medians.some(item => !item.passed || item.median < 90)) throw new Error('Incomplete same-revision local performance evidence.');
 const expectedRoutes = ['de/', 'en/', 'de/docs/install/', 'en/docs/install/'];
 for (const route of expectedRoutes) {
-  const results = summary.results.filter(item => item.url === `http://127.0.0.1:4321/ltd-skill/${route}`);
+  const results = summary.results.filter(item => item.url === `http://127.0.0.1:4321/ldt-skill/${route}`);
   if (results.map(item => item.run).sort().join(',') !== '1,2,3') throw new Error('Each approved URL requires exactly three distinct measurements.');
   const median = results.map(item => item.score).sort((a, b) => a - b)[1];
   if (!results.every(item => typeof item.score === 'number' && item.score >= 0 && item.score <= 100) || median < 90) throw new Error('Actual measurement median fails the approved policy.');
