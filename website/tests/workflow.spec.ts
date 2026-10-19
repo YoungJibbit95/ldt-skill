@@ -7,7 +7,7 @@ for (const locale of ['de', 'en'] as const) {
       await page.setViewportSize({ width, height: 950 });
       const errors: string[] = [];
       page.on('pageerror', error => errors.push(error.message));
-      await page.goto(`/ltd-skill/${locale}/demo/`);
+      await page.goto(`/ldt-skill/${locale}/demo/`);
       const demo = page.locator('ldt-demo');
       await expect(demo).toHaveAttribute('data-enhanced', '');
       await expect(demo.locator('[data-stage-link]')).toHaveCount(8);
@@ -39,14 +39,14 @@ for (const locale of ['de', 'en'] as const) {
       await expect(demo.locator('[data-revision]')).toContainText('1');
       await expect(demo.locator('[data-previous]')).toBeDisabled();
       await page.getByRole('link', { name: locale === 'de' ? 'Switch to English' : 'Zu Deutsch wechseln' }).click();
-      await expect(page).toHaveURL(new RegExp(`/ltd-skill/${locale === 'de' ? 'en' : 'de'}/demo/$`));
+      await expect(page).toHaveURL(new RegExp(`/ldt-skill/${locale === 'de' ? 'en' : 'de'}/demo/$`));
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
       expect(errors).toEqual([]);
     });
   }
 
   test(`${locale}: localized search, empty results and keyboard return`, async ({ page }) => {
-    await page.goto(`/ltd-skill/${locale}/docs/`);
+    await page.goto(`/ldt-skill/${locale}/docs/`);
     const open = page.locator('button[data-open-modal]');
     await open.focus();
     await page.keyboard.press('Enter');
@@ -57,7 +57,7 @@ for (const locale of ['de', 'en'] as const) {
     const results = dialog.locator('.pagefind-ui__result-link');
     await expect(results.first()).toBeVisible();
     const hrefs = await results.evaluateAll(nodes => nodes.map(node => node.getAttribute('href')));
-    expect(hrefs.every(href => href?.includes(`/ltd-skill/${locale}/`))).toBe(true);
+    expect(hrefs.every(href => href?.includes(`/ldt-skill/${locale}/`))).toBe(true);
     await search.fill('zzqxnonexistent987654');
     await expect(dialog.locator('.pagefind-ui__message')).toContainText(locale === 'de' ? /keine|keinen/i : /no results/i);
     await page.keyboard.press('Escape');
@@ -66,7 +66,7 @@ for (const locale of ['de', 'en'] as const) {
   });
 
   test(`${locale}: revised demo remains accessible`, async ({ page }) => {
-    await page.goto(`/ltd-skill/${locale}/demo/`);
+    await page.goto(`/ldt-skill/${locale}/demo/`);
     await page.locator('[data-stage-link="2"]').click();
     await page.locator('[data-revise]').click();
     const audit = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze();
@@ -77,10 +77,10 @@ for (const locale of ['de', 'en'] as const) {
 test('all demo steps and platform instructions remain readable without JavaScript', async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 375, height: 950 } });
   const page = await context.newPage();
-  await page.goto('/ltd-skill/en/demo/');
+  await page.goto('/ldt-skill/en/demo/');
   for (const stage of [0, 1, 2, 3, 4, 5, 6, 7]) await expect(page.locator(`[data-stage="${stage}"]`)).toBeVisible();
   await expect(page.locator('[data-next]')).not.toBeVisible();
-  await page.goto('/ltd-skill/en/docs/install/');
+  await page.goto('/ldt-skill/en/docs/install/');
   for (const panel of await page.getByRole('tabpanel', { includeHidden: true }).all()) await expect(panel).toBeVisible();
   await context.close();
 });

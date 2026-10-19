@@ -20,29 +20,29 @@ Validation helpers need **Python 3.10 or later**. On macOS/Linux, the command is
 
 ## 2. Retrieve a named source revision
 
-Run the appropriate block in a working folder outside your target project. The name `ltd-skill-source` must not already exist there. The pinned commit makes this guide reproducible; it is a development snapshot, not an approved finished V2 release.
+Run the appropriate block in a working folder outside your target project. The name `ldt-skill-source` must not already exist there. The pinned commit makes this guide reproducible; it is a development snapshot, not an approved finished V2 release.
 
 <Tabs>
   <TabItem label="Windows · PowerShell">
 ```powershell
-git clone https://github.com/YoungJibbit95/ltd-skill.git ltd-skill-source
+git clone https://github.com/YoungJibbit95/ldt-skill.git ldt-skill-source
 if ($LASTEXITCODE -ne 0) { throw 'Clone failed.' }
-git -C ltd-skill-source checkout --detach 9a062eb9de0990ce1074dd677d26e5a528ee14a0
+git -C ldt-skill-source checkout --detach 9a062eb9de0990ce1074dd677d26e5a528ee14a0
 if ($LASTEXITCODE -ne 0) { throw 'Source revision unavailable.' }
-$skillSource = (Resolve-Path -LiteralPath '.\ltd-skill-source\.agents\skills\architect-dev-team').Path
+$skillSource = (Resolve-Path -LiteralPath '.\ldt-skill-source\.agents\skills\architect-dev-team').Path
 ```
   </TabItem>
   <TabItem label="macOS / Linux · Bash">
 ```bash
-git clone https://github.com/YoungJibbit95/ltd-skill.git ltd-skill-source &&
-git -C ltd-skill-source checkout --detach 9a062eb9de0990ce1074dd677d26e5a528ee14a0 &&
+git clone https://github.com/YoungJibbit95/ldt-skill.git ldt-skill-source &&
+git -C ldt-skill-source checkout --detach 9a062eb9de0990ce1074dd677d26e5a528ee14a0 &&
 # Continue only after a successful checkout.
-skill_source="$(cd ltd-skill-source/.agents/skills/architect-dev-team && pwd)"
+skill_source="$(cd ldt-skill-source/.agents/skills/architect-dev-team && pwd)"
 ```
   </TabItem>
 </Tabs>
 
-Before copying, read at least `SKILL.md` and its linked workflows. Inspect the complete [source at the pinned commit](https://github.com/YoungJibbit95/ltd-skill/tree/9a062eb9de0990ce1074dd677d26e5a528ee14a0/.agents/skills/architect-dev-team) as needed.
+Before copying, read at least `SKILL.md` and its linked workflows. Inspect the complete [source at the pinned commit](https://github.com/YoungJibbit95/ldt-skill/tree/9a062eb9de0990ce1074dd677d26e5a528ee14a0/.agents/skills/architect-dev-team) as needed.
 
 ## 3. Choose the scope
 
@@ -122,7 +122,7 @@ Summarize the goal, current state, and open questions. Start with an
 architecture proposal and a small first milestone.
 ```
 
-The [first-task guide](/ltd-skill/en/docs/guide/) explains what comes next.
+The [first-task guide](/ldt-skill/en/docs/guide/) explains what comes next.
 
 ## Update
 

@@ -3,51 +3,51 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/YoungJibbit95/ltd-skill/actions/workflows/validate.yml"><img src="https://github.com/YoungJibbit95/ltd-skill/actions/workflows/validate.yml/badge.svg?branch=main" alt="Skill-Prüfungen auf main" /></a>
-  <a href="https://github.com/YoungJibbit95/ltd-skill/actions/workflows/website.yml"><img src="https://github.com/YoungJibbit95/ltd-skill/actions/workflows/website.yml/badge.svg?branch=main" alt="Website-Prüfungen auf main" /></a>
-  <a href="https://youngjibbit95.github.io/ltd-skill/de/docs/install/"><img src="https://img.shields.io/badge/Python-3.10%2B-ae91ed?style=flat&amp;logo=python&amp;logoColor=white&amp;labelColor=16152b" alt="Python 3.10 oder neuer" /></a>
-  <a href="https://youngjibbit95.github.io/ltd-skill/en/"><img src="https://img.shields.io/badge/Docs-DE%20%7C%20EN-d99dc4?style=flat&amp;labelColor=16152b" alt="Dokumentation auf Deutsch und Englisch" /></a>
+  <a href="https://github.com/YoungJibbit95/ldt-skill/actions/workflows/validate.yml"><img src="https://github.com/YoungJibbit95/ldt-skill/actions/workflows/validate.yml/badge.svg?branch=main" alt="Skill-Prüfungen auf main" /></a>
+  <a href="https://github.com/YoungJibbit95/ldt-skill/actions/workflows/website.yml"><img src="https://github.com/YoungJibbit95/ldt-skill/actions/workflows/website.yml/badge.svg?branch=main" alt="Website-Prüfungen auf main" /></a>
+  <a href="https://youngjibbit95.github.io/ldt-skill/de/docs/install/"><img src="https://img.shields.io/badge/Python-3.10%2B-ae91ed?style=flat&amp;logo=python&amp;logoColor=white&amp;labelColor=16152b" alt="Python 3.10 oder neuer" /></a>
+  <a href="https://youngjibbit95.github.io/ldt-skill/en/"><img src="https://img.shields.io/badge/Docs-DE%20%7C%20EN-d99dc4?style=flat&amp;labelColor=16152b" alt="Dokumentation auf Deutsch und Englisch" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-88cfc7?style=flat&amp;labelColor=16152b" alt="Apache License 2.0" /></a>
 </p>
 
 
 <p align="center">
-  <a href="https://youngjibbit95.github.io/ltd-skill/de/">Website</a> ·
-  <a href="https://youngjibbit95.github.io/ltd-skill/de/docs/install/">Installation</a> ·
-  <a href="https://youngjibbit95.github.io/ltd-skill/de/docs/guide/">Guide</a> ·
-  <a href="https://youngjibbit95.github.io/ltd-skill/de/demo/">Demo</a> ·
-  <a href="https://youngjibbit95.github.io/ltd-skill/en/">English docs</a> ·
-  <a href="https://github.com/youngjibbit95/ltd-skill/releases">Releases</a> ·
-  <a href="https://github.com/youngjibbit95/ltd-skill/issues">Report Bug</a>
+  <a href="https://youngjibbit95.github.io/ldt-skill/de/">Website</a> ·
+  <a href="https://youngjibbit95.github.io/ldt-skill/de/docs/install/">Installation</a> ·
+  <a href="https://youngjibbit95.github.io/ldt-skill/de/docs/guide/">Guide</a> ·
+  <a href="https://youngjibbit95.github.io/ldt-skill/de/demo/">Demo</a> ·
+  <a href="https://youngjibbit95.github.io/ldt-skill/en/">English docs</a> ·
+  <a href="https://github.com/youngjibbit95/ldt-skill/releases">Releases</a> ·
+  <a href="https://github.com/youngjibbit95/ldt-skill/issues">Report Bug</a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/youngjibbit95/ltd-skill/stargazers">
-    <img src="https://img.shields.io/github/stars/youngjibbit95/ltd-skill?style=flat-square&logo=github&label=Stars" alt="Stars">
+  <a href="https://github.com/youngjibbit95/ldt-skill/stargazers">
+    <img src="https://img.shields.io/github/stars/youngjibbit95/ldt-skill?style=flat-square&logo=github&label=Stars" alt="Stars">
   </a>
-  <a href="https://github.com/youngjibbit95/ltd-skill/network/members">
-    <img src="https://img.shields.io/github/forks/youngjibbit95/ltd-skill?style=flat-square&logo=github&label=Forks" alt="Forks">
+  <a href="https://github.com/youngjibbit95/ldt-skill/network/members">
+    <img src="https://img.shields.io/github/forks/youngjibbit95/ldt-skill?style=flat-square&logo=github&label=Forks" alt="Forks">
   </a>
-  <a href="https://github.com/youngjibbit95/ltd-skill/issues">
-    <img src="https://img.shields.io/github/issues/youngjibbit95/ltd-skill?style=flat-square&logo=github&label=Issues" alt="Issues">
+  <a href="https://github.com/youngjibbit95/ldt-skill/issues">
+    <img src="https://img.shields.io/github/issues/youngjibbit95/ldt-skill?style=flat-square&logo=github&label=Issues" alt="Issues">
   </a>
-  <a href="https://github.com/youngjibbit95/ltd-skill/releases">
-    <img src="https://img.shields.io/github/v/release/youngjibbit95/ltd-skill?style=flat-square&label=Release" alt="Release">
+  <a href="https://github.com/youngjibbit95/ldt-skill/releases">
+    <img src="https://img.shields.io/github/v/release/youngjibbit95/ldt-skill?style=flat-square&label=Release" alt="Release">
   </a>
 </p>
 
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=youngjibbit95-ltd-skill&label=Repository%20Views&color=blueviolet&style=flat-square" alt="Repository Views">
-  <img src="https://img.shields.io/github/last-commit/youngjibbit95/ltd-skill?style=flat-square&label=Last%20Commit" alt="Last Commit">
-  <img src="https://img.shields.io/github/repo-size/youngjibbit95/ltd-skill?style=flat-square&label=Repo%20Size" alt="Repository Size">
-  <img src="https://img.shields.io/github/contributors/youngjibbit95/ltd-skill?style=flat-square&label=Contributors" alt="Contributors">
+  <img src="https://komarev.com/ghpvc/?username=youngjibbit95-ldt-skill&label=Repository%20Views&color=blueviolet&style=flat-square" alt="Repository Views">
+  <img src="https://img.shields.io/github/last-commit/youngjibbit95/ldt-skill?style=flat-square&label=Last%20Commit" alt="Last Commit">
+  <img src="https://img.shields.io/github/repo-size/youngjibbit95/ldt-skill?style=flat-square&label=Repo%20Size" alt="Repository Size">
+  <img src="https://img.shields.io/github/contributors/youngjibbit95/ldt-skill?style=flat-square&label=Contributors" alt="Contributors">
 </p>
 
 <p align="center">
-  <a href="https://github.com/youngjibbit95/ltd-skill">
+  <a href="https://github.com/youngjibbit95/ldt-skill">
     <img src="https://img.shields.io/badge/GitHub-Source%20Code-181717?style=for-the-badge&logo=github" alt="Source Code">
   </a>
-  <a href="https://youngjibbit95.github.io/ltd-skill/de/demo/">
+  <a href="https://youngjibbit95.github.io/ldt-skill/de/demo/">
     <img src="https://img.shields.io/badge/Live-Demo-2ea44f?style=for-the-badge&logo=githubpages" alt="Live Demo">
   </a>
 </p>
@@ -61,7 +61,7 @@
 
 ```text
 Richte LittleDevTeam in diesem Projekt ein.
-Quelle: https://github.com/YoungJibbit95/ltd-skill
+Quelle: https://github.com/YoungJibbit95/ldt-skill
 Commit: 9a062eb9de0990ce1074dd677d26e5a528ee14a0
 
 Lies die Projektregeln und die Skill-Anweisungen. Übernimm den vollständigen
@@ -77,7 +77,7 @@ mir einen Architekturvorschlag mit erstem Meilenstein und Prüfungen vor.
 Beginne die Umsetzung nach meiner Freigabe des konkreten Vorschlags.
 ```
 
-Der Prompt verwendet den dokumentierten Entwicklungsstand der [Installationsanleitung](https://youngjibbit95.github.io/ltd-skill/de/docs/install/). Codex erkennt neue Skills automatisch; falls der Skill nicht erscheint, starte Codex neu. Der Projektpfad `.agents/skills` ist in den [offiziellen Codex-Skill-Hinweisen](https://learn.chatgpt.com/docs/build-skills) beschrieben.
+Der Prompt verwendet den dokumentierten Entwicklungsstand der [Installationsanleitung](https://youngjibbit95.github.io/ldt-skill/de/docs/install/). Codex erkennt neue Skills automatisch; falls der Skill nicht erscheint, starte Codex neu. Der Projektpfad `.agents/skills` ist in den [offiziellen Codex-Skill-Hinweisen](https://learn.chatgpt.com/docs/build-skills) beschrieben.
 
 
 ## 🪐 Was ist LittleDevTeam?
@@ -101,11 +101,11 @@ Du brauchst Git und eine Coding-Agent-Umgebung mit Skill-Unterstützung. Für di
 ### 1. Repository öffnen
 
 ```sh
-git clone https://github.com/YoungJibbit95/ltd-skill.git
-cd ltd-skill
+git clone https://github.com/YoungJibbit95/ldt-skill.git
+cd ldt-skill
 ```
 
-Öffne diesen Ordner in Codex. Der vollständige Skill liegt unter [`.agents/skills/architect-dev-team`](.agents/skills/architect-dev-team/SKILL.md). Lies vor dem ersten Einsatz seine Anweisungen. Für die Übernahme in ein anderes Projekt oder dein persönliches Skill-Verzeichnis nutze das [Installationstutorial für Windows, macOS und Linux](https://youngjibbit95.github.io/ltd-skill/de/docs/install/).
+Öffne diesen Ordner in Codex. Der vollständige Skill liegt unter [`.agents/skills/architect-dev-team`](.agents/skills/architect-dev-team/SKILL.md). Lies vor dem ersten Einsatz seine Anweisungen. Für die Übernahme in ein anderes Projekt oder dein persönliches Skill-Verzeichnis nutze das [Installationstutorial für Windows, macOS und Linux](https://youngjibbit95.github.io/ldt-skill/de/docs/install/).
 
 ### 2. Einen kleinen Auftrag geben
 
@@ -120,15 +120,15 @@ Prüfungen. Zeige mir den konkreten Vorschlag zur Freigabe, bevor du ihn umsetzt
 
 Prüfe Umfang, Annahmen und Abnahmekriterien. Bitte bei Bedarf um eine Überarbeitung. Nach deiner Freigabe setzt der Agent den vereinbarten Schritt um und legt Änderungen, Prüfergebnisse und offene Punkte vor. Die nächste Iteration, ein Merge und eine Veröffentlichung benötigen jeweils die dafür geltende Freigabe.
 
-Der [Praxisguide](https://youngjibbit95.github.io/ltd-skill/de/docs/guide/) führt dich durch diesen Ablauf. Die [interaktive Demo](https://youngjibbit95.github.io/ltd-skill/de/demo/) zeigt Freigabe, Überarbeitung und Review als lokale Simulation; sie führt keine Agenten aus.
+Der [Praxisguide](https://youngjibbit95.github.io/ldt-skill/de/docs/guide/) führt dich durch diesen Ablauf. Die [interaktive Demo](https://youngjibbit95.github.io/ldt-skill/de/demo/) zeigt Freigabe, Überarbeitung und Review als lokale Simulation; sie führt keine Agenten aus.
 
 
 ## 🛠️ So läuft ein Meilenstein ab
 
 <p align="center">
-  <a href="https://youngjibbit95.github.io/ltd-skill/de/docs/workflow/"><img src="https://img.shields.io/badge/Lean-kleiner%20Umfang-88cfc7?style=flat&amp;labelColor=16152b" alt="Lean für kleinen Umfang" /></a>
-  <a href="https://youngjibbit95.github.io/ltd-skill/de/docs/workflow/"><img src="https://img.shields.io/badge/Balanced-Standard-ae91ed?style=flat&amp;labelColor=16152b" alt="Balanced als Standard" /></a>
-  <a href="https://youngjibbit95.github.io/ltd-skill/de/docs/workflow/"><img src="https://img.shields.io/badge/Rigorous-mehr%20Pr%C3%BCftiefe-d99dc4?style=flat&amp;labelColor=16152b" alt="Rigorous mit mehr Prüftiefe" /></a>
+  <a href="https://youngjibbit95.github.io/ldt-skill/de/docs/workflow/"><img src="https://img.shields.io/badge/Lean-kleiner%20Umfang-88cfc7?style=flat&amp;labelColor=16152b" alt="Lean für kleinen Umfang" /></a>
+  <a href="https://youngjibbit95.github.io/ldt-skill/de/docs/workflow/"><img src="https://img.shields.io/badge/Balanced-Standard-ae91ed?style=flat&amp;labelColor=16152b" alt="Balanced als Standard" /></a>
+  <a href="https://youngjibbit95.github.io/ldt-skill/de/docs/workflow/"><img src="https://img.shields.io/badge/Rigorous-mehr%20Pr%C3%BCftiefe-d99dc4?style=flat&amp;labelColor=16152b" alt="Rigorous mit mehr Prüftiefe" /></a>
 </p>
 
 ```mermaid
@@ -148,7 +148,7 @@ Die Python-Hilfen prüfen unter anderem Pakete, Registry-Daten, lokale Zustände
 
 ## 🌌 Mit LittleDevTeam gebaut
 
-Die Dokumentationswebsite entstand mit dem LittleDevTeam-Skill und demonstriert seine Arbeitsweise. Die [Fallstudie](https://youngjibbit95.github.io/ltd-skill/de/built-with-littledevteam/) zeigt tatsächliche Planung, Entscheidungen, Umsetzung und Prüfbelege.
+Die Dokumentationswebsite entstand mit dem LittleDevTeam-Skill und demonstriert seine Arbeitsweise. Die [Fallstudie](https://youngjibbit95.github.io/ldt-skill/de/built-with-littledevteam/) zeigt tatsächliche Planung, Entscheidungen, Umsetzung und Prüfbelege.
 
 Die Website enthält eine deutsche und englische Einführung, Installationsanleitungen, technische Referenz, Suche und die interaktive Simulation. Sie nutzt Astro, Starlight und lokal eingebundene Schriften im dunklen Nebula-Design. Die Dokumentation benennt den Skill-Quellstand, auf den sie sich bezieht.
 
@@ -165,7 +165,7 @@ npm ci
 npm run dev
 ```
 
-Öffne die ausgegebene Adresse mit `/ltd-skill/de/` oder `/ltd-skill/en/`. Die [Website-Anleitung](website/README.md) beschreibt Produktionsbuild, Linkprüfung und Browserchecks.
+Öffne die ausgegebene Adresse mit `/ldt-skill/de/` oder `/ldt-skill/en/`. Die [Website-Anleitung](website/README.md) beschreibt Produktionsbuild, Linkprüfung und Browserchecks.
 
 </details>
 

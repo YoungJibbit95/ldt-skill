@@ -10,7 +10,7 @@ export default defineConfig({
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: {
     command: `"${process.execPath}" node_modules/astro/bin/astro.mjs preview --host 127.0.0.1 --port 4321`,
-    url: 'http://127.0.0.1:4321/ltd-skill/de/',
+    url: 'http://127.0.0.1:4321/ldt-skill/de/',
     reuseExistingServer: !process.env.CI,
     timeout: 60000,
   },

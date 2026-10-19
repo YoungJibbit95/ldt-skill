@@ -22,8 +22,8 @@ npm test
 npm run test:install
 ```
 
-Development and preview serve `/ltd-skill/de/` and `/ltd-skill/en/`. The deployment
-base is always `/ltd-skill/`; test the built site, not just development mode.
+Development and preview serve `/ldt-skill/de/` and `/ldt-skill/en/`. The deployment
+base is always `/ldt-skill/`; test the built site, not just development mode.
 `npm run preview -- --port 4321` serves the production build used by Playwright.
 
 Content documents skill revision `9a062eb9de0990ce1074dd677d26e5a528ee14a0`.

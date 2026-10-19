@@ -3,7 +3,7 @@ import starlight from '@astrojs/starlight';
 
 export default defineConfig({
   site: 'https://youngjibbit95.github.io',
-  base: '/ltd-skill',
+  base: '/ldt-skill',
   trailingSlash: 'always',
   integrations: [starlight({
     title: 'LittleDevTeam',
@@ -39,7 +39,7 @@ export default defineConfig({
         { slug: 'docs/limits', label: 'Grenzen & Wiederaufnahme', translations: { en: 'Limits & recovery' } },
       ],
     }],
-    editLink: { baseUrl: 'https://github.com/YoungJibbit95/ltd-skill/edit/main/website/' },
+    editLink: { baseUrl: 'https://github.com/YoungJibbit95/ldt-skill/edit/main/website/' },
     lastUpdated: false,
     pagination: true,
   })],

@@ -17,7 +17,7 @@ Commit, verbindliche Prüfpolitik, Snapshot und erfolgreiche CI wurden vor der
 Freigabeaufzeichnung erneut geprüft; Review- und Advance-Gate bestehen. Lokale
 Nachweise sind separat archiviert und werden nicht als Website-Inhalte importiert.
 W2 bleibt eine Eigenprüfung. Die nun beteiligten Planungsagenten prüfen W2 nicht
-nachträglich unabhängig frei. [PR #2](https://github.com/YoungJibbit95/ltd-skill/pull/2)
+nachträglich unabhängig frei. [PR #2](https://github.com/YoungJibbit95/ldt-skill/pull/2)
 ist offen; seine Freigabe erlaubt keinen Merge.
 
 Vorhanden sind 26 statische HTML-Seiten mit deutscher und englischer Einführung,
@@ -39,7 +39,7 @@ Produktänderungen eine Architekturfreigabe.
 
 Die Repository-API meldet derzeit `has_pages: false`; es gibt keine Deployments.
 Lighthouse, Release-Artefakte, Pages-Workflow und öffentliche URL-Prüfungen fehlen.
-Die veröffentlichte Adresse soll `https://youngjibbit95.github.io/ltd-skill/` sein.
+Die veröffentlichte Adresse soll `https://youngjibbit95.github.io/ldt-skill/` sein.
 
 ## Gestaltung: drei untersuchte Richtungen
 
@@ -183,7 +183,7 @@ Auflösung werden bei der tatsächlichen Prüfung dokumentiert.
   Node 24. Die konkrete Integration und Chromium-Version werden getestet und
   gelockt. Kein LHCI-Dienst und keine Runtime-UI-Abhängigkeit erforderlich.
 
-Astro/Starlight, `/ltd-skill/`, alle DE/EN-Seitenschlüssel und lokale Fonts bleiben
+Astro/Starlight, `/ldt-skill/`, alle DE/EN-Seitenschlüssel und lokale Fonts bleiben
 erhalten. Skill-Quellcode, Registry, ursprüngliche Arbeitsstände und deren
 Zustandsdateien bleiben außerhalb des Auftrags. Keine Domain, Analysewerkzeuge,
 Konten, Backend, Live-Agenten oder neue Projektlizenz.
@@ -247,7 +247,7 @@ verwendet genau dieses Archiv und wiederholt die öffentlichen Prüfungen.
 | `existing skill checks` | Vorhandene Paket-, beide Registry- und Regressionsprüfungen der bestehenden Linux/Windows- und Python-3.10/3.12-CI unverändert erfolgreich. |
 | `accessibility` | Beide Sprachen und alle Inhaltsrouten bei 375/768/1440 ohne horizontalen Überlauf; manuelle Tastatur-/Fokusprüfung von Header, Suche, Sprachwahl, Codekopie und Demo; 200-%-Zoom und reduzierte Bewegung. WCAG-AA-Kontraste; Axe ohne schwerwiegende/kritische Befunde. Suchdialog und geänderte Demozustände mitprüfen. |
 | `performance` | Tatsächlich ausgeführtes Lighthouse Mobile auf `/de/`, `/en/`, `/de/docs/install/`, `/en/docs/install/`: je drei Läufe mit kaltem Cache und festgehaltenem Lighthouse/Chromium/Runner. Median je URL mindestens 90; alle Einzelergebnisse erhalten. Gleiche Messserie nach Deployment separat auf öffentlichem Ursprung; beide Serien bestehen. Keine ausgewählten Wiederholungen bis zu einem guten Wert. |
-| `published URL checks` | Erst nach autorisiertem Deployment: vollständige direkten DE/EN-Aufrufe und Reloads, tatsächliche Releaseidentität, deutsche Startweiterleitung, Assets/Fonts/Favicon und Pagefind unter `/ltd-skill/`, Canonical/Hreflang, Sprachwechsel, lokalisierte Suche samt Leerzustand, Demo, mobile Navigation, Kopieren, repräsentative Live-Axe- und No-JS-Prüfung; unbekannte URL liefert tatsächliches HTTP 404. |
+| `published URL checks` | Erst nach autorisiertem Deployment: vollständige direkten DE/EN-Aufrufe und Reloads, tatsächliche Releaseidentität, deutsche Startweiterleitung, Assets/Fonts/Favicon und Pagefind unter `/ldt-skill/`, Canonical/Hreflang, Sprachwechsel, lokalisierte Suche samt Leerzustand, Demo, mobile Navigation, Kopieren, repräsentative Live-Axe- und No-JS-Prüfung; unbekannte URL liefert tatsächliches HTTP 404. |
 | `independent_review` | Tatsächlich andere Agenten prüfen finalen Diff und Nachweise für Design, Inhalt, Frontend/Release und Qualität. Master integriert; keine offenen blockierenden Befunde. Fehlende Prüfer werden nicht als Eigenprüfung bestanden. |
 
 Lighthouse kann abhängig von der Messumgebung schwanken; die vorgeschlagene

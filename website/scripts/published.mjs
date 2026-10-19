@@ -11,7 +11,7 @@ const { values } = parseArgs({ options: { public: { type: 'boolean' }, sha: { ty
 if (!values.public || !/^[a-f0-9]{40}$/.test(values.sha ?? '') || !values.output) throw new Error('Explicit --public, --sha and a new --output directory are required.');
 if (values.origin !== 'https://youngjibbit95.github.io') throw new Error('Only the approved Pages origin may be checked.');
 await createReportDirectory(values.output);
-const base = `${values.origin}/ltd-skill/`;
+const base = `${values.origin}/ldt-skill/`;
 const report = { schema: 1, source_sha: values.sha, origin: values.origin, started_at: new Date().toISOString(), attempts: [], routes: [], status: 'running' };
 const save = () => writeFile(join(values.output, 'published.json'), JSON.stringify(report, null, 2) + '\n');
 await save();
@@ -24,7 +24,7 @@ try {
     try {
       const response = await fetch(`${base}release.json?verify=${Date.now()}`, { cache: 'no-store', signal: AbortSignal.timeout(Math.max(1, Math.min(10000, deadline - Date.now()))) });
       const identity = await response.json();
-      identityReady = response.ok && identity.repository === 'YoungJibbit95/ltd-skill' && identity.source_sha === values.sha;
+      identityReady = response.ok && identity.repository === 'YoungJibbit95/ldt-skill' && identity.source_sha === values.sha;
       report.attempts.push({ at: new Date().toISOString(), http: response.status, source_sha: identity.source_sha, matched: identityReady });
     } catch (error) { report.attempts.push({ at: new Date().toISOString(), error: String(error), matched: false }); }
     await save();
@@ -76,7 +76,7 @@ try {
     await search.fill(locale === 'de' ? 'Umfangsfingerabdruck' : 'scope fingerprint');
     const links = dialog.locator('.pagefind-ui__result-link');
     await expect(links.first()).toBeVisible();
-    expect((await links.evaluateAll(nodes => nodes.map(node => node.getAttribute('href')))).every(href => href.includes(`/ltd-skill/${locale}/`))).toBeTruthy();
+    expect((await links.evaluateAll(nodes => nodes.map(node => node.getAttribute('href')))).every(href => href.includes(`/ldt-skill/${locale}/`))).toBeTruthy();
     await search.fill('zzqxnonexistent987654');
     await expect(dialog.locator('.pagefind-ui__message')).toContainText(locale === 'de' ? /keine|keinen/i : /no results/i);
     const searchAudit = await new AxeBuilder({ page }).analyze();
@@ -123,8 +123,8 @@ try {
   await expect(page).toHaveTitle('404 — LittleDevTeam');
   await expect(page.getByText('404 · OUTSIDE THE ORBIT', { exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Diese Seite liegt außerhalb unserer Umlaufbahn.', exact: true })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Zur deutschen Startseite ↗', exact: true })).toHaveAttribute('href', '/ltd-skill/de/');
-  await expect(page.getByRole('link', { name: 'Open English homepage ↗', exact: true })).toHaveAttribute('href', '/ltd-skill/en/');
+  await expect(page.getByRole('link', { name: 'Zur deutschen Startseite ↗', exact: true })).toHaveAttribute('href', '/ldt-skill/de/');
+  await expect(page.getByRole('link', { name: 'Open English homepage ↗', exact: true })).toHaveAttribute('href', '/ldt-skill/en/');
   report.custom_404 = { http: unknown.status(), intended_content: true, both_home_links: true };
   expect(fontAssets.size, 'Locally served fonts loaded').toBeGreaterThan(0);
   expect(badAssets).toEqual([]); expect(pageErrors).toEqual([]);

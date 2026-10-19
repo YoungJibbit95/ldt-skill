@@ -6,7 +6,7 @@ for (const locale of ['de', 'en'] as const) {
     test(`${locale}/${width}: search has a visible localized label and passes unfiltered Axe`, async ({ page }) => {
       test.setTimeout(60000);
       await page.setViewportSize({ width, height: 1000 });
-      await page.goto(`/ltd-skill/${locale}/docs/`);
+      await page.goto(`/ldt-skill/${locale}/docs/`);
       const opener = page.locator('button[data-open-modal]');
       await expect(opener).toBeEnabled();
       await opener.focus();
