@@ -56,7 +56,7 @@ def exercise(locale, sandbox):
         raise RuntimeError(f"Expected the four tutorial blocks for {locale}/{language}; got {len(blocks)}")
     # Execute the documented clone/pin block, retaining its source variable in-process.
     shell(blocks[0], sandbox)
-    source = sandbox / "ltd-skill-source/.agents/skills/architect-dev-team"
+    source = sandbox / "ldt-skill-source/.agents/skills/architect-dev-team"
     project_block = blocks[1].replace("C:\\Pfad\\zu\\deinem\\Projekt", str(project)).replace("C:\\path\\to\\your\\project", str(project)).replace("/pfad/zu/deinem/projekt", str(project)).replace("/path/to/your/project", str(project))
     # Substitute only the home operand in test code. Never repurpose HOME/$HOME.
     personal_block = blocks[2].replace("$HOME", "$smokeUserHome" if WINDOWS else "$smoke_user_home")

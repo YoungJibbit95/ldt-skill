@@ -34,7 +34,7 @@ async function freePort() {
 }
 try {
   if (values.public) {
-    const identity = await (await fetch(`${origin.origin}/ltd-skill/release.json`, { cache: 'no-store' })).json();
+    const identity = await (await fetch(`${origin.origin}/ldt-skill/release.json`, { cache: 'no-store' })).json();
     if (identity.source_sha !== values.sha) throw new Error('Public identity differs from the approved source SHA.');
   }
   for (const route of ['de/', 'en/', 'de/docs/install/', 'en/docs/install/']) {
@@ -54,7 +54,7 @@ try {
           } catch { await new Promise(resolve => setTimeout(resolve, 100)); }
         }
         if (!ready) throw new Error('Chromium did not open a debugging port.');
-        const url = `${origin.origin}/ltd-skill/${route}`;
+        const url = `${origin.origin}/ldt-skill/${route}`;
         const result = await lighthouse(url, { port, output: ['html', 'json'], onlyCategories: ['performance'], formFactor: 'mobile', throttlingMethod: 'simulate', logLevel: 'error', disableStorageReset: false });
         if (!result) throw new Error('No Lighthouse result');
         const file = `${route.replaceAll('/', '-')}run-${run}`;

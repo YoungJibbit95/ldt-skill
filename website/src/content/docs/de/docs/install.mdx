@@ -20,29 +20,29 @@ Die Prüfhilfen benötigen Python **3.10 oder neuer**. Auf macOS und Linux heiß
 
 ## 2. Einen benannten Quellstand beziehen
 
-Führe den passenden Block in einem Arbeitsordner außerhalb deines Zielprojekts aus. Der Name `ltd-skill-source` muss dort noch frei sein. Der festgelegte Commit macht die Anleitung reproduzierbar; er ist ein Entwicklungsstand, keine als fertig freigegebene V2-Version.
+Führe den passenden Block in einem Arbeitsordner außerhalb deines Zielprojekts aus. Der Name `ldt-skill-source` muss dort noch frei sein. Der festgelegte Commit macht die Anleitung reproduzierbar; er ist ein Entwicklungsstand, keine als fertig freigegebene V2-Version.
 
 <Tabs>
   <TabItem label="Windows · PowerShell">
 ```powershell
-git clone https://github.com/YoungJibbit95/ltd-skill.git ltd-skill-source
+git clone https://github.com/YoungJibbit95/ldt-skill.git ldt-skill-source
 if ($LASTEXITCODE -ne 0) { throw 'Klonen fehlgeschlagen.' }
-git -C ltd-skill-source checkout --detach 9a062eb9de0990ce1074dd677d26e5a528ee14a0
+git -C ldt-skill-source checkout --detach 9a062eb9de0990ce1074dd677d26e5a528ee14a0
 if ($LASTEXITCODE -ne 0) { throw 'Quellstand nicht verfügbar.' }
-$skillSource = (Resolve-Path -LiteralPath '.\ltd-skill-source\.agents\skills\architect-dev-team').Path
+$skillSource = (Resolve-Path -LiteralPath '.\ldt-skill-source\.agents\skills\architect-dev-team').Path
 ```
   </TabItem>
   <TabItem label="macOS / Linux · Bash">
 ```bash
-git clone https://github.com/YoungJibbit95/ltd-skill.git ltd-skill-source &&
-git -C ltd-skill-source checkout --detach 9a062eb9de0990ce1074dd677d26e5a528ee14a0 &&
+git clone https://github.com/YoungJibbit95/ldt-skill.git ldt-skill-source &&
+git -C ldt-skill-source checkout --detach 9a062eb9de0990ce1074dd677d26e5a528ee14a0 &&
 # Nur nach erfolgreichem Checkout fortfahren.
-skill_source="$(cd ltd-skill-source/.agents/skills/architect-dev-team && pwd)"
+skill_source="$(cd ldt-skill-source/.agents/skills/architect-dev-team && pwd)"
 ```
   </TabItem>
 </Tabs>
 
-Lies vor der Übernahme mindestens `SKILL.md` und die referenzierten Arbeitsabläufe. Prüfe die vollständige Quelle bei Bedarf im [Repository am festgelegten Commit](https://github.com/YoungJibbit95/ltd-skill/tree/9a062eb9de0990ce1074dd677d26e5a528ee14a0/.agents/skills/architect-dev-team).
+Lies vor der Übernahme mindestens `SKILL.md` und die referenzierten Arbeitsabläufe. Prüfe die vollständige Quelle bei Bedarf im [Repository am festgelegten Commit](https://github.com/YoungJibbit95/ldt-skill/tree/9a062eb9de0990ce1074dd677d26e5a528ee14a0/.agents/skills/architect-dev-team).
 
 ## 3. Geltungsbereich wählen
 
@@ -122,7 +122,7 @@ Fasse Ziel, aktuellen Stand und offene Fragen zusammen. Beginne mit einem
 Architekturvorschlag und einem kleinen ersten Meilenstein.
 ```
 
-Die [Anleitung für den ersten Auftrag](/ltd-skill/de/docs/guide/) zeigt den weiteren Ablauf.
+Die [Anleitung für den ersten Auftrag](/ldt-skill/de/docs/guide/) zeigt den weiteren Ablauf.
 
 ## Aktualisieren
 

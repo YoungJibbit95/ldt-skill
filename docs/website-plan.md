@@ -43,8 +43,8 @@ action. Documentation has a sidebar, contents, search and copyable examples.
 Astro, Starlight, TypeScript, Markdown/MDX, own CSS and small browser scripts.
 Independent `website/` project, npm lockfile and Node.js 24. Preserve existing
 Python tools. Static pages, assets and Pagefind index, no server APIs. Preserve
-skill identifiers, commands and formats. German `/ltd-skill/de/…` and English
-`/ltd-skill/en/…`, start address leads to German. Matching page keys and complete
+skill identifiers, commands and formats. German `/ldt-skill/de/…` and English
+`/ldt-skill/en/…`, start address leads to German. Matching page keys and complete
 translations; language switch keeps the corresponding page; localized search.
 Installation copies the complete skill for project/personal use according to
 official Codex skill docs. No new installer or imaginary `ldt` command. State
@@ -72,7 +72,7 @@ macOS and Linux, separate from actual Codex discovery verification. All translat
 links, base paths and direct routes work in production. Mobile Lighthouse >=90 on
 home and representative docs. Content readable without JavaScript. GitHub Actions
 checks PRs. Deploy GitHub Pages only after approval of the concrete revision, at
-https://youngjibbit95.github.io/ltd-skill/ initially without a custom domain. Retain
+https://youngjibbit95.github.io/ldt-skill/ initially without a custom domain. Retain
 the previous deployment artifact for recovery.
 
 German default, informal “du”, complete English. No analytics or remote fonts.

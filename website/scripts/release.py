@@ -8,7 +8,7 @@ from pathlib import Path, PurePosixPath
 import re
 import tarfile
 
-REPOSITORY = "YoungJibbit95/ltd-skill"
+REPOSITORY = "YoungJibbit95/ldt-skill"
 WORKFLOW = ".github/workflows/website.yml"
 IDENTITY = "release.json"
 

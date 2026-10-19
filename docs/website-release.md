@@ -3,7 +3,7 @@
 This procedure prepares and promotes the static LittleDevTeam website. It does
 not install the skill or change the documented skill revision. The website still
 documents skill `9a062eb9de0990ce1074dd677d26e5a528ee14a0`; each website release has
-its own source SHA in `/ltd-skill/release.json`.
+its own source SHA in `/ldt-skill/release.json`.
 
 W3 implementation approval permits release preparation and tests. It does not
 permit merging, configuring Pages or environments, dispatching publication, or
@@ -86,9 +86,9 @@ These read-only commands inspect a candidate. Replace uppercase operands with
 the reviewed values; do not type the placeholders literally.
 
 ```sh
-gh run view CANDIDATE_RUN --repo YoungJibbit95/ltd-skill
-gh api repos/YoungJibbit95/ltd-skill/actions/artifacts/ARTIFACT_ID
-gh run download CANDIDATE_RUN --repo YoungJibbit95/ltd-skill --name website-candidate --dir .architect-dev-team/website/downloaded-candidate
+gh run view CANDIDATE_RUN --repo YoungJibbit95/ldt-skill
+gh api repos/YoungJibbit95/ldt-skill/actions/artifacts/ARTIFACT_ID
+gh run download CANDIDATE_RUN --repo YoungJibbit95/ldt-skill --name website-candidate --dir .architect-dev-team/website/downloaded-candidate
 ```
 
 On PowerShell, calculate hashes with
@@ -117,7 +117,7 @@ The following command publishes. It is an operator instruction, not a step
 authorized by W3 implementation approval:
 
 ```sh
-gh workflow run pages.yml --repo YoungJibbit95/ltd-skill --ref main \
+gh workflow run pages.yml --repo YoungJibbit95/ldt-skill --ref main \
   -f approved_sha=FULL_SOURCE_SHA \
   -f candidate_run=CANDIDATE_RUN \
   -f artifact_id=ARTIFACT_ID \
@@ -147,7 +147,7 @@ Deployment success alone does not complete W3.
 ## Verify the public release
 
 After deployment, the read-only evidence job checks
-`https://youngjibbit95.github.io/ltd-skill/`. Release identity propagation may retry
+`https://youngjibbit95.github.io/ldt-skill/`. Release identity propagation may retry
 for at most five minutes; attempts are logged. Other failures remain failures.
 The job checks all direct DE/EN routes and reloads, release identity, German entry,
 canonical/hreflang, language switching, asset/font loading, Pagefind search and

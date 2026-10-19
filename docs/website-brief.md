@@ -4,7 +4,7 @@ Stand: 18. Oktober 2026. Status: Auftrag aufgenommen; Website-Planung folgt.
 
 ## Auftrag
 
-Eine schöne, moderne Website für LittleDevTeam mit Dokumentation, Guide und Installationstutorial. Repository: [YoungJibbit95/ltd-skill](https://github.com/YoungJibbit95/ltd-skill).
+Eine schöne, moderne Website für LittleDevTeam mit Dokumentation, Guide und Installationstutorial. Repository: [YoungJibbit95/ldt-skill](https://github.com/YoungJibbit95/ldt-skill).
 
 **Die Website wird mithilfe des LittleDevTeam-Skills entwickelt. Das Projekt erklärt ausdrücklich, dass es zugleich eine Demonstration des Skills und seiner Arbeitsweise ist.**
 

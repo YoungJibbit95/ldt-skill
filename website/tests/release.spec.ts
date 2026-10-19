@@ -11,28 +11,28 @@ for (const locale of ['de', 'en']) {
       test.setTimeout(60000);
       await page.setViewportSize({ width, height: 1000 });
       for (const route of routes) {
-        const response = await page.goto(`/ltd-skill/${locale}/${route}`);
+        const response = await page.goto(`/ldt-skill/${locale}/${route}`);
         expect(response?.status(), route).toBe(200);
         await page.evaluate(() => document.fonts.ready);
         await expect(page.locator('html')).toHaveAttribute('lang', locale);
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), route).toBe(true);
         await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
         const counterpart = page.getByRole('link', { name: locale === 'de' ? 'Switch to English' : 'Zu Deutsch wechseln' });
-        await expect(counterpart).toHaveAttribute('href', `/ltd-skill/${locale === 'de' ? 'en' : 'de'}/${route}`);
+        await expect(counterpart).toHaveAttribute('href', `/ldt-skill/${locale === 'de' ? 'en' : 'de'}/${route}`);
       }
     });
   }
 
   test(`${locale}: primary targets, workflow readability and search accessibility`, async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 1000 });
-    await page.goto(`/ltd-skill/${locale}/`);
+    await page.goto(`/ldt-skill/${locale}/`);
     for (const target of await page.locator('.hero-buttons a').all()) {
       const box = await target.boundingBox();
       expect(box?.height).toBeGreaterThanOrEqual(44);
       expect(box?.width).toBeGreaterThanOrEqual(44);
     }
     expect(await page.locator('.hero-intro').evaluate(el => parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThanOrEqual(16);
-    await page.goto(`/ltd-skill/${locale}/demo/`);
+    await page.goto(`/ldt-skill/${locale}/demo/`);
     for (const target of await page.locator('.language-link, .mobile-menu summary, .demo-navigation a, .demo-controls button:visible, [data-reset]').all()) {
       const box = await target.boundingBox();
       expect(box?.height).toBeGreaterThanOrEqual(44);
@@ -46,7 +46,7 @@ for (const locale of ['de', 'en']) {
     expect(await page.locator('.demo-stage-body').first().evaluate(el => parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThanOrEqual(16);
     await page.locator('[data-reset]').focus();
     expect(await page.locator('[data-reset]').evaluate(el => getComputedStyle(el).outlineStyle)).not.toBe('none');
-    await page.goto(`/ltd-skill/${locale}/docs/`);
+    await page.goto(`/ldt-skill/${locale}/docs/`);
     for (const target of await page.locator('[data-open-modal], .sl-menu-button').all()) {
       const box = await target.boundingBox();
       expect(box?.height).toBeGreaterThanOrEqual(44);
@@ -61,12 +61,12 @@ for (const locale of ['de', 'en']) {
     const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 375, height: 1000 } });
     const page = await context.newPage();
     for (const route of routes) {
-      await page.goto(`/ltd-skill/${locale}/${route}`);
+      await page.goto(`/ldt-skill/${locale}/${route}`);
       await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
       expect((await page.locator('main').innerText()).length, route).toBeGreaterThan(150);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), route).toBe(true);
     }
-    await page.goto(`/ltd-skill/${locale}/docs/install/`);
+    await page.goto(`/ldt-skill/${locale}/docs/install/`);
     for (const panel of await page.getByRole('tabpanel', { includeHidden: true }).all()) await expect(panel).toBeVisible();
     await context.close();
   });
@@ -82,7 +82,7 @@ for (const locale of ['de', 'en']) {
     try {
       const worker = context.serviceWorkers()[0] ?? await context.waitForEvent('serviceworker');
       const page = context.pages()[0] ?? await context.newPage();
-      await page.goto(`http://127.0.0.1:4321/ltd-skill/${locale}/`);
+      await page.goto(`http://127.0.0.1:4321/ldt-skill/${locale}/`);
       const before = await page.evaluate(() => ({ width: innerWidth, dpr: devicePixelRatio }));
       const zoom = await worker.evaluate(async () => {
         const api = (globalThis as any).chrome;
@@ -94,7 +94,7 @@ for (const locale of ['de', 'en']) {
       await expect.poll(() => page.evaluate(() => innerWidth)).toBeLessThan(before.width * 0.6);
       const after = await page.evaluate(() => ({ width: innerWidth, dpr: devicePixelRatio }));
       for (const route of ['', 'docs/install/', 'demo/']) {
-        await page.goto(`http://127.0.0.1:4321/ltd-skill/${locale}/${route}`);
+        await page.goto(`http://127.0.0.1:4321/ldt-skill/${locale}/${route}`);
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), route).toBe(true);
         await page.locator('.mobile-menu summary').focus();
         await page.keyboard.press('Enter');
@@ -111,7 +111,7 @@ for (const locale of ['de', 'en']) {
     const context = await browser.newContext({ viewport: { width: 720, height: 500 }, deviceScaleFactor: 2 });
     const page = await context.newPage();
     for (const route of ['', 'docs/install/', 'demo/']) {
-      await page.goto(`/ltd-skill/${locale}/${route}`);
+      await page.goto(`/ldt-skill/${locale}/${route}`);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), route).toBe(true);
       await page.locator('.mobile-menu summary').focus();
       await page.keyboard.press('Enter');

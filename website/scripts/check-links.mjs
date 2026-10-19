@@ -3,7 +3,7 @@ import { join, resolve, relative } from 'node:path';
 import { parse } from 'parse5';
 
 const root = resolve('dist');
-const base = '/ltd-skill/';
+const base = '/ldt-skill/';
 async function files(directory) {
   const result = [];
   for (const entry of await readdir(directory, { withFileTypes: true })) {

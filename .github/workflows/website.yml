@@ -47,7 +47,7 @@ jobs:
           PREVIEW_PID=$!
           trap 'kill "$PREVIEW_PID" || true' EXIT
           for attempt in $(seq 1 60); do
-            if curl --fail --silent http://127.0.0.1:4321/ltd-skill/de/ > /dev/null; then break; fi
+            if curl --fail --silent http://127.0.0.1:4321/ldt-skill/de/ > /dev/null; then break; fi
             sleep 1
           done
           npm run measure -- --sha "$GITHUB_SHA" --output reports/performance
