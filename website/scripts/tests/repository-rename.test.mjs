@@ -22,3 +22,23 @@ test('Pages base, release identity, public checks and browser tests use renamed 
   assert.match(linkChecker, /base = '\/ldt-skill\/'/);
   assert.match(playwright, /\/ldt-skill\/de\//);
 });
+
+test('all source pages and components avoid the obsolete Pages prefix', async () => {
+  const { readdir } = await import('node:fs/promises');
+  const { fileURLToPath } = await import('node:url');
+  const { join } = await import('node:path');
+  const source = fileURLToPath(new URL('../../src/', import.meta.url));
+  const inspect = async directory => {
+    for (const item of await readdir(directory, { withFileTypes: true })) {
+      const path = join(directory, item.name);
+      if (item.isDirectory()) {
+        await inspect(path);
+      } else if (/\.(?:astro|mdx|css|ts|json)$/.test(item.name)) {
+        const body = await readFile(path, 'utf8');
+        assert.doesNotMatch(body, /\/ltd-skill\//, path);
+        assert.doesNotMatch(body, /YoungJibbit95\/ltd-skill\b/i, path);
+      }
+    }
+  };
+  await inspect(source);
+});
