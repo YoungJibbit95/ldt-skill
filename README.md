@@ -59,22 +59,15 @@
 > [!TIP]
 > Du brauchst keine Shell-Befehle anzupassen. Gib dein Ziel direkt unter dem Prompt an oder lass Codex danach fragen. Für die Paketprüfung braucht deine Umgebung Python ab 3.10.
 
+Deutsch:
+
 ```text
-Richte LittleDevTeam in diesem Projekt ein.
-Quelle: https://github.com/YoungJibbit95/ldt-skill
-Commit: 9a062eb9de0990ce1074dd677d26e5a528ee14a0
+Installiere LittleDevTeam von https://github.com/YoungJibbit95/ldt-skill in diesem Projekt. Verwende die neueste stabile Version, prüfe die Installation und starte anschließend mit $architect-dev-team die Projektplanung. Frage mich nach meinem Vorhaben.
+```
 
-Lies die Projektregeln und die Skill-Anweisungen. Übernimm den vollständigen
-Ordner .agents/skills/architect-dev-team aus diesem Commit in denselben Pfad
-meines Projekts, einschließlich scripts/ldt_core und aller Begleitdateien.
-Wenn das Ziel bereits existiert, zeige mir die Unterschiede vor Änderungen.
-Prüfe das Paket mit Python 3.10+ vom Projektstamm aus:
-python -B .agents/skills/architect-dev-team/scripts/validate.py package .agents/skills/architect-dev-team
-
-Nutze danach $architect-dev-team mit dem Profil Balanced für meinen Auftrag.
-Frage nach meinem Ziel, falls es noch fehlt. Untersuche das Projekt und lege
-mir einen Architekturvorschlag mit erstem Meilenstein und Prüfungen vor.
-Beginne die Umsetzung nach meiner Freigabe des konkreten Vorschlags.
+Englisch:
+```text
+Install LittleDevTeam from https://github.com/YoungJibbit95/ldt-skill into this project. Use the latest stable version, verify the installation, then start project planning with $architect-dev-team. Ask me what I want to build.
 ```
 
 Der Prompt verwendet den dokumentierten Entwicklungsstand der [Installationsanleitung](https://youngjibbit95.github.io/ldt-skill/de/docs/install/). Codex erkennt neue Skills automatisch; falls der Skill nicht erscheint, starte Codex neu. Der Projektpfad `.agents/skills` ist in den [offiziellen Codex-Skill-Hinweisen](https://learn.chatgpt.com/docs/build-skills) beschrieben.
