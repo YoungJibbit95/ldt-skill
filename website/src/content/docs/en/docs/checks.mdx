@@ -40,6 +40,19 @@ python -B .agents/skills/architect-dev-team/scripts/validate.py snapshot .
 
 Some phases apply gates even without an explicit `--gate` option. This does not turn an empty or invented state into an approved project.
 
+## Additional commands in the local development snapshot
+
+The local development snapshot adds intake, architecture-team, research, task-contract, project-view, pair-execution, integration, and runtime-diagnostic commands to `validate.py`. For example:
+
+```sh
+python -B .agents/skills/architect-dev-team/scripts/validate.py intake .
+python -B .agents/skills/architect-dev-team/scripts/validate.py arch-team . decompose
+python -B .agents/skills/architect-dev-team/scripts/validate.py project-view . generate
+python -B .agents/skills/architect-dev-team/scripts/validate.py runtime detect
+```
+
+The `research`, `task-contracts`, `pair-exec`, and `integration` commands need their corresponding task and project artifacts. They are available in this development snapshot but are not included in the published GitHub source pin `9a062eb` yet. See the [workflow guide](/ldt-skill/en/docs/workflow/) for the distinction between contracts, real agent execution, and human approvals.
+
 ## Inspect migration drafts
 
 ```sh

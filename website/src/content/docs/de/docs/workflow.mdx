@@ -16,15 +16,27 @@ LittleDevTeam organisiert anspruchsvolle Entwicklungsarbeit in kleinen, überpr�
 | `INTAKE` | Auftrag aufnehmen | Ziel und Grenzen |
 | `DISCOVERY` | Regeln, Quellen und Arbeitsstand untersuchen | Tatsächlicher Stand und offene Fragen |
 | `SPECIFICATION` | Gewünschtes Verhalten präzisieren | Überprüfbare Anforderungen |
-| `ARCHITECTURE` | Lösung und Meilenstein entwerfen | Versionierter Vorschlag mit Pflichtchecks |
+| `ARCHITECTURE` | Lösung und Meilenstein entwerfen | Versionierter Vorschlag mit Research-Ergebnissen und Pflichtchecks |
 | `APPROVAL` mit `architecture` | Menschliche Architekturentscheidung | Freigabe oder Überarbeitungsauftrag für den konkreten Umfang |
+| Projektansicht / `start` | Freigegebenen ersten Meilenstein und Teamplan sichtbar machen | Gesonderte Startentscheidung, wenn Task-Verträge genutzt werden |
 | `IMPLEMENTATION` | Einen freigegebenen Meilenstein umsetzen | Begrenzte Quelländerung |
 | `VERIFICATION` | Relevante Checks ausführen | Tatsächliche Ergebnisse und Grenzen |
 | `PR_REVIEW` | Ergebnis reviewen und übergeben | Konkrete Revision, Review und Quellstand-Snapshot |
+| Integration | Gesamtstand und Meilensteinverträge zusammenführen | Integrationsbericht mit tatsächlichen Prüf- und Agentennachweisen |
 | `APPROVAL` mit `iteration` | Ergebnis bewerten | Menschliche Entscheidung über diese Revision |
 | `NEXT_ITERATION` | Nächsten Schritt auswählen | Neuer konkreter Meilenstein |
 
 `APPROVAL` ist dieselbe Phase mit zwei unterschiedlichen `approval_stage`-Werten. „PR REVIEW“ wird in JSON als `PR_REVIEW` gespeichert. Fehlgeschlagene Checks oder abgelehnte Ergebnisse führen zu Reparatur und erneuter Prüfung im aktuellen Umfang. Eine wesentliche Designänderung führt zurück zur Architekturentscheidung.
+
+## Architektur-Team und Task-Verträge
+
+Bei mehrstufigen Aufgaben kann der Architektur-Lead offene Fachfragen in begrenzte Research-Aufträge zerlegen. Research-Ergebnisse beschreiben Quellen, Einheiten, Toleranzen, Referenzwerte und Invarianten; sie liefern keinen Produktionscode. Der Lead integriert die Ergebnisse in einen Architekturvorschlag.
+
+Umsetzungs- und Review-Aufträge können versionierte Verträge binden: Architektur, Meilenstein, Dateigrenzen, Abnahmekriterien, Pflichtchecks, Modellprofil und Review-Zuordnung. Eine generierte Projektansicht fasst Aufgaben, Zuständigkeiten, Skills, Laufzeit, Risiken und Checks zusammen. Mit Task-Verträgen braucht die Implementierung zusätzlich zur Architekturfreigabe eine gesonderte Startfreigabe. Diese Entscheidungen berechtigen weder zur Installation weiterer Skills noch zu Merge oder Deployment.
+
+## Tatsächliche Laufzeit
+
+Agentenaufgaben laufen über den Harness und dessen native Berechtigungen. Der derzeit dokumentierte Adapter ruft OpenCode auf; Python erzeugt keine Agentenergebnisse. Laufzeit, Agenten und Modelle werden vor Ausführung geprüft, Sessions anhand ihrer Ausgaben verifiziert und Rückfälle transparent protokolliert. Eine Codex-Adapter-Ausführung ist nicht verifiziert. Fehlt die Laufzeit, lautet das Ergebnis `unavailable`; Reviews werden nicht simuliert.
 
 ## Das passende Profil
 
@@ -38,7 +50,7 @@ Das Profil steuert den Aufwand, nicht deine Autorität. Kein Profil ersetzt eine
 
 ## Rollen und Werkzeuge
 
-Rollen beschreiben Verantwortlichkeiten: etwa Architektur, Umsetzung, Prüfung und Integration. Ein führender Agent wählt die passende Aufteilung, vergibt begrenzte Aufgaben und führt die Ergebnisse zusammen. Zusätzliche Agenten kommen infrage, wenn sie sinnvoll abgrenzbare Aufgaben übernehmen können und die Sitzung sie tatsächlich bereitstellt und erlaubt. Eine feste Teamgröße ist nicht zugesichert.
+Rollen beschreiben Verantwortlichkeiten: etwa Architektur, Umsetzung, Prüfung und Integration. Ein führender Agent wählt die passende Aufteilung, vergibt begrenzte Aufgaben und führt die Ergebnisse zusammen. Zusätzliche Agenten kommen infrage, wenn sie sinnvoll abgrenzbare Aufgaben übernehmen können und die Sitzung sie tatsächlich bereitstellt und erlaubt. Eine feste Teamgröße ist nicht zugesichert. Ein Inventar kann unterstützte Dateien, Sprachen und Konfigurationshinweise aufführen, ohne daraus installierte Abhängigkeiten oder gesicherte Kompatibilität abzuleiten.
 
 Ein einzelner Agent kann mehrere Rollen nacheinander übernehmen. Sein eigener Review bleibt eine Eigenprüfung. Ein unabhängiger Review erfordert einen anderen tatsächlichen Agenten oder Menschen, der die konkrete Änderung und ihre Nachweise prüft.
 

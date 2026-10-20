@@ -21,7 +21,11 @@ LittleDevTeam ist ein Skill für Codex. Er führt deinen Agenten vom Auftrag üb
 5. **Prüfen:** Relevante Checks durchführen und das Ergebnis reviewen.
 6. **Fortsetzen:** Dir das konkrete Ergebnis zur Bewertung vorlegen, bevor der nächste Meilenstein beginnt.
 
-Die Profile Lean, Balanced und Rigorous passen den Aufwand an die Aufgabe an. Balanced ist der Ausgangspunkt. Sie ändern die Freigaberegeln nicht. Ein führender Agent koordiniert die Arbeit und integriert die Ergebnisse. Er kann passende Spezialisten für sinnvoll abgrenzbare Aufgaben einsetzen, wenn zusätzliche Agenten verfügbar und erlaubt sind. Der Skill selbst stellt keine Agentenplattform bereit.
+Die Profile Lean, Balanced und Rigorous passen den Aufwand an die Aufgabe an. Balanced ist der Ausgangspunkt. Sie ändern die Freigaberegeln nicht. Der aktuelle Entwicklungsstand ergänzt einen strukturierten Projekt-Intake, Research-Aufträge für Architekturfragen, Task-Verträge, eine Projektansicht mit Startfreigabe sowie Prüfungen für Quellinventar, Integration und Laufzeitnachweise. Ein führender Agent koordiniert und integriert; echte Agenten laufen über die verfügbare Harness-Laufzeit. Der Skill selbst stellt keine Agentenplattform bereit.
+
+## Schnellstart: Projekt einrichten und Planung beginnen
+
+Öffne dein Projekt in Codex und füge den [Setup-Prompt aus dem Praxisguide](/ldt-skill/de/docs/guide/) in den Chat ein. Er weist den Agenten an, LittleDevTeam aus dem GitHub-Repository zu beziehen, den vollständigen Skill vorsichtig einzurichten, das Paket zu prüfen und mit der Projektaufnahme zu beginnen. Die Planung startet sofort; die Umsetzung wartet auf deine Freigabe des konkreten Vorschlags.
 
 ## Was du brauchst
 
@@ -37,15 +41,15 @@ Wir entwickeln diese Website mit LittleDevTeam: mit einem freigegebenen Plan, ge
 
 Die [interaktive Simulation](/ldt-skill/de/demo/) erklärt einen festen Beispielauftrag. Die [technische Referenz](/ldt-skill/de/docs/workflow/) beschreibt die tatsächlichen Abläufe und Prüfhilfen. Die [Fallstudie](/ldt-skill/de/built-with-littledevteam/) verbindet die Website-Entwicklung mit überprüfbaren öffentlichen Belegen.
 
-## Beschriebener Entwicklungsstand
+## Veröffentlichter Stand und laufende Entwicklung
 
-Diese Einstiegsdokumentation beschreibt den veröffentlichten Entwicklungsstand [`9a062eb`](https://github.com/YoungJibbit95/ldt-skill/tree/9a062eb9de0990ce1074dd677d26e5a528ee14a0). Sie belegt keine fertige V2-Veröffentlichung und keine pauschale Freigabe aller enthaltenen Entwicklungsschritte.
+Der auf GitHub veröffentlichte Skill-Quellstand ist [`9a062eb`](https://github.com/YoungJibbit95/ldt-skill/tree/9a062eb9de0990ce1074dd677d26e5a528ee14a0). Die Website beschreibt zusätzlich neue lokale Entwicklungsarbeit an Intake, Architektur-Team, Task-Verträgen, Pair-Ausführung, Integration und Runtime. Diese Änderungen sind noch nicht Teil dieses veröffentlichten Commits; der Setup-Prompt bezieht deshalb ausdrücklich die tatsächlich auf GitHub verfügbare Fassung. Die Dokumentation behauptet weder eine fertige V2-Veröffentlichung noch eine pauschale Freigabe laufender Entwicklungsarbeit.
 
 <Aside type="note" title="Anweisungen und Prüfungen haben Grenzen">
 Die lokalen Werkzeuge prüfen Datenkonsistenz und Quellstände. Sie authentifizieren keine menschlichen Entscheidungen. Werkzeugberechtigungen, menschliche Freigaben und tatsächliche Testergebnisse bleiben unterschiedliche Dinge.
 </Aside>
 
-Externe Registry-Einträge sind Metadaten zu Kandidaten. Sie installieren oder aktivieren keine weiteren Skills. CLI- und Runtime-Entwürfe im Repository sind als Vorschläge einzuordnen.
+Registry-Einträge beschreiben Kandidaten und installieren oder aktivieren keine Dritt-Skills. Eine eigenständige `ldt`-CLI ist nicht vorhanden. Der neue OpenCode-Runtime-Adapter ist lokaler Entwicklungsstand; eine Codex-Runtime-Anbindung ist nicht verifiziert.
 
 ## Weiterführende Quellen
 

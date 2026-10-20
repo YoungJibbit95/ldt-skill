@@ -7,6 +7,39 @@ import { Aside } from '@astrojs/starlight/components';
 
 You have [set up the skill](/ldt-skill/en/docs/install/) and opened your project in Codex. Start with a goal you can actually evaluate. The following example is a **guide**, not a transcript of an agent run that has already happened.
 
+## Quick start: set up from GitHub and begin planning
+
+If the skill is not installed yet, open your project in Codex and send this prompt. It lets the agent set up the current GitHub version and then begin project intake. An existing installation is never overwritten. You remain responsible for approving any later implementation.
+
+```text
+I authorize you to retrieve and set up the LittleDevTeam skill for this
+project from https://github.com/YoungJibbit95/ldt-skill.
+
+1. First inspect project instructions, Git status, and existing changes.
+2. Clone the repository into a temporary directory outside this project.
+   Read .agents/skills/architect-dev-team/SKILL.md and the instructions it
+   references for the current phase.
+3. Copy the complete .agents/skills/architect-dev-team folder into this
+   project's .agents/skills/architect-dev-team. Do not overwrite anything:
+   if the destination already exists, compare the two versions and ask me
+   before installing or updating it.
+4. Validate the copy with
+   python -B .agents/skills/architect-dev-team/scripts/validate.py package .agents/skills/architect-dev-team
+   (use python3 or py -3 if needed).
+5. Then use $architect-dev-team. Intake this project and inspect its code,
+   documentation, architecture, and working state. Ask focused questions only
+   where the answer changes the plan. Prepare a concrete architecture proposal
+   with a small first milestone, acceptance criteria, and required checks.
+   Show me the proposal and wait for my explicit approval before changing
+   product files for the first milestone.
+
+Do not install or activate other skills, add dependencies, merge, publish, or
+deploy without separate authorization. Report honestly if Codex does not
+discover the skill or a required tool is unavailable.
+```
+
+The prompt is for an agent working in your project folder. If you already have the skill set up, continue with the [first task](#1-describe-the-outcome).
+
 ## 1. Describe the outcome
 
 ```text

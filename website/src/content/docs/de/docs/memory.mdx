@@ -15,7 +15,9 @@ Das Projektgedächtnis hält überprüfbare Fakten fest: aktiven Umfang, tatsäc
 .architect-dev-team/
   state.json        aktiver Projektzustand
   architecture.md   gespeicherter Vorschlag
-  review.json       Quellstand-Snapshot
+  review.json       Quellstand-Snapshot und Reviewbezug
+  tasks/            optionale versionierte Umsetzungs- und Review-Verträge
+  research/         optionale Research-Aufträge und Ergebnisspezifikationen
 ```
 
 Diese Pfade sind die Standardkonvention. Vorhandene passende Projektdokumente können wiederverwendet werden. Getrennte Arbeitsstränge brauchen getrennte Zustände: Die Website ersetzt beispielsweise nicht den Entwicklungszustand des Skills.
@@ -34,6 +36,8 @@ Aktive automatische Gates verwenden **Schema 2**. Der Zustand bleibt unter 64 Ki
 | `review` | `null` oder Snapshot-Pfad/Hash, Unabhängigkeit und Review-Evidenz |
 | `completed`, `open_issues`, `constraints`, `next_action` | Kompakte Historie, Grenzen und nächster Schritt |
 
+Erweiterte Projektabläufe können zusätzlich Research-Pläne, Aufgabenkontrakte, Projektansichten und Integrationsberichte speichern. Diese Artefakte ergänzen den Projektzustand, ersetzen aber weder seine Freigaben noch den Quellstandvergleich.
+
 Prüfergebnisse sind `passed`, `failed`, `not_run`, `unavailable` oder `waived`. Zeitstempel von Entscheidungen enthalten eine Zeitzone. Pfade für gebundene Artefakte sind reguläre Dateien relativ zum ausdrücklich angegebenen Projektstamm; keine Symlinks oder Pfadtraversierung.
 
 ## Was ein Snapshot enthält
@@ -48,7 +52,7 @@ Ohne Git erfolgt eine Dateisystem-Auflistung mit definierten Ausschlüssen. Verw
 
 Unlesbare oder unvollständige Auflistungen, nicht unterstützte Dateinamen, Symlinks, Gitlinks/Submodule und ungelöste Indexkonflikte blockieren automatische Snapshots. Diese Diagnose darf nicht durch das Weglassen von Dateien versteckt werden. Behebe den Zustand oder vereinbare eine ausdrücklich menschlich bewertete manuelle Abdeckung und weise die Automatisierung als nicht verfügbar aus.
 
-Snapshots sind nicht atomar. Während der Erfassung und des Reviews darf sich die Quelle nicht parallel ändern. Nach einem neuen Commit ist auch HEAD anders; der Snapshot muss vor der Ergebnisfreigabe aktualisiert werden.
+Snapshots sind nicht atomar. Während der Erfassung und des Reviews darf sich die Quelle nicht parallel ändern. Nach einem neuen Commit ist auch HEAD anders; der Snapshot muss vor der Ergebnisfreigabe aktualisiert werden. Das optionale Quellinventar liefert Hinweise für die Planung; es ersetzt weder Laufzeittests noch bestätigte Kompatibilität.
 
 ## Ältere Zustände migrieren
 

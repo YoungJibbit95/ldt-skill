@@ -21,7 +21,11 @@ LittleDevTeam is a skill for Codex. It guides your agent from a request through 
 5. **Verify:** run relevant checks and review the result.
 6. **Continue:** present the concrete result for your evaluation before the next milestone.
 
-Lean, Balanced, and Rigorous profiles adapt effort to the task. Balanced is the default. Profiles do not change approval rules. A lead agent coordinates the work and integrates the results. It can assign useful, bounded tasks to suitable specialists when additional agents are available and permitted. The skill itself does not supply an agent platform.
+Lean, Balanced, and Rigorous profiles adapt effort to the task. Balanced is the default. Profiles do not change approval rules. The current development work adds structured project intake, architecture research contracts, task contracts, a project view with a start gate, and helpers for source inventory, integration, and runtime evidence. A lead coordinates and integrates; real agents run through an available harness. The skill itself does not supply an agent platform.
+
+## Quick start: set up a project and begin planning
+
+Open your project in Codex and paste the [setup prompt in the practical guide](/ldt-skill/en/docs/guide/). It directs the agent to retrieve LittleDevTeam from GitHub, carefully set up the complete skill, validate the package, and begin project intake. Planning starts immediately; implementation waits for your approval of a concrete proposal.
 
 ## What you need
 
@@ -37,15 +41,15 @@ We build this website with LittleDevTeam: an approved plan, a separate workspace
 
 The [interactive simulation](/ldt-skill/en/demo/) explains a fixed example request. The [technical reference](/ldt-skill/en/docs/workflow/) documents actual workflows and validation helpers. The [case study](/ldt-skill/en/built-with-littledevteam/) connects website development to inspectable public evidence.
 
-## Documented development snapshot
+## Published source and ongoing development
 
-This introductory documentation describes published development revision [`9a062eb`](https://github.com/YoungJibbit95/ldt-skill/tree/9a062eb9de0990ce1074dd677d26e5a528ee14a0). It does not establish a finished V2 release or blanket approval of all development work it contains.
+The skill source published on GitHub is [`9a062eb`](https://github.com/YoungJibbit95/ldt-skill/tree/9a062eb9de0990ce1074dd677d26e5a528ee14a0). This website also describes newer local development work on intake, the architecture team, task contracts, pair execution, integration, and runtime. Those changes are not part of that published commit yet, so the setup prompt explicitly retrieves the version that is actually available on GitHub. This documentation does not claim a finished V2 release or blanket approval of ongoing development work.
 
 <Aside type="note" title="Instructions and validation have limits">
 Local tools check data consistency and source snapshots. They do not authenticate human decisions. Tool permissions, human approvals, and actual test results remain separate concerns.
 </Aside>
 
-External registry entries describe skill candidates. They do not install or activate additional skills. CLI and runtime designs in the repository remain proposals.
+Registry entries describe candidates; they do not install or activate third-party skills. There is no standalone `ldt` CLI. The new OpenCode runtime adapter is local development work; a Codex runtime integration has not been verified.
 
 ## Further sources
 

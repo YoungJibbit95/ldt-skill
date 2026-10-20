@@ -40,6 +40,19 @@ python -B .agents/skills/architect-dev-team/scripts/validate.py snapshot .
 
 Einige Phasen wenden Gates schon ohne explizite `--gate`-Option an. Ein leerer oder erfundener Zustand wird dadurch nicht zu einem freigegebenen Projekt.
 
+## Zusätzliche Befehle im lokalen Entwicklungsstand
+
+Der lokale Entwicklungsstand ergänzt `validate.py` um Intake, Architektur-Team, Research, Task-Verträge, Projektansicht, Pair-Ausführung, Integration und Laufzeitdiagnose. Zum Beispiel:
+
+```sh
+python -B .agents/skills/architect-dev-team/scripts/validate.py intake .
+python -B .agents/skills/architect-dev-team/scripts/validate.py arch-team . decompose
+python -B .agents/skills/architect-dev-team/scripts/validate.py project-view . generate
+python -B .agents/skills/architect-dev-team/scripts/validate.py runtime detect
+```
+
+Die Befehle `research`, `task-contracts`, `pair-exec` und `integration` benötigen ihre jeweiligen Aufgaben- und Projektartefakte. Sie sind in diesem Entwicklungsstand verfügbar, aber noch nicht im veröffentlichten GitHub-Quellpin `9a062eb` enthalten. Sieh die [Ablaufbeschreibung](/ldt-skill/de/docs/workflow/) für die Trennung zwischen Verträgen, echter Agentenausführung und menschlichen Freigaben.
+
 ## Migrationsentwürfe ansehen
 
 ```sh
