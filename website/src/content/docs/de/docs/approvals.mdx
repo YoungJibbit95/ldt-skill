@@ -15,6 +15,12 @@ Vor der Umsetzung zeigt der Agent einen versionierten Vorschlag mit Meilenstein,
 
 Deine ausdrückliche Zustimmung zu genau diesem Vorschlag reicht aus. Eine unveränderte bereits erteilte Freigabe muss nicht erneut eingeholt werden. Ändert sich der Umfang wesentlich, wird die neue Fassung vor der Umsetzung zur Entscheidung vorgelegt.
 
+## Startfreigabe und Task-Verträge
+
+Bei Zuständen mit Task-Verträgen ist die Startentscheidung ein eigenes Gate: Nach der Architekturfreigabe zeigt der Agent die generierte Projektansicht und fragt, ob er den beschriebenen ersten Meilenstein mit diesem Plan beginnen soll. Sie bindet denselben Umfangsfingerabdruck wie die Architekturfreigabe. Eine Startfreigabe ersetzt weder die Architektur- noch die spätere Ergebnisfreigabe. Skill-Auswahl, Skill-Installation und Ausführung bleiben separate Entscheidungen.
+
+Jeder Umsetzungs- und Review-Vertrag bindet eine konkrete Aufgabenverantwortung an Version, Meilenstein, Basisrevision, betroffene Dateien, Abnahmekriterien, Checks und Review-Zuordnung. Verträge dokumentieren die Grenzen; sie authentifizieren keine menschliche Entscheidung und erweitern nicht stillschweigend den freigegebenen Umfang.
+
 ## Ergebnisfreigabe
 
 Nach Umsetzung und Checks folgt der konkrete Reviewstand. Er enthält Quellrevision, Änderungen, tatsächliche Prüfergebnisse, Review-Unabhängigkeit, offene Punkte und einen aktuellen Snapshot. Deine Ergebnisentscheidung bindet zusätzlich den Hash dieses Review-Snapshots. Nachträgliche Quell- oder HEAD-Änderungen machen ihn veraltet.
@@ -44,3 +50,5 @@ Eine Ergebnisfreigabe erlaubt den Übergang zum nächsten Schritt. Sie autorisie
 ## Technische Grenze
 
 Die lokalen Prüfwerkzeuge prüfen die Konsistenz der Aufzeichnungen. Sie können weder eine Chat-Nachricht authentifizieren noch externe Handlungen verhindern. Bei einer Wiederaufnahme werden die tatsächlichen Quellen und verfügbaren menschlichen Entscheidungen abgeglichen. Fehlende Evidenz wird nicht durch das Bearbeiten von Freigabedateien ersetzt.
+
+Bei Schema 2 müssen die tatsächlichen Prüfergebnisse genau der zuvor genehmigten Pflichtcheck-Liste entsprechen. Eine fehlgeschlagene Prüfung kann nicht durch Umbenennen, Entfernen oder Herabstufen aus dem Gate verschwinden. Ausnahmen benötigen eine konkrete menschliche Entscheidung, eine Begründung und eine Bindung an denselben Umfang.

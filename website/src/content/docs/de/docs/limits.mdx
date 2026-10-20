@@ -7,7 +7,7 @@ import SourceNote from '../../../../components/SourceNote.astro';
 
 <SourceNote file="references/approvals.md" />
 
-Der Skill ist ein Arbeitsablauf mit lokalen Prüfhilfen. Er ist kein Berechtigungssystem, keine permanente Agentenplattform und kein Nachweis für die Wahrheit gespeicherter Behauptungen.
+Der Skill ist ein Arbeitsablauf mit lokalen Prüfhilfen. Er ist kein Berechtigungssystem, keine permanente Agentenplattform und kein Nachweis für die Wahrheit gespeicherter Behauptungen. Native Umsetzungs- und Review-Aufgaben benötigen eine passende Harness-Laufzeit; der dokumentierte OpenCode-Aufruf ist kein eigenes LittleDevTeam-Agentensystem.
 
 ## Wenn sich die Quelle geändert hat
 
@@ -30,9 +30,15 @@ Fehlende Werkzeuge werden als **nicht verfügbar** ausgewiesen. Ein isolierter K
 
 Bei nicht unterstützten Snapshot-Eigenschaften ist automatische Freigabeprüfung nicht verfügbar. Eine menschlich vereinbarte manuelle Abdeckung benennt die erfassten Dateien, Revisionen, Prüfungen und verbleibenden Lücken. Sie wird nicht als erfolgreiches automatisches Gate ausgegeben.
 
+## Laufzeit- und Veröffentlichungsgrenzen
+
+Der Runtime-Adapter kann OpenCode als tatsächlich aufrufbare Harness-Laufzeit verwenden und Session-Evidenz prüfen. Das belegt keine Codex-Integration und garantiert weder installierte Modelle noch erfolgreiche Agentenstarts. Ein Quellinventar ist ein Planungshinweis, kein Beweis, dass ein Paket installiert, ausführbar oder kompatibel ist. Research- und Task-Verträge helfen bei der Aufteilung und Nachverfolgung; sie sind keine Berechtigungsgrenze.
+
+Die zusätzlichen Architektur-Team-, Vertrag-, Inventar-, Pair- und Integrationsabläufe befinden sich in einem lokalen Entwicklungsstand. Der dokumentierte GitHub-Pin enthält diese neueren Änderungen noch nicht. Die Website darf sie daher nicht als bereits über diesen Pin installierbare GitHub-Funktionen darstellen.
+
 ## Was noch kein fertiges Produktmerkmal ist
 
-CLI-, SDK-, Runtime-Adapter- und weitergehende Rollenentwürfe im Repository sind historische Vorschläge. Die Registry installiert keine Dritt-Skills. Diese Website führt keine Agenten für Besucher aus. Die [Demo](/ldt-skill/de/demo/) ist eine lokale Simulation; die [Fallstudie](/ldt-skill/de/built-with-littledevteam/) dokumentiert tatsächlich belegte Arbeit.
+Eine eigenständige `ldt`-CLI und ein SDK sind nicht vorhanden. Die Registry installiert keine Dritt-Skills. Diese Website führt keine Agenten für Besucher aus. Die [Demo](/ldt-skill/de/demo/) ist eine lokale Simulation; die [Fallstudie](/ldt-skill/de/built-with-littledevteam/) dokumentiert tatsächlich belegte Arbeit.
 
 ## Warum lokale Daten lokal bleiben
 

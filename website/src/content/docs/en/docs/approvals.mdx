@@ -15,6 +15,12 @@ Before implementation, the agent presents a versioned proposal with a milestone,
 
 Your explicit agreement to that exact proposal is sufficient. Existing approval of an unchanged proposal does not need to be requested again. A material scope change is presented for a new decision before implementation.
 
+## Start approval and task contracts
+
+For states with task contracts, starting work is a separate gate: after architecture approval, the agent presents the generated project view and asks whether it should begin the described first milestone with that plan. The decision binds the same scope fingerprint as architecture approval. It does not replace architecture approval or the later result approval. Skill selection, installation, and execution remain separate decisions.
+
+Each implementation and review contract binds a concrete responsibility to a version, milestone, base revision, affected files, acceptance criteria, checks, and review assignment. Contracts document boundaries; they do not authenticate human decisions or silently expand approved scope.
+
 ## Result approval
 
 Implementation and checks are followed by the concrete review state. It includes source revision, changes, actual check outcomes, review independence, open issues, and a current snapshot. Your result decision additionally binds the review snapshot hash. Subsequent source or HEAD changes make that snapshot stale.
@@ -44,3 +50,5 @@ Approving a result permits moving to the next step. It does not automatically au
 ## Technical limit
 
 Local validation helpers check the consistency of records. They cannot authenticate a chat message or prevent external actions. Resuming a project means reconciling actual sources and available human decisions. Missing evidence is not replaced by editing approval files.
+
+With schema 2, actual check results must match the required-check list that was approved in advance. A failed check cannot be removed from the gate by renaming, deleting, or demoting it. Exceptions require a concrete human decision, a reason, and a binding to the same scope.

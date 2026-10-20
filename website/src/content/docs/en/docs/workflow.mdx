@@ -16,15 +16,27 @@ LittleDevTeam organizes substantial engineering work into small, verifiable step
 | `INTAKE` | Receive the request | Goal and boundaries |
 | `DISCOVERY` | Inspect rules, sources, and working state | Actual state and open questions |
 | `SPECIFICATION` | Clarify desired behavior | Observable requirements |
-| `ARCHITECTURE` | Design the solution and milestone | Versioned proposal with required checks |
+| `ARCHITECTURE` | Design the solution and milestone | Versioned proposal with research results and required checks |
 | `APPROVAL` with `architecture` | Human architecture decision | Approval or revision request for the concrete scope |
+| Project view / `start` | Show the approved first milestone and team plan | Separate start decision when task contracts are used |
 | `IMPLEMENTATION` | Implement one approved milestone | Bounded source change |
 | `VERIFICATION` | Execute relevant checks | Actual outcomes and limitations |
 | `PR_REVIEW` | Review and hand off the result | Concrete revision, review, and source snapshot |
+| Integration | Combine the milestone and overall state | Integration report with actual checks and agent evidence |
 | `APPROVAL` with `iteration` | Evaluate the result | Human decision about this revision |
 | `NEXT_ITERATION` | Select the next step | A new concrete milestone |
 
 `APPROVAL` is one phase with two different `approval_stage` values. “PR REVIEW” is persisted as `PR_REVIEW` in JSON. Failed checks or rejected results lead to repair and renewed verification within the current scope. A material design change returns to the architecture decision.
+
+## Architecture team and task contracts
+
+For multi-step work, the architecture lead can split open domain questions into bounded research tasks. Research results describe sources, units, tolerances, reference values, and invariants; they do not produce production code. The lead integrates results into one architecture proposal.
+
+Implementation and review tasks can use versioned contracts that bind the architecture, milestone, file boundaries, acceptance criteria, required checks, model profile, and review assignment. A generated project view summarizes tasks, responsibilities, skills, runtime, risks, and checks. When task contracts are used, implementation requires a separate start approval in addition to architecture approval. Neither decision authorizes installing other skills, merging, or deployment.
+
+## Actual runtime
+
+Agent tasks run through the harness and its native permissions. The currently documented adapter invokes OpenCode; Python does not manufacture agent results. Runtime, agents, and models are checked before execution, sessions are verified against their output, and fallbacks are reported. A Codex adapter run has not been verified. If the runtime is unavailable, the result is `unavailable`; reviews are not simulated.
 
 ## Choose the appropriate profile
 
@@ -38,7 +50,7 @@ Profiles adjust effort, not your authority. No profile replaces actual approval 
 
 ## Roles and tools
 
-Roles describe responsibilities, such as architecture, implementation, verification, and integration. A lead agent chooses the appropriate division of work, assigns bounded tasks, and integrates the results. Additional agents are useful when tasks can be separated cleanly and the session makes those agents available and permits their use. A fixed team size is not guaranteed.
+Roles describe responsibilities, such as architecture, implementation, verification, and integration. A lead agent chooses the appropriate division of work, assigns bounded tasks, and integrates the results. Additional agents are useful when tasks can be separated cleanly and the session makes those agents available and permits their use. A fixed team size is not guaranteed. A source inventory can list supported files, languages, and configuration hints without claiming installed dependencies or verified compatibility.
 
 One agent can perform several roles in sequence. Its own review remains self-review. Independent review requires another actual agent or person to inspect the concrete change and its evidence.
 

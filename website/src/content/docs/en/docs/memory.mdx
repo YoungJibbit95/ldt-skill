@@ -15,7 +15,9 @@ Project memory records inspectable facts: active scope, actual decisions, check 
 .architect-dev-team/
   state.json        active project state
   architecture.md   saved proposal
-  review.json       source snapshot
+  review.json       source snapshot and review binding
+  tasks/            optional versioned implementation and review contracts
+  research/         optional research tasks and specifications
 ```
 
 These paths are defaults. Equivalent existing project documents can be reused. Separate workstreams need separate states: the website, for example, does not replace the skill-development state.
@@ -34,6 +36,8 @@ Active automated gates use **schema 2**. State remains below 64 KiB and includes
 | `review` | `null` or snapshot path/hash, independence, and review evidence |
 | `completed`, `open_issues`, `constraints`, `next_action` | Compact history, boundaries, and next step |
 
+Extended project workflows can also store research plans, task contracts, project views, and integration reports. These artifacts supplement project state; they do not replace its approvals or source comparison.
+
 Check statuses are `passed`, `failed`, `not_run`, `unavailable`, or `waived`. Decision timestamps include a timezone. Bound artifact paths refer to regular files relative to the explicit project root; no symlinks or path traversal.
 
 ## What a snapshot contains
@@ -48,7 +52,7 @@ Without Git, the helper walks the filesystem with defined exclusions. Managed st
 
 Unreadable or incomplete inventories, unsupported filenames, symlinks, gitlinks/submodules, and unresolved index conflicts block automatic snapshots. Do not hide the diagnostic by omitting files. Resolve the condition or agree on explicit human-reviewed manual coverage and report automation as unavailable.
 
-Snapshots are not atomic. Sources must not change concurrently during capture and review. A new commit also changes HEAD; refresh the snapshot before result approval.
+Snapshots are not atomic. Sources must not change concurrently during capture and review. A new commit also changes HEAD; refresh the snapshot before result approval. The optional source inventory provides planning hints; it is not a runtime test or confirmation of compatibility.
 
 ## Migrate older state
 
