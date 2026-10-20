@@ -4,8 +4,11 @@ description: Vollständige Installation von LittleDevTeam in Codex auf Windows, 
 ---
 
 import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+import Quickstart from '../../../../components/Quickstart.astro';
 
-Du übernimmst den vollständigen Ordner `architect-dev-team`. Es gibt keinen zusätzlichen LittleDevTeam-Dienst und keinen separaten Installer. Für Einrichtung und anschließenden Projekt-Intake kannst du auch den [kopierbaren Quickstart-Prompt](/ldt-skill/de/docs/guide/#schnellstart-github-quelle-einrichten-und-planung-starten) verwenden.
+Der Quickstart startet die Einrichtung im Chat. Hier findest du die manuelle Installation und Hilfe bei Problemen.
+
+<Quickstart locale="de" />
 
 ## 1. Voraussetzungen prüfen
 
@@ -16,33 +19,48 @@ git --version
 python --version
 ```
 
-Die Prüfhilfen benötigen Python **3.10 oder neuer**. Auf macOS und Linux heißt der Befehl häufig `python3`, unter Windows kann `py -3` verfügbar sein. Verwende im Folgenden den bei dir funktionierenden Befehl. Es sind keine `pip`-Installationen nötig. Die Website beschreibt auch neuere lokale Erweiterungen, die der veröffentlichte GitHub-Pin `9a062eb` noch nicht enthält. Dieses Tutorial richtet genau den angegebenen öffentlichen Stand ein.
+Die Prüfhilfen benötigen Python **3.10 oder neuer**. Auf macOS und Linux heißt der Befehl häufig `python3`, unter Windows kann `py -3` verfügbar sein. Verwende im Folgenden den bei dir funktionierenden Befehl. Es sind keine `pip`-Installationen nötig. Die Website beschreibt auch neuere lokale Erweiterungen, die der veröffentlichte GitHub-Pin `9a062eb` noch nicht enthält. Wähle den öffentlichen Quellstand nach den folgenden Regeln.
+
+## Vor dem Kopieren eine Version wählen
+
+Der kurze Prompt übergibt diese Entscheidung an den Agenten. Bei manueller Einrichtung:
+
+1. Prüfe die [Releases](https://github.com/YoungJibbit95/ldt-skill/releases) zum Installationszeitpunkt. Bevorzuge das neueste stabile Release, dessen Skill-Paket und relevante Prüfungen du verifizieren kannst. Entwürfe und Vorabversionen zählen nicht dazu. Prüfe Hinweise und Kompatibilität; ein Tag allein ist kein Prüfnachweis.
+2. Gibt es kein geprüftes stabiles Release, benenne das und biete vor der Einrichtung eine konkrete geprüfte Entwicklungsrevision an. Am **20. Oktober 2026** gibt es keine Releases. Die öffentliche Entwicklungsrevision [`838a2e1`](https://github.com/YoungJibbit95/ldt-skill/tree/838a2e1376a0b3e44931c54310be95d253380b1a) enthält dasselbe Skill-Paket wie der dokumentierte Stand `9a062eb`. Sie ist eine Ausweichmöglichkeit, kein stabiles Release und keine fertige V2.
+3. Ersetze unten `SELECTED_TAG_OR_COMMIT` durch den gewählten Release-Tag oder vollständigen Entwicklungscommit (`838a2e1376a0b3e44931c54310be95d253380b1a` für diese Ausweichmöglichkeit). Löse ihn zu einem unveränderlichen Commit auf, lies die Skill-Anweisungen, prüfe das vollständige Paket und bewahre `INSTALL_REVISION.txt` bei den Installationsnotizen deines Projekts auf. Bei fehlgeschlagenen Prüfungen anhalten; nicht stillschweigend `main` oder eine Vorabversion verwenden.
+4. Existiert bereits eine Installation, vergleiche die Fassungen und erhalte lokale Änderungen. Die Kopierbefehle unten halten an, statt sie zu überschreiben. Folge **Aktualisieren** erst nach der Entscheidung für dieses Update.
+
+Der veröffentlichte Skill unterstützt Projektuntersuchung, Architekturvorschläge, optionale Spezialisten, Prüfungen und gespeicherten Projektkontext. Strukturierter Intake, Architektur-Team-/Task-Vertragshelfer und die neue Runtime sind noch unveröffentlichte Entwicklung. Eine automatische Release-Auswahl liefert der verteilte Skill derzeit nicht; der installierende Agent muss die obige Regel anwenden. Der [Guide](/ldt-skill/de/docs/guide/) erklärt den unterstützten Ablauf.
 
 ## 2. Einen benannten Quellstand beziehen
 
-Führe den passenden Block in einem Arbeitsordner außerhalb deines Zielprojekts aus. Der Name `ldt-skill-source` muss dort noch frei sein. Der festgelegte Commit macht die Anleitung reproduzierbar; er ist ein Entwicklungsstand, keine als fertig freigegebene V2-Version.
+Führe den passenden Block in einem Arbeitsordner außerhalb deines Zielprojekts aus. Der Name `ldt-skill-source` muss dort noch frei sein. Verwende die oben gewählte Version. Der Checkout hält an, wenn du den Platzhalter unverändert lässt. Der genau aufgelöste Commit wird außerhalb des Skill-Ordners festgehalten.
 
 <Tabs>
   <TabItem label="Windows · PowerShell">
 ```powershell
 git clone https://github.com/YoungJibbit95/ldt-skill.git ldt-skill-source
 if ($LASTEXITCODE -ne 0) { throw 'Klonen fehlgeschlagen.' }
-git -C ldt-skill-source checkout --detach 9a062eb9de0990ce1074dd677d26e5a528ee14a0
+git -C ldt-skill-source checkout --detach SELECTED_TAG_OR_COMMIT
 if ($LASTEXITCODE -ne 0) { throw 'Quellstand nicht verfügbar.' }
+$resolvedRevision = git -C ldt-skill-source rev-parse --verify 'HEAD^{commit}'
+if ($LASTEXITCODE -ne 0) { throw 'Quellcommit kann nicht aufgelöst werden.' }
+$resolvedRevision | Set-Content -LiteralPath 'ldt-skill-source/INSTALL_REVISION.txt' -Encoding utf8
 $skillSource = (Resolve-Path -LiteralPath '.\ldt-skill-source\.agents\skills\architect-dev-team').Path
 ```
   </TabItem>
   <TabItem label="macOS / Linux · Bash">
 ```bash
 git clone https://github.com/YoungJibbit95/ldt-skill.git ldt-skill-source &&
-git -C ldt-skill-source checkout --detach 9a062eb9de0990ce1074dd677d26e5a528ee14a0 &&
+git -C ldt-skill-source checkout --detach SELECTED_TAG_OR_COMMIT &&
 # Nur nach erfolgreichem Checkout fortfahren.
+git -C ldt-skill-source rev-parse --verify 'HEAD^{commit}' > ldt-skill-source/INSTALL_REVISION.txt &&
 skill_source="$(cd ldt-skill-source/.agents/skills/architect-dev-team && pwd)"
 ```
   </TabItem>
 </Tabs>
 
-Lies vor der Übernahme mindestens `SKILL.md` und die referenzierten Arbeitsabläufe. Prüfe die vollständige Quelle bei Bedarf im [Repository am festgelegten Commit](https://github.com/YoungJibbit95/ldt-skill/tree/9a062eb9de0990ce1074dd677d26e5a528ee14a0/.agents/skills/architect-dev-team).
+Lies vor der Übernahme mindestens `SKILL.md` und die referenzierten Arbeitsabläufe. Die historische [Referenzquelle](https://github.com/YoungJibbit95/ldt-skill/tree/9a062eb9de0990ce1074dd677d26e5a528ee14a0/.agents/skills/architect-dev-team) bleibt zum Vergleich verfügbar.
 
 ## 3. Geltungsbereich wählen
 

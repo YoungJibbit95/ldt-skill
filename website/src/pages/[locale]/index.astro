@@ -1,6 +1,7 @@
 ---
 import Page from '../../layouts/Page.astro';
 import OrbitMark from '../../components/OrbitMark.astro';
+import Quickstart from '../../components/Quickstart.astro';
 import { pathFor, type Locale } from '../../lib/site';
 export function getStaticPaths() { return [{ params: { locale: 'de' } }, { params: { locale: 'en' } }]; }
 const locale = Astro.params.locale as Locale;
@@ -23,8 +24,8 @@ const t = de ? {
     ['02', 'Du entscheidest.', 'Freigaben beziehen sich auf konkrete Vorschläge und Ergebnisse. Der nächste Schritt bleibt nachvollziehbar.'],
     ['03', 'Mit Nachweisen.', 'Prüfungen, Review und Projektgedächtnis halten fest, was tatsächlich gemacht wurde — und was noch offen ist.'],
   ],
-  workflowLabel: 'VON DER IDEE ZUM ERGEBNIS', workflowTitle: 'Ein klarer Weg durch dein Projekt.', workflowText: 'Der Intake erfasst Auftrag und Bestand. Bei komplexen Fragen kann ein Architektur-Lead begrenzte Research-Aufträge vergeben, die Ergebnisse integrieren und daraus Projektansicht sowie Task-Verträge für die Umsetzung ableiten. Echte Agenten laufen über die verfügbare Harness-Laufzeit.',
-  steps: [['Verstehen', 'Auftrag, Regeln & Arbeitsstand'], ['Planen', 'Research & Architektur'], ['Entscheiden', 'Architektur und Start freigeben'], ['Entwickeln', 'Vertraglich umrissener Meilenstein'], ['Prüfen', 'Checks, Review & Integration'], ['Weitergehen', 'Ergebnis bewerten & fortsetzen']],
+  workflowLabel: 'VON DER IDEE ZUM ERGEBNIS', workflowTitle: 'Ein klarer Weg durch dein Projekt.', workflowText: 'Der Skill untersucht Auftrag und Bestand, stellt gezielte Fragen und erstellt einen Architekturvorschlag. Spezialisten helfen, wenn die Umgebung sie unterstützt. Nach deiner Freigabe folgen Umsetzung, Prüfung und Review. Erweiterte Intake- und Team-Helfer sind noch unveröffentlicht.',
+  steps: [['Verstehen', 'Auftrag, Regeln & Arbeitsstand'], ['Planen', 'Anforderungen & Architektur'], ['Entscheiden', 'Konkreten Vorschlag freigeben'], ['Entwickeln', 'Ein begrenzter Meilenstein'], ['Prüfen', 'Checks & Review'], ['Weitergehen', 'Ergebnis bewerten & fortsetzen']],
   guide: 'Zum praktischen Guide',
   builtLabel: 'DIESE WEBSITE IST DAS BEISPIEL.', builtTitle: 'Mit LittleDevTeam.', builtEnd: 'Für LittleDevTeam.',
   builtText: 'Diese Website entsteht mit LittleDevTeam: vom freigegebenen Plan über den Einstieg bis zu Referenz, Suche und Simulation. W1 und W2 wurden geprüft und vom Benutzer freigegeben. Die Fallstudie zeigt die zugehörigen Commits und CI-Läufe und kennzeichnet die Reviews als Eigenprüfungen.',
@@ -49,8 +50,8 @@ const t = de ? {
     ['02', 'You decide.', 'Approvals refer to concrete proposals and results. The next step stays understandable and intentional.'],
     ['03', 'Show the evidence.', 'Checks, review, and project memory record what actually happened — and what remains unresolved.'],
   ],
-  workflowLabel: 'FROM IDEA TO RESULT', workflowTitle: 'A clear path through your project.', workflowText: 'Intake records the request and current state. For complex questions, an architecture lead can assign bounded research, integrate its results, and use a project view and task contracts to prepare implementation. Real agents run through the available harness.',
-  steps: [['Understand', 'Request, rules & working state'], ['Plan', 'Research & architecture'], ['Decide', 'Approve architecture and start'], ['Build', 'Contract-bounded milestone'], ['Verify', 'Checks, review & integration'], ['Continue', 'Evaluate the result & iterate']],
+  workflowLabel: 'FROM IDEA TO RESULT', workflowTitle: 'A clear path through your project.', workflowText: 'The skill inspects the request and current state, asks focused questions, and prepares an architecture proposal. Specialists help when the environment supports them. After your approval come implementation, checks, and review. Extended intake and team helpers remain unpublished.',
+  steps: [['Understand', 'Request, rules & working state'], ['Plan', 'Requirements & architecture'], ['Decide', 'Approve a concrete proposal'], ['Build', 'One bounded milestone'], ['Verify', 'Checks & review'], ['Continue', 'Evaluate the result & iterate']],
   guide: 'Open the practical guide',
   builtLabel: 'THIS WEBSITE IS THE EXAMPLE.', builtTitle: 'Built with LittleDevTeam.', builtEnd: 'For LittleDevTeam.',
   builtText: 'We build this website with LittleDevTeam: from an approved plan and the entry experience to reference, search, and simulation. W1 and W2 were checked and approved by the user. The case study links their commits and CI runs and identifies the reviews as self-reviews.',
@@ -68,7 +69,7 @@ const t = de ? {
         <div class="eyebrow-pill"><span class="status-spark" aria-hidden="true"></span>{t.pill}<span class="pill-line" aria-hidden="true"></span><span class="pill-tag">LDT</span></div>
         <h1>{t.heading[0]}<br />{t.heading[1]}<br /><span class="gradient-text">{t.heading[2]}</span></h1>
         <p class="hero-intro">{t.intro}</p>
-        <div class="hero-buttons"><a class="button" href={pathFor(locale, 'docs/guide')}>{t.start}<span aria-hidden="true">↗</span></a><a class="button button-ghost" href={pathFor(locale, 'demo')}>{t.explore}<span aria-hidden="true">↓</span></a></div>
+        <div class="hero-buttons"><a class="button" href="#quickstart">{t.start}<span aria-hidden="true">↗</span></a><a class="button button-ghost" href={pathFor(locale, 'demo')}>{t.explore}<span aria-hidden="true">↓</span></a></div>
         <p class="hero-note"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2 3 5v5c0 4 7 8 7 8s7-4 7-8V5l-7-3Z" stroke="currentColor"/><path d="m6 10 3 3 5-6" stroke="currentColor"/></svg>{t.note}</p>
       </div>
       <div class="mission-scene">
@@ -88,6 +89,7 @@ const t = de ? {
       </div>
     </div>
   </section>
+  <div id="quickstart" class="site-container"><Quickstart locale={locale} /></div>
   <div class="principles-strip site-container">{t.strip.map((text, i) => <div><span>0{i + 1}</span><p>{text}</p><span class="strip-star" aria-hidden="true">✧</span></div>)}</div>
   <section class="promise-section site-container section-space">
     <p class="small-label section-label">{t.promiseLabel}</p><h2 class="section-heading">{t.promiseTitle}<br /><span class="muted-heading">{t.promiseEnd}</span></h2>
@@ -100,5 +102,5 @@ const t = de ? {
     </div>
   </section>
   <section class="built-section site-container section-space"><div class="built-visual" aria-hidden="true"><div class="built-ring ring-a"></div><div class="built-ring ring-b"></div><div class="built-ring ring-c"></div><div class="built-symbol"><OrbitMark /></div><span class="orbit-point point-a"></span><span class="orbit-point point-b"></span><span class="orbit-text">BUILT WITH THE WORKFLOW</span></div><div><p class="small-label section-label">{t.builtLabel}</p><h2 class="section-heading">{t.builtTitle}<br /><span class="muted-heading">{t.builtEnd}</span></h2><p class="body-copy">{t.builtText}</p><a class="text-link" href={pathFor(locale, 'built-with-littledevteam')}>{t.builtLink}<span aria-hidden="true">↗</span></a></div></section>
-  <section class="final-section site-container"><div class="final-glow" aria-hidden="true"></div><p class="small-label section-label">{t.finalLabel}</p><h2>{t.finalTitle}</h2><p>{t.finalText}</p><div class="hero-buttons"><a class="button" href={pathFor(locale, 'docs/guide')}>{t.finalButton}<span aria-hidden="true">↗</span></a><a class="text-link" href={pathFor(locale, 'docs')}>{t.finalSecondary}<span aria-hidden="true">→</span></a></div></section>
+  <section class="final-section site-container"><div class="final-glow" aria-hidden="true"></div><p class="small-label section-label">{t.finalLabel}</p><h2>{t.finalTitle}</h2><p>{t.finalText}</p><div class="hero-buttons"><a class="button" href="#quickstart">{t.finalButton}<span aria-hidden="true">↗</span></a><a class="text-link" href={pathFor(locale, 'docs')}>{t.finalSecondary}<span aria-hidden="true">→</span></a></div></section>
 </Page>

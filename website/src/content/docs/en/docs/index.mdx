@@ -4,8 +4,11 @@ description: What LittleDevTeam does, what you need, and how to start your first
 ---
 
 import { LinkCard, CardGrid, Aside } from '@astrojs/starlight/components';
+import Quickstart from '../../../../components/Quickstart.astro';
 
 LittleDevTeam is a skill for Codex. It guides your agent from a request through approved architecture to a verified milestone. The skill's technical name is **`architect-dev-team`**. Use it for a new project, a substantial feature, or a complex refactor.
+
+<Quickstart locale="en" />
 
 <CardGrid>
   <LinkCard title="Set up the skill" description="Windows, macOS, or Linux. For one project or your personal use." href="/ldt-skill/en/docs/install/" />
@@ -23,10 +26,6 @@ LittleDevTeam is a skill for Codex. It guides your agent from a request through 
 
 Lean, Balanced, and Rigorous profiles adapt effort to the task. Balanced is the default. Profiles do not change approval rules. The current development work adds structured project intake, architecture research contracts, task contracts, a project view with a start gate, and helpers for source inventory, integration, and runtime evidence. A lead coordinates and integrates; real agents run through an available harness. The skill itself does not supply an agent platform.
 
-## Quick start: set up a project and begin planning
-
-Open your project in Codex and paste the [setup prompt in the practical guide](/ldt-skill/en/docs/guide/). It directs the agent to retrieve LittleDevTeam from GitHub, carefully set up the complete skill, validate the package, and begin project intake. Planning starts immediately; implementation waits for your approval of a concrete proposal.
-
 ## What you need
 
 - A configured, signed-in **Codex environment** that can read local skills.
@@ -43,7 +42,7 @@ The [interactive simulation](/ldt-skill/en/demo/) explains a fixed example reque
 
 ## Published source and ongoing development
 
-The skill source published on GitHub is [`9a062eb`](https://github.com/YoungJibbit95/ldt-skill/tree/9a062eb9de0990ce1074dd677d26e5a528ee14a0). This website also describes newer local development work on intake, the architecture team, task contracts, pair execution, integration, and runtime. Those changes are not part of that published commit yet, so the setup prompt explicitly retrieves the version that is actually available on GitHub. This documentation does not claim a finished V2 release or blanket approval of ongoing development work.
+The skill source published on GitHub is [`9a062eb`](https://github.com/YoungJibbit95/ldt-skill/tree/9a062eb9de0990ce1074dd677d26e5a528ee14a0). This website also describes newer local development work on intake, the architecture team, task contracts, pair execution, integration, and runtime. Those changes are not part of that published commit yet, so version selection must account for that limitation. This documentation does not claim a finished V2 release or blanket approval of ongoing development work.
 
 <Aside type="note" title="Instructions and validation have limits">
 Local tools check data consistency and source snapshots. They do not authenticate human decisions. Tool permissions, human approvals, and actual test results remain separate concerns.

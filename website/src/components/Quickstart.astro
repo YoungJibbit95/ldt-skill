@@ -1,0 +1,61 @@
+---
+import prompts from '../data/quickstart.json';
+import { pathFor, repository, type Locale } from '../lib/site';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const de = locale === 'de';
+const title = de ? 'Ein Prompt. Dein Start.' : 'One prompt. Get started.';
+---
+<section class="quickstart" aria-label="Quickstart" data-quickstart>
+  <div class="quickstart-heading"><div><span class="quickstart-label">QUICKSTART</span><h2>{title}</h2></div>
+    <button type="button" data-copy disabled
+      data-success={de ? 'Prompt kopiert.' : 'Prompt copied.'}
+      data-error={de ? 'Kopieren nicht möglich. Markiere den Prompt und kopiere ihn manuell.' : 'Could not copy. Select the prompt and copy it manually.'}>
+      {de ? 'Prompt kopieren' : 'Copy prompt'}<span aria-hidden="true"> ⧉</span>
+    </button>
+  </div>
+  <p class="quickstart-intro">{de ? 'Im Projekt in Codex senden.' : 'Paste into Codex in your project.'}</p>
+  <p class="quickstart-prompt" data-prompt>{prompts[locale]}</p>
+  <p class="quickstart-status" role="status" aria-live="polite" aria-atomic="true"></p>
+  <p class="quickstart-version">{de ? 'Noch kein stabiles Release (20.10.2026). Erst eine geprüfte Entwicklungsrevision anbieten und den gewählten Commit festhalten.' : 'No stable release yet (20 October 2026). Offer a verified development revision first and record its commit.'} <a href={`${repository}/releases`}>{de ? 'Releases prüfen' : 'Check releases'} ↗</a></p>
+  <a class="quickstart-manual" href={pathFor(locale, 'docs/install')}>{de ? 'Installation, Versionen & Hilfe' : 'Installation, versions & help'} →</a>
+  <p data-manual>{de ? 'Markiere den Prompt und kopiere ihn manuell.' : 'Select the prompt and copy it manually.'}</p>
+</section>
+<script>
+  for (const card of document.querySelectorAll<HTMLElement>('[data-quickstart]')) {
+    const button = card.querySelector<HTMLButtonElement>('[data-copy]');
+    const prompt = card.querySelector<HTMLElement>('[data-prompt]');
+    const status = card.querySelector<HTMLElement>('[role="status"]');
+    if (!button || !prompt || !status) continue;
+    const manual = card.querySelector<HTMLElement>('[data-manual]');
+    if (manual) manual.hidden = true;
+    button.disabled = false;
+    button.addEventListener('click', async () => {
+      status.textContent = '';
+      try {
+        await navigator.clipboard.writeText(prompt.textContent ?? '');
+        status.textContent = button.dataset.success ?? '';
+      } catch {
+        status.textContent = button.dataset.error ?? '';
+      }
+    });
+  }
+</script>
+<style>
+  .quickstart{min-width:0;margin:1.5rem 0;padding:clamp(1.1rem,3vw,1.8rem);border:1px solid #b49bfc66;border-radius:18px;background:linear-gradient(135deg,#1c1838,#101225);color:#f4f1fc;font-size:1rem;line-height:1.65}
+  .quickstart-heading{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .quickstart-heading>*{margin:0}
+  .quickstart-label{color:#cbb9ff;font-size:.75rem;letter-spacing:.12em;font-weight:600}
+  .quickstart h2{margin:.35rem 0 0;font-size:clamp(1.3rem,3vw,1.7rem);letter-spacing:-.025em;line-height:1.25;color:#f4f1fc}
+  .quickstart button{min-height:44px;padding:.6rem 1rem;border:1px solid #b49bfc88;border-radius:9px;background:#302448;color:#f4f1fc;font:inherit;cursor:pointer}
+  .quickstart button:disabled{opacity:.55;cursor:default}
+  .quickstart button:focus-visible,.quickstart a:focus-visible{outline:2px solid #e0c8ff;outline-offset:4px}
+  .quickstart-intro{margin:.8rem 0;color:#c4bed7}
+  .quickstart-prompt{margin:1rem 0 0;padding:1rem;border-radius:10px;background:#090b18b3;border:1px solid #b49bfc22;overflow-wrap:anywhere;user-select:text;color:#f4f1fc}
+  .quickstart-status{margin:.3rem 0;color:#d8caff;font-size:.875rem}
+  .quickstart-version{margin:0;color:#c4bed7;font-size:.875rem}
+  .quickstart a{color:#d8caff;text-decoration:underline;text-underline-offset:3px}
+  .quickstart-manual{display:inline-flex;align-items:center;min-height:44px;margin-top:.4rem;font-size:.875rem}
+  .quickstart :global(p){max-width:none}
+  @media(max-width:480px){.quickstart{padding:1rem}.quickstart-heading{align-items:stretch;gap:.8rem}.quickstart button{width:100%}.quickstart-prompt{padding:.75rem}}
+</style>

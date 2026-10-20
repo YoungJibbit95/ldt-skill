@@ -4,8 +4,11 @@ description: Complete LittleDevTeam setup for Codex on Windows, macOS, and Linux
 ---
 
 import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+import Quickstart from '../../../../components/Quickstart.astro';
 
-Copy the complete `architect-dev-team` folder. There is no additional LittleDevTeam service or separate installer. You can also use the [copyable quick-start prompt](/ldt-skill/en/docs/guide/#quick-start-set-up-from-github-and-begin-planning) to set up the skill and begin project intake.
+The Quickstart begins setup in chat. This page covers manual installation and troubleshooting.
+
+<Quickstart locale="en" />
 
 ## 1. Check prerequisites
 
@@ -16,33 +19,48 @@ git --version
 python --version
 ```
 
-Validation helpers need **Python 3.10 or later**. On macOS/Linux, the command is often `python3`; Windows may offer `py -3`. Use the command that works on your machine below. No `pip` installations are needed. The website also describes newer local extensions that are not yet included in the published GitHub pin `9a062eb`. This tutorial sets up exactly the public revision named below.
+Validation helpers need **Python 3.10 or later**. On macOS/Linux, the command is often `python3`; Windows may offer `py -3`. Use the command that works on your machine below. No `pip` installations are needed. The website also describes newer local extensions that are not yet included in the published GitHub pin `9a062eb`. Choose the public revision using the policy below.
+
+## Choose a version before copying
+
+The short prompt asks the agent to handle this decision. For manual setup:
+
+1. Check [Releases](https://github.com/YoungJibbit95/ldt-skill/releases) at installation time. Prefer the latest non-draft, non-prerelease release whose skill package and relevant checks you can verify. Review its notes and compatibility; a tag alone is not verification.
+2. If no verified stable release is available, say so and offer a specific verified development revision before proceeding. As of **20 October 2026**, there are no releases. The public development revision [`838a2e1`](https://github.com/YoungJibbit95/ldt-skill/tree/838a2e1376a0b3e44931c54310be95d253380b1a) contains the same skill package as the documented `9a062eb` source. It is a fallback, not a stable release or a finished V2.
+3. Replace `SELECTED_TAG_OR_COMMIT` below with the chosen release tag or full development commit (`838a2e1376a0b3e44931c54310be95d253380b1a` for that fallback). Resolve it to an immutable commit, inspect its skill instructions, validate the complete package, and retain `INSTALL_REVISION.txt` with your project's installation notes. Stop on failed checks; do not silently substitute `main` or a prerelease.
+4. If an installation already exists, compare it and preserve local changes. The copy commands below stop instead of overwriting it. Follow **Update** only after choosing that update.
+
+The published skill handles discovery, architecture proposals, optional specialist work, checks and saved project context. Structured intake, architecture-team/task-contract helpers and the new runtime are still unpublished development. Automated release selection is not currently provided by the distributed skill; the installing agent must follow the policy above. The [guide](/ldt-skill/en/docs/guide/) explains the supported workflow.
 
 ## 2. Retrieve a named source revision
 
-Run the appropriate block in a working folder outside your target project. The name `ldt-skill-source` must not already exist there. The pinned commit makes this guide reproducible; it is a development snapshot, not an approved finished V2 release.
+Run the appropriate block in a working folder outside your target project. The name `ldt-skill-source` must not already exist there. Use the version selected above. The checkout stops if you leave the placeholder unchanged. The exact resolved commit is recorded outside the skill folder.
 
 <Tabs>
   <TabItem label="Windows · PowerShell">
 ```powershell
 git clone https://github.com/YoungJibbit95/ldt-skill.git ldt-skill-source
 if ($LASTEXITCODE -ne 0) { throw 'Clone failed.' }
-git -C ldt-skill-source checkout --detach 9a062eb9de0990ce1074dd677d26e5a528ee14a0
+git -C ldt-skill-source checkout --detach SELECTED_TAG_OR_COMMIT
 if ($LASTEXITCODE -ne 0) { throw 'Source revision unavailable.' }
+$resolvedRevision = git -C ldt-skill-source rev-parse --verify 'HEAD^{commit}'
+if ($LASTEXITCODE -ne 0) { throw 'Cannot resolve source commit.' }
+$resolvedRevision | Set-Content -LiteralPath 'ldt-skill-source/INSTALL_REVISION.txt' -Encoding utf8
 $skillSource = (Resolve-Path -LiteralPath '.\ldt-skill-source\.agents\skills\architect-dev-team').Path
 ```
   </TabItem>
   <TabItem label="macOS / Linux · Bash">
 ```bash
 git clone https://github.com/YoungJibbit95/ldt-skill.git ldt-skill-source &&
-git -C ldt-skill-source checkout --detach 9a062eb9de0990ce1074dd677d26e5a528ee14a0 &&
+git -C ldt-skill-source checkout --detach SELECTED_TAG_OR_COMMIT &&
 # Continue only after a successful checkout.
+git -C ldt-skill-source rev-parse --verify 'HEAD^{commit}' > ldt-skill-source/INSTALL_REVISION.txt &&
 skill_source="$(cd ldt-skill-source/.agents/skills/architect-dev-team && pwd)"
 ```
   </TabItem>
 </Tabs>
 
-Before copying, read at least `SKILL.md` and its linked workflows. Inspect the complete [source at the pinned commit](https://github.com/YoungJibbit95/ldt-skill/tree/9a062eb9de0990ce1074dd677d26e5a528ee14a0/.agents/skills/architect-dev-team) as needed.
+Before copying, read at least `SKILL.md` and its linked workflows. The historical [reference source](https://github.com/YoungJibbit95/ldt-skill/tree/9a062eb9de0990ce1074dd677d26e5a528ee14a0/.agents/skills/architect-dev-team) remains available for comparison.
 
 ## 3. Choose the scope
 

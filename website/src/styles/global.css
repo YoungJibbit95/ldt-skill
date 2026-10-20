@@ -1362,3 +1362,8 @@ svg {
     transform:none
   }
 }
+
+/* Contain the decorative orbit within narrow viewports. */
+@media(max-width:360px) {
+  .built-visual { overflow:clip }
+}

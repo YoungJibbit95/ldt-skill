@@ -4,55 +4,16 @@ description: Ein konkreter Einstieg in LittleDevTeam — von der Idee über die 
 ---
 
 import { Aside } from '@astrojs/starlight/components';
+import Quickstart from '../../../../components/Quickstart.astro';
 
 Wenn du den [Skill eingerichtet](/ldt-skill/de/docs/install/) und dein Projekt in Codex geöffnet hast, beschreibst du als Nächstes ein Ziel, das du beurteilen kannst. Das folgende Beispiel ist eine **Anleitung**, kein Protokoll eines bereits ausgeführten Agentenlaufs.
 
-## Schnellstart: GitHub-Quelle einrichten und Planung starten
-
-Wenn der Skill noch nicht installiert ist, öffne dein Projekt in Codex und sende diesen Prompt. Er erlaubt dem Agenten, die aktuelle GitHub-Fassung einzurichten und anschließend den Intake zu beginnen. Eine vorhandene Installation wird nie überschrieben. Die Freigabe für die spätere Implementierung bleibt bei dir.
-
-```text
-Ich erlaube dir, den LittleDevTeam-Skill für dieses Projekt aus
-https://github.com/YoungJibbit95/ldt-skill zu beziehen und einzurichten.
-
-1. Prüfe zuerst Projektregeln, Git-Status und vorhandene Änderungen.
-2. Klone das Repository in einen temporären Ordner außerhalb dieses Projekts.
-   Lies .agents/skills/architect-dev-team/SKILL.md und die für die aktuelle
-   Phase referenzierten Anweisungen.
-3. Übernimm den vollständigen Ordner
-   .agents/skills/architect-dev-team nach
-   .agents/skills/architect-dev-team in diesem Projekt. Überschreibe nichts:
-   Falls das Ziel bereits existiert, vergleiche beide Fassungen und frage mich,
-   bevor du eine Installation oder Aktualisierung vornimmst.
-4. Prüfe die Kopie mit diesem Befehl (verwende python3 oder py -3, falls nötig):
-   python -B .agents/skills/architect-dev-team/scripts/validate.py package .agents/skills/architect-dev-team
-5. Nutze danach $architect-dev-team. Nimm mein Projekt auf, untersuche Code,
-   Dokumentation, Architektur und Arbeitsstand und frage gezielt nach
-   entscheidenden offenen Punkten. Erstelle einen konkreten Architekturvorschlag
-   mit einem kleinen ersten Meilenstein, Abnahmekriterien und Pflichtchecks.
-   Zeige mir den Vorschlag und warte auf meine ausdrückliche Freigabe, bevor du
-   Produktdateien für den ersten Meilenstein änderst.
-
-Installiere oder aktiviere keine weiteren Skills, füge keine Abhängigkeiten
-hinzu und veröffentliche, merge oder deploye nichts ohne separate Zustimmung.
-Berichte ehrlich, wenn Codex den Skill nicht erkennt oder ein Werkzeug fehlt.
-```
-
-Der Prompt richtet sich an einen Agenten im Projektordner. Wenn du den Skill schon eingerichtet hast, kannst du direkt mit dem [Auftrag](/ldt-skill/de/docs/guide/#1-beschreibe-das-ergebnis) fortfahren.
+<Quickstart locale="de" />
 
 ## 1. Beschreibe das Ergebnis
 
 ```text
-Nutze $architect-dev-team mit dem Profil Balanced.
-
-Ich möchte eine kleine Dokumentationswebsite für mein Projekt.
-Sie soll einen verständlichen Einstieg, eine Installation und einen Guide
-enthalten. Sie muss auf dem Smartphone gut lesbar und mit der Tastatur
-bedienbar sein. Untersuche zuerst den vorhandenen Stand.
-
-Lege mir anschließend eine Architektur und einen kleinen ersten Meilenstein
-mit konkreten Abnahmekriterien und notwendigen Prüfungen vor.
-Beginne die Umsetzung erst nach meiner Freigabe dieses Vorschlags.
+Nutze $architect-dev-team. Ich möchte eine kleine Dokumentationswebsite für mein Projekt bauen.
 ```
 
 Beschreibe die tatsächliche Zielgruppe und Einschränkungen. Ein vorhandener Technologie-Stack, ein Hostingziel oder ein bereits abgestimmtes Design gehören in den Auftrag. Unbekannte Details darf der Agent als Fragen oder ausdrücklich benannte Annahmen behandeln.

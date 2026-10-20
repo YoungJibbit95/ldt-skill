@@ -10,6 +10,7 @@ import sys
 import tempfile
 
 WEBSITE = Path(__file__).resolve().parents[1]
+VERIFIED_DEVELOPMENT_REVISION = "838a2e1376a0b3e44931c54310be95d253380b1a"
 WINDOWS = os.name == "nt"
 SHELL = shutil.which("pwsh") or shutil.which("powershell") if WINDOWS else shutil.which("bash")
 if not SHELL:
@@ -54,8 +55,24 @@ def exercise(locale, sandbox):
     blocks = re.findall(r"```" + language + r"\n(.*?)```", text, re.S)
     if len(blocks) != 4:
         raise RuntimeError(f"Expected the four tutorial blocks for {locale}/{language}; got {len(blocks)}")
-    # Execute the documented clone/pin block, retaining its source variable in-process.
-    shell(blocks[0], sandbox)
+    # Manual selection is explicit; never silently use the clone's default branch.
+    # Substitute the documented verified development fallback, like the target paths.
+    shell(blocks[0].replace("SELECTED_TAG_OR_COMMIT", VERIFIED_DEVELOPMENT_REVISION), sandbox)
+    recorded = (sandbox / "ldt-skill-source/INSTALL_REVISION.txt").read_text(encoding="utf-8-sig").strip()
+    if recorded != VERIFIED_DEVELOPMENT_REVISION:
+        raise RuntimeError("Installation provenance does not match the selected commit")
+    # Exercise annotated-tag resolution without creating or publishing a release.
+    subprocess.run(["git", "-C", str(sandbox / "ldt-skill-source"),
+                    "-c", "user.name=Installation smoke", "-c", "user.email=smoke@example.invalid",
+                    "tag", "-a", "smoke-stable-fixture", VERIFIED_DEVELOPMENT_REVISION,
+                    "-m", "Local test fixture, not a published release"], check=True, capture_output=True)
+    selection = blocks[0][blocks[0].index("git -C ldt-skill-source checkout"):]
+    shell(selection.replace("SELECTED_TAG_OR_COMMIT", "smoke-stable-fixture"), sandbox)
+    if (sandbox / "ldt-skill-source/INSTALL_REVISION.txt").read_text(encoding="utf-8-sig").strip() != recorded:
+        raise RuntimeError("Annotated tag did not resolve to the immutable selected commit")
+    shell(selection, sandbox, succeeds=False)
+    if (sandbox / "ldt-skill-source/INSTALL_REVISION.txt").read_text(encoding="utf-8-sig").strip() != recorded:
+        raise RuntimeError("Failed selection changed the installation provenance")
     source = sandbox / "ldt-skill-source/.agents/skills/architect-dev-team"
     project_block = blocks[1].replace("C:\\Pfad\\zu\\deinem\\Projekt", str(project)).replace("C:\\path\\to\\your\\project", str(project)).replace("/pfad/zu/deinem/projekt", str(project)).replace("/path/to/your/project", str(project))
     # Substitute only the home operand in test code. Never repurpose HOME/$HOME.
@@ -98,7 +115,7 @@ def exercise(locale, sandbox):
         shutil.copytree(backup, destination)
         validate(destination)
         remove_inside(destination, sandbox)
-        print(f"PASS {locale}/{label}: tutorial copy, validation, no-overwrite, staged replacement, removal, recovery", flush=True)
+        print(f"PASS {locale}/{label}: selected commit recorded, tutorial copy, validation, no-overwrite, staged replacement, removal, recovery", flush=True)
 
 
 def main():
