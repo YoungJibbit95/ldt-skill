@@ -62,12 +62,16 @@
 Deutsch:
 
 ```text
-Installiere LittleDevTeam von https://github.com/YoungJibbit95/ldt-skill in diesem Projekt. Verwende die neueste stabile Version, prüfe die Installation und starte anschließend mit $architect-dev-team die Projektplanung. Frage mich nach meinem Vorhaben.
+Installiere LittleDevTeam von https://github.com/YoungJibbit95/ldt-skill in diesem Projekt.
+Verwende die neueste stabile Version, prüfe die Installation und starte anschließend mit $architect-dev-team die Projektplanung.
+Frage mich nach meinem Vorhaben.
 ```
 
 Englisch:
 ```text
-Install LittleDevTeam from https://github.com/YoungJibbit95/ldt-skill into this project. Use the latest stable version, verify the installation, then start project planning with $architect-dev-team. Ask me what I want to build.
+Install LittleDevTeam from https://github.com/YoungJibbit95/ldt-skill into this project.
+Use the latest stable version, verify the installation, then start project planning with $architect-dev-team.
+Ask me what I want to build.
 ```
 
 Der Prompt verwendet den dokumentierten Entwicklungsstand der [Installationsanleitung](https://youngjibbit95.github.io/ldt-skill/de/docs/install/). Codex erkennt neue Skills automatisch; falls der Skill nicht erscheint, starte Codex neu. Der Projektpfad `.agents/skills` ist in den [offiziellen Codex-Skill-Hinweisen](https://learn.chatgpt.com/docs/build-skills) beschrieben.
