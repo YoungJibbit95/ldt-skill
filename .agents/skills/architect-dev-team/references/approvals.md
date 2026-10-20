@@ -15,7 +15,7 @@ A vague build request doesn't approve a design not yet shown.
    architecture reference, whole milestone (including acceptance and the stable
    `required_checks` policy), and profile. Define that policy before asking.
 3. Request approval of this scope. Record a real human message/reference and date
-   only after receiving it. “Approved” replying to the exact proposal suffices.
+   only after receiving it. "Approved" replying to the exact proposal suffices.
    Existing explicit approval of this scope persists; don't ask twice.
 4. Append an `architecture` decision to `approvals` with null `review_sha256`.
    Run `state STATE --root ROOT --gate implement` before implementation.
@@ -25,6 +25,43 @@ supersedes older approval: revise without implementing. Changed proposal bytes o
 milestone acceptance, mandatory check policy, or profile invalidate old scope;
 renew approval for a material change.
 Avoid gratuitous proposal formatting changes after approval.
+
+## Start gate (M2 Slice 1)
+
+After architecture approval, the project view is generated and presented.
+A distinct `start` approval is required before implementation begins.
+
+1. Generate project view: `validate.py project-view ROOT generate`
+2. Present: goal, functions, diagram, milestones, roles, skills, models, risks, checks.
+3. Ask: "Soll ich den ersten beschriebenen Meilenstein mit diesem Plan und Team starten?"
+4. Record a `start` decision in `approvals`:
+   - `kind: "start"`, `decision: "approved"`
+   - `scope_sha256` = the same scope fingerprint the architecture approval uses
+   - `review_sha256` = null
+   - `evidence` = the actual human message or reference
+   - `recorded_at` = ISO8601 with timezone
+5. Run `state STATE --root ROOT --gate implement`.
+
+### What the validator enforces
+
+- `start` is a distinct approval kind. It does not replace or weaken the
+  architecture approval: a `start` decision also requires an approved,
+  current architecture approval.
+- `start` binds the same scope fingerprint as `architecture`: the architecture
+  reference, the whole milestone and the profile. A change to any of them
+  invalidates it, exactly like the architecture approval.
+- The implement gate requires a current `start` approval **when the state
+  carries task contracts** (the M2 workflow). A pre-M2 state without task
+  contracts keeps its previous behaviour, so existing M1a-M1d records and
+  resume paths continue to work unchanged.
+- A `start` decision never satisfies the iteration gate.
+- The most recent decision of that kind wins. A rejection supersedes an
+  earlier approval.
+
+There is no second approval state machine: `start` reuses the existing scope
+fingerprint, the existing gate composition and the existing evidence rules.
+
+Skill installation and execution consent are separate decisions, not bundled.
 
 ## Iteration gate
 

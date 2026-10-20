@@ -48,6 +48,9 @@ Its strict contract and bounded source types are in [registry formats](registry.
 
 Evidence records use `kind`, `reference`, `summary`, `date`. Use durable URLs or
 repository-relative evidence files; no private logs or credentials.
+That advice describes legacy Schema 1 evidence. Schema 2 source-verified claims
+currently require the bounded pinned GitHub references described in its format
+contract; local/external assertions remain preserved in unverified migration drafts.
 
 - `candidate`: verify ownership, pinned source/manifest/license and attribution;
   `provenance` evidence required; no execution implied.

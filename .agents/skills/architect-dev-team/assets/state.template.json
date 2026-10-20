@@ -11,5 +11,14 @@
   "completed": [],
   "open_issues": [],
   "constraints": [],
-  "next_action": "Inspect the relevant project and clarify acceptance criteria."
+  "next_action": "Inspect the relevant project and clarify acceptance criteria.",
+  "brief": null,
+  "research_results": [],
+  "task_contracts": [],
+  "approved_skills": [],
+  "project_view": null,
+  "pair_results": [],
+  "lead_session": null,
+  "arch_lead_session": null,
+  "effort": {"tokens": 0, "time_seconds": 0, "agents": 0, "repair_rounds": 0}
 }

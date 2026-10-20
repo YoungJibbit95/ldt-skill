@@ -4,6 +4,7 @@ import hashlib
 import importlib.util
 import json
 import os
+import shutil
 from pathlib import Path
 import subprocess
 import sys
@@ -426,6 +427,22 @@ class RegistryV2(unittest.TestCase):
             self.new.registry_file(path)
             self.new.registry_record(record)
             self.new.migrate_registry(self.legacy)
+
+    def test_package_validates_its_optional_index_and_referenced_records(self):
+        package = self.root / 'copied-skill'
+        shutil.copytree(PACKAGE, package, ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
+        self.new.package(package)
+        index = package / 'registry/index.json'
+        original = json.loads(index.read_text(encoding='utf-8'))
+        missing = copy.deepcopy(original)
+        missing['records'][0] = {'id': 'absent', 'path': 'skills/absent.json'}
+        for value in (self.legacy, self.record(), {'schema_version': 3, 'records': []}, missing):
+            with self.subTest(index=value):
+                self.write(index, value)
+                with self.assertRaises(self.new.Invalid):
+                    self.new.package(package)
+        self.write(index, original)
+        self.new.package(package)
 
     def test_production_exact_three_records_and_legacy_unchanged(self):
         index_path = PACKAGE / "registry/index.json"

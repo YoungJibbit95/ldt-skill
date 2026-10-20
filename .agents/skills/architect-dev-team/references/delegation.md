@@ -45,6 +45,14 @@ Wait for relevant results, inspect diffs and evidence, and integrate sequentiall
 Don't erase user/worker changes to resolve conflicts. Worker claims alone aren't
 completion evidence.
 
+## Department Lead (M2 Slice 2)
+
+A Department Lead is a real native agent that coordinates a bounded set of
+specialists. The full contract, the eleven steps, the specialist budget and
+the correction rules are in [department-lead](department-lead.md). The lead
+does not approve, integrate or widen the scope; the Master Lead keeps that
+authority.
+
 ## Independent review and fallback
 
 A reviewer must be a distinct actual agent or human and inspect the final change
@@ -55,3 +63,36 @@ independent review.
 Without available/permitted subagents, use sequential role passes labeled `self`
 or `unavailable`. Preserve checks and approval. Mandatory missing independence
 needs explicit human disposition, never a claim it happened.
+
+A review must also satisfy the [critic quality contract](critic-quality.md):
+a validated report bound to the reviewed revision. A session alone is not a
+review.
+
+## Pair Execution Protocol (M2 Slice 1)
+
+For Balanced and Rigorous profiles, implementation tasks use an **Implementer/Critic pair**:
+
+1. **Implementer** receives full task contract, writes code/tests, runs deterministic checks.
+2. **Critic** (independent agent/session) receives: requirements, specs, implementer artifacts.
+   - Does NOT receive implementer's reasoning or private context.
+   - Researches consequential/version-dependent questions.
+   - Produces findings with: severity (blocker/major/minor/info), file:line, reproduction, spec reference.
+   - May add tests only in approved isolated areas (e.g., `tests/critic/`).
+   - Does NOT write production files.
+3. **Repair loop**: max 2 targeted rounds per finding group.
+   - Implementer repairs specific findings.
+   - Critic re-reviews repaired code.
+   - After 2 rounds: Lead evaluates root cause, progress, budget.
+4. **Escalation to Lead** for:
+   - Material scope/architecture change
+   - Missing domain decision
+   - Additional cost/permissions
+   - Critical security/data loss risk
+   - Budget exhausted
+   - Repeated stall
+   - Mandatory check unfulfillable
+
+**Independence evidence**: Separate session IDs, separate artifacts, critic findings reference implementer output only.
+
+**Blocked work**: Failed findings block dependent tasks. Independent work continues.
+**Interruption**: Save state, not results.

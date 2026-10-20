@@ -48,6 +48,10 @@ Registry Schema 2 is separate from project-state/snapshot schema numbering.
 Its [index, metadata and read-only migration contract](registry.md) does not
 change approval semantics or authorize installation/execution.
 
+For bounded read-only technology discovery, see the [inventory API](inventory.md).
+Its observations/inferences and coverage gaps are discovery inputs, never approval
+evidence or permission to execute a project or an installed skill.
+
 Artifact paths are relative to explicit project root: regular files, no traversal
 or symlinks. Without Python, check manually and disclose unavailable automation.
 
@@ -61,23 +65,36 @@ iteration, otherwise null. `profile` is lean, balanced, or rigorous.
   required_checks: [stable check names]}`. Names are unique; approve the policy
   before implementation. Results must contain each approved name as required.
 - `approvals`: ordered `{kind, decision, scope_sha256, review_sha256, evidence,
-  recorded_at}`. Kind: architecture/iteration; decision: approved/rejected. Evidence
-  references the actual human decision. ISO8601 timestamps include timezone.
-  Architecture decisions have null review digest; iteration binds the snapshot.
-  Scope fingerprints bind architecture, the complete milestone, and the profile,
-  so changing review effort cannot silently reuse a prior approval.
+  recorded_at}`. Kind: architecture/start/iteration; decision: approved/rejected.
+  Evidence references the actual human decision. ISO8601 timestamps include timezone.
+  Architecture and start decisions have a null review digest; iteration binds the
+  snapshot. Scope fingerprints bind architecture, the complete milestone, and the
+  profile, so changing review effort cannot silently reuse a prior approval.
+  A `start` decision additionally requires a current architecture approval and
+  uses the same scope fingerprint; it is an extra gate, not a second state
+  machine.
 - `checks`: `{name, required, status, evidence, waiver}`. Status:
   passed/failed/not_run/unavailable/waived. Waiver: null or
   `{evidence, reason, scope_sha256}` bound to this exact approved scope
   referencing explicit human disposition. Passed/failed evidence is observed,
   not a planned command. Optional failures remain reportable.
-- `review`: null initially, then `{path, sha256, independence, evidence}`.
-  Independence: independent/self/unavailable. Reference actual reviewer findings;
-  snapshot validation isn't code review. Rigorous gates accept actual independent
-  review directly. Its waiver fallback needs `independent_review` in the approved
-  mandatory policy plus a scope-bound human waiver. Other proposal-specific review
-  requirements must also be represented by approved mandatory check names.
+- `review`: null initially, then `{path, sha256, independence, evidence}`, plus an
+  optional `verification` block `{path, sha256}` that binds the review to a
+  hash-checked runtime evidence artifact. Independence: independent/self/unavailable.
+  Reference actual reviewer findings; snapshot validation isn't code review.
+  Rigorous gates accept actual independent review only with the bound runtime
+  evidence: two distinct verifiable sessions and a read-only reviewer agent.
+  A self-declared independence string is not sufficient. Its waiver fallback needs
+  `independent_review` in the approved mandatory policy plus a scope-bound human
+  waiver. Other proposal-specific review requirements must also be represented by
+  approved mandatory check names.
 - `completed`, `open_issues`, `constraints`: compact factual string lists.
+- Optional M2 fields, absent or null in a pre-M2 state: `brief`,
+  `research_results`, `task_contracts`, `project_view`, `pair_results`,
+  `lead_session`, `arch_lead_session`, `effort`. A state carrying any of these
+  is still schema 2 and validates with the same gates. Unknown fields are
+  rejected. `task_contracts` records the contracts that exist; the start gate
+  also looks at the contract files on disk, so it fails closed.
 - `next_action`: one specific next step or pending human decision.
 
 ## Review snapshots

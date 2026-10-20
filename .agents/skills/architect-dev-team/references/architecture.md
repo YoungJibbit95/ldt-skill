@@ -37,6 +37,35 @@ boundaries/flows; no drawing tool is required. ADRs are for significant lasting
 decisions: context, decision, alternatives, consequences. Follow repository format.
 Target under 200 lines for an ordinary proposal; link existing documentation.
 
+## Architecture Team & Research
+
+For non-Lean work, the Architecture Lead coordinates a task-specific research team
+(see [architecture-team.md](architecture-team.md)). Research tasks produce
+specifications, formulas, units, tolerances, reference values, and invariants —
+not production code. Results are integrated into the architecture document.
+
+## Task Contracts
+
+Each implementation and review task receives a detailed contract
+(see [task-contracts.md](task-contracts.md)). Contracts bind:
+- Architecture version, milestone, base revision
+- Input paths, dependencies, file ownership, permissions
+- Acceptance criteria, required checks (subset of milestone.required_checks)
+- Skill pins, model profile, resource budget
+- Review assignment (critic task_id)
+
+## Project View & Start Gate
+
+Before implementation, a project view is generated from versioned data
+(brief, architecture, research, tasks) showing:
+- Goal, key functions, component/data flow diagram (Mermaid + text)
+- Milestones, dependencies, roles, tasks, review assignments
+- Skills (install/consent status), model profiles
+- Risks, open decisions, mandatory checks
+
+The start gate asks: **"Soll ich den ersten beschriebenen Meilenstein mit diesem Plan und Team starten?"**
+Skill selection, installation, and execution rights are separate consents.
+
 ## Milestones and expansion
 
 Prefer a testable vertical slice. Specify scope, acceptance, dependencies,

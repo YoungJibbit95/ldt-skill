@@ -173,7 +173,11 @@ class Lifecycle(unittest.TestCase):
         for independence in ("unavailable", "self"):
             self.value["review"]["independence"] = independence
             self.invalid("rigorous review requires independent review", "review")
+        # An independent claim alone is not enough: the M2 slice requires
+        # hash-bound runtime evidence behind it.
         self.value["review"]["independence"] = "independent"
+        self.invalid("verified runtime evidence", "review")
+        self.value["review"]["verification"] = self._runtime_evidence()
         v.state(self.value, self.root, "review")
         self.value["review"]["independence"] = "unavailable"
         waiver = {"name": "independent_review", "required": False, "status": "waived",
@@ -188,6 +192,22 @@ class Lifecycle(unittest.TestCase):
         v.state(self.value, self.root, "review")
         waiver["name"] = "other_review"
         self.invalid("approved required_checks", "review")
+
+    def _runtime_evidence(self):
+        """A hash-bound artifact with a verified independent review."""
+        import json as _json
+        evidence = self.root / ".architect-dev-team" / "integration_evidence.json"
+        evidence.write_text(_json.dumps({"independence": [{
+            "task": "impl-001", "independence": "independent", "reasons": [],
+            "evidence": {
+                "implementer_session_id": "ses_a",
+                "critic_session_id": "ses_b",
+                "critic_read_only": True,
+                "implementer_execution_mode": "native",
+                "critic_execution_mode": "native",
+            }}]}), encoding="utf-8")
+        return {"path": ".architect-dev-team/integration_evidence.json",
+                "sha256": v.digest_file(evidence)}
 
     def test_approved_scope_repair_clears_stale_review(self):
         self.ready_review()
@@ -702,8 +722,18 @@ class Package(unittest.TestCase):
         files = ["SKILL.md", "agents/openai.yaml", "registry/skills.json", "assets/state.template.json",
                  "assets/architecture.template.md", "scripts/validate.py"]
         files += [f"scripts/ldt_core/{name}.py" for name in
-                  ("__init__", "common", "snapshots", "approvals", "state", "registry", "package")]
-        files += [f"references/{name}.md" for name in ("architecture", "delegation", "approvals", "delivery", "external-skills", "project-memory", "evaluation")]
+                  ("__init__", "common", "snapshots", "approvals", "state", "registry", "package",
+                   "inventory", "runtime", "intake", "arch_team", "research", "task_contracts",
+                   "project_view", "pair_execution", "integration",
+                   "critic_report", "lead_execution")]
+        files += [f"references/{name}.md" for name in
+                  ("architecture", "delegation", "approvals", "delivery", "external-skills",
+                   "project-memory", "evaluation", "registry", "intake", "architecture-team",
+                   "task-contracts", "implementation", "runtime",
+                   "department-lead", "critic-quality")]
+        files += [f"assets/{name}" for name in
+                  ("brief.template.md", "research.template.md", "task.template.md",
+                   "project-view.template.md", "integration-report.template.md")]
         for value in files:
             path = self.root / value
             path.parent.mkdir(parents=True, exist_ok=True)

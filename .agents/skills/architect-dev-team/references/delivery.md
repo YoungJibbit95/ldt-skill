@@ -47,6 +47,30 @@ Inspect unfamiliar test/config commands before execution; they run project code.
 Keep secrets out of logs. Missing dependencies/services mean `unavailable`, not
 `passed`. Exit zero isn't enough if no intended tests ran or the wrong target ran.
 
+## Integration & Architecture Conformance (M2 Slice 1)
+
+After task-level reviews, integration combines reviewed results into an executable whole.
+
+**Integration Engineer** (Lead or designated):
+- Receives reviewed task results from Department Leads.
+- Responsible for: interfaces, error handling, executable whole.
+- Uses isolated worktrees or clear file ownership for parallel integration.
+
+**Architecture Lead Review** (after integration):
+- Compares: architecture, domain contracts, actual implementation.
+- Re-engages research specialists only for NEW domain questions.
+
+**Final Mandatory Tests** (at integrated whole):
+- Integration tests
+- End-to-end tests
+- Security tests (if in scope)
+- Performance tests (if budgeted)
+- Any other approved `required_checks`
+
+**Review Invalidation**:
+- Any integration change affecting previously reviewed code → affected reviews invalidated.
+- Re-run affected checks + independent re-review.
+
 ## PR or local handoff
 
 Use available GitHub tools only after checking host/repo, access, and existing

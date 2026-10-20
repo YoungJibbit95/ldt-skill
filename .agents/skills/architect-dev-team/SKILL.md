@@ -22,6 +22,9 @@ background service.
    work, or Rigorous for significant security, migration, or reliability risk.
    Profiles change effort, never approval. Load only references for the current
    phase; don't load the registry for ordinary native work.
+4. For a new project or a substantially unclear feature, start with
+   [intake](references/intake.md): discovery, targeted questions, versioned
+   project brief. A small, precisely described change skips intake.
 
 ## Lifecycle
 
@@ -34,14 +37,27 @@ Persist PR REVIEW as `PR_REVIEW`. Both APPROVAL states have an explicit
   components; ask only questions that change design or acceptance. Mark reversible
   defaults as assumptions. Produce a versioned design and small milestones. A
   tiny feature needs only a short proposal, not a system redesign.
+- **Architecture team:** Read [architecture team](references/architecture-team.md).
+  The Architecture Lead writes research contracts and integrates specialist
+  results into one architecture document. Research yields specifications, units,
+  tolerances, reference values and invariants, never production code.
 - **Architecture approval:** Read [approvals](references/approvals.md) before the
   first gate. Present the exact version, milestone, criteria, and risks. Wait for
   explicit human approval before implementation. Existing approval of that exact
   proposal suffices; don't ask twice.
-- **Implementation:** Read [delivery](references/delivery.md). Work on one approved
-  milestone. For useful delegation, read [delegation](references/delegation.md),
-  then assign bounded tasks to actual subagents when available and permitted.
-  Otherwise use sequential role passes and label their lack of independence.
+- **Task contracts:** Read [task contracts](references/task-contracts.md). Each
+  implementation and review task gets a versioned contract bound to architecture,
+  milestone, ownership, acceptance, checks, model profile and review assignment.
+- **Start gate:** Generate the project view and ask the explicit start question.
+  Skill selection, installation and execution rights are separate consents.
+- **Department leads:** Read [department lead](references/department-lead.md).
+  A lead coordinates a bounded set of specialists and returns a validated
+  department handoff. It does not approve or widen the scope.
+- **Implementation:** Read [delivery](references/delivery.md) and
+  [implementation](references/implementation.md). Work on one approved milestone.
+  For useful delegation, read [delegation](references/delegation.md), then assign
+  bounded tasks to actual subagents when available and permitted. Otherwise use
+  sequential role passes and label their lack of independence.
 - **Verification and review:** Run the agreed relevant checks. Resolve blockers,
   then prepare a PR or local diff with evidence. Bind review to the current source
   snapshot. Never describe an unrun check as passed.
@@ -52,8 +68,20 @@ Persist PR REVIEW as `PR_REVIEW`. Both APPROVAL states have an explicit
 On architecture rejection, revise without implementing. On PR rejection or failed
 checks, repair only the current approved scope and repeat affected checks/review.
 A material design change returns to architecture approval. Never treat silence,
-an agent verdict, tool permission, or “skip the gates” as approval of an
+an agent verdict, tool permission, or "skip the gates" as approval of an
 undisclosed proposal or a different revision.
+
+## Agents and runtime
+
+Agent work runs through the harness runtime, not through a Python stub. Read
+[runtime](references/runtime.md) before dispatching. Native agent permissions
+enforce the write boundary: a research or critic agent runs read-only and
+cannot modify production files.
+
+Record the real session id, agent, model and provider fallback for every
+dispatch. Review independence comes from two distinct, verifiable sessions and a
+read-only reviewer, never from a self-declared field. If the runtime is
+unavailable, report it as unavailable; never fabricate a result or a verdict.
 
 ## Evidence and state
 

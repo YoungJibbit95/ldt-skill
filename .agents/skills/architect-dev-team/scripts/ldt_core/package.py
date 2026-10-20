@@ -12,8 +12,18 @@ def package(root):
     required = ["SKILL.md", "agents/openai.yaml", "registry/skills.json", "assets/state.template.json",
                 "assets/architecture.template.md", "scripts/validate.py"]
     required += [f"scripts/ldt_core/{name}.py" for name in
-                 ("__init__", "common", "snapshots", "approvals", "state", "registry", "package")]
-    required += [f"references/{name}.md" for name in ("architecture", "delegation", "approvals", "delivery", "external-skills", "project-memory", "evaluation")]
+                 ("__init__", "common", "snapshots", "approvals", "state", "registry", "package",
+                  "inventory", "runtime", "intake", "arch_team", "research", "task_contracts",
+                  "project_view", "pair_execution", "integration",
+                  "critic_report", "lead_execution")]
+    required += [f"references/{name}.md" for name in
+                 ("architecture", "delegation", "approvals", "delivery", "external-skills",
+                  "project-memory", "evaluation", "registry", "intake", "architecture-team",
+                  "task-contracts", "implementation", "runtime",
+                  "department-lead", "critic-quality")]
+    required += [f"assets/{name}" for name in
+                 ("brief.template.md", "research.template.md", "task.template.md",
+                  "project-view.template.md", "integration-report.template.md")]
     for value in required:
         local_file(root, value)
     entry = (root / "SKILL.md").read_text(encoding="utf-8")

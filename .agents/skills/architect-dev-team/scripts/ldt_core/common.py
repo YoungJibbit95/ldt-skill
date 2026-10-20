@@ -23,6 +23,22 @@ def shape(value, keys, label):
             f"{label}: expected fields {keys}")
 
 
+def shape_extended(value, keys, label, optional=""):
+    """Required fields plus a bounded whitelist of optional fields.
+
+    Backward compatible: a value carrying only the required fields stays
+    valid. Forward compatible: a value carrying whitelisted optional fields
+    is valid too. Unknown fields are still rejected, so a typo or an
+    unrecognised record never passes silently.
+    """
+    required = set(keys.split())
+    allowed = required | set(optional.split())
+    require(isinstance(value, dict), f"{label}: expected object")
+    require(required <= set(value), f"{label}: expected fields {keys}")
+    unknown = set(value) - allowed
+    require(not unknown, f"{label}: expected fields {keys}")
+
+
 def string(value, label):
     require(isinstance(value, str) and bool(value.strip()), f"{label}: expected nonempty string")
 

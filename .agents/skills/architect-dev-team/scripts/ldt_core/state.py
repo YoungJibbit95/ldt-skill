@@ -4,13 +4,80 @@ import json
 from pathlib import Path
 import re
 
-from .common import (Invalid, require, shape, string, strings, hash_value, timestamp,
-                     digest_file, local_file, read_json, relative, canonical, digest_bytes)
-from .approvals import scope_fields, scope, approval
+from .common import (Invalid, require, shape, shape_extended, string, strings, hash_value,
+                     timestamp, digest_file, local_file, read_json, relative, canonical,
+                     digest_bytes)
+from .approvals import scope_fields, scope, approval, APPROVAL_KINDS
 from .snapshots import snapshot
 
 PHASES = {"INTAKE", "DISCOVERY", "SPECIFICATION", "ARCHITECTURE", "APPROVAL",
           "IMPLEMENTATION", "VERIFICATION", "PR_REVIEW", "NEXT_ITERATION"}
+
+
+def _uses_task_contracts(root, value):
+    """True when the project uses the M2 task-contract workflow.
+
+    The state list is one signal. The task contracts on disk are the other:
+    a project that carries contract files has gone through the M2 workflow and
+    needs the explicit start decision, even if the state list is stale or
+    empty. This fails closed.
+    """
+    if value.get("task_contracts"):
+        return True
+    tasks_dir = Path(root) / ".architect-dev-team" / "tasks"
+    try:
+        if not tasks_dir.is_dir():
+            return False
+        # Any contract artefact counts, not only the JSON sidecar.
+        return any(tasks_dir.glob("*.json")) or any(tasks_dir.glob("*.md"))
+    except OSError:
+        return False
+
+
+def _verified_independent_review(root, value):
+    """Check the hash-bound runtime evidence for a genuine independent review.
+
+    Returns (ok, reason). The evidence artifact is produced by the runtime
+    adapter from session exports; this function verifies its structure and its
+    hash binding. Re-exporting the sessions needs the runtime and is done by
+    `validate.py runtime verify`.
+    """
+    review = value.get("review")
+    if not review:
+        return False, "review snapshot required"
+    verification = review.get("verification")
+    if not verification:
+        return False, "rigorous review requires a bound runtime verification artifact"
+    path = local_file(root, verification["path"])
+    require(digest_file(path) == verification["sha256"],
+            "review.verification artifact changed")
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return False, "review.verification artifact is unreadable"
+    records = data.get("independence") if isinstance(data, dict) else None
+    if not isinstance(records, list) or not records:
+        return False, "review.verification artifact has no independence records"
+    for record in records:
+        if not isinstance(record, dict):
+            continue
+        if record.get("independence") != "independent" or record.get("reasons"):
+            continue
+        evidence = record.get("evidence") or {}
+        impl_session = evidence.get("implementer_session_id")
+        critic_session = evidence.get("critic_session_id")
+        if not impl_session or not critic_session:
+            continue
+        if impl_session == critic_session:
+            continue
+        if not evidence.get("critic_read_only"):
+            continue
+        if evidence.get("implementer_execution_mode") == "fixture":
+            continue
+        if evidence.get("critic_execution_mode") == "fixture":
+            continue
+        return True, ""
+    return False, "review.verification artifact has no verified independent review"
 
 
 def artifact(root, value, label):
@@ -22,7 +89,17 @@ def artifact(root, value, label):
 def state(value, root, gate=None, *, migrating=False):
     root = Path(root).resolve(strict=True)
     require(root.is_dir(), "project root must be a directory")
-    shape(value, "schema_version phase approval_stage profile architecture milestone approvals checks review completed open_issues constraints next_action", "state")
+    # The original M1a required fields stay mandatory. The M2 Slice 1 fields
+    # are optional and whitelisted, so pre-M2 state files keep validating and
+    # unknown fields are still rejected.
+    shape_extended(
+        value,
+        "schema_version phase approval_stage profile architecture milestone approvals "
+        "checks review completed open_issues constraints next_action",
+        "state",
+        optional=("brief research_results task_contracts project_view pair_results "
+                  "lead_session arch_lead_session effort approved_skills"),
+    )
     scope_fields(value)
     version = value["schema_version"]
     require(isinstance(value["phase"], str) and value["phase"] in PHASES, "invalid phase")
@@ -32,6 +109,19 @@ def state(value, root, gate=None, *, migrating=False):
     if version == 1 and not migrating and (gate is not None or value["phase"] in {"IMPLEMENTATION", "VERIFICATION", "PR_REVIEW", "NEXT_ITERATION"} or stage == "iteration"):
         raise Invalid("legacy schema v1 cannot satisfy gates; run migrate-state with explicit --required-check policy, then obtain renewed architecture approval")
     require(isinstance(value["profile"], str) and value["profile"] in {"lean", "balanced", "rigorous"}, "invalid profile")
+    for optional_key in ("research_results", "task_contracts", "pair_results"):
+        if optional_key in value:
+            require(isinstance(value[optional_key], list), f"{optional_key} must be list")
+    for optional_key in ("brief", "project_view", "lead_session", "arch_lead_session"):
+        if optional_key in value and value[optional_key] is not None:
+            require(isinstance(value[optional_key], (str, dict)),
+                    f"{optional_key} must be string or object")
+    if "effort" in value and value["effort"] is not None:
+        effort = value["effort"]
+        require(isinstance(effort, dict), "effort must be object")
+        for key in ("tokens", "time_seconds", "agents", "repair_rounds"):
+            require(key in effort and isinstance(effort[key], int) and effort[key] >= 0,
+                    f"effort.{key} must be a nonnegative integer")
     if value["architecture"] is not None:
         artifact(root, value["architecture"], "architecture")
     if stage == "architecture":
@@ -40,12 +130,15 @@ def state(value, root, gate=None, *, migrating=False):
     require(isinstance(value["approvals"], list), "approvals must be list")
     for item in value["approvals"]:
         shape(item, "kind decision scope_sha256 review_sha256 evidence recorded_at", "approval")
-        require(isinstance(item["kind"], str) and item["kind"] in {"architecture", "iteration"}, "invalid approval kind")
+        require(isinstance(item["kind"], str) and item["kind"] in APPROVAL_KINDS, "invalid approval kind")
         require(isinstance(item["decision"], str) and item["decision"] in {"approved", "rejected"}, "invalid decision")
         hash_value(item["scope_sha256"], "scope_sha256")
         if item["review_sha256"] is not None:
             hash_value(item["review_sha256"], "review_sha256")
-        require((item["kind"] == "architecture") == (item["review_sha256"] is None), "iteration decisions require review hash; architecture decisions require null")
+        require(item["kind"] != "iteration" or item["review_sha256"] is not None,
+                "iteration decisions require a review hash")
+        require(item["kind"] == "iteration" or item["review_sha256"] is None,
+                "architecture and start decisions require a null review hash")
         string(item["evidence"], "approval.evidence")
         timestamp(item["recorded_at"])
     require(isinstance(value["checks"], list), "checks must be list")
@@ -71,8 +164,17 @@ def state(value, root, gate=None, *, migrating=False):
             require(item["waiver"] is None, "only waived checks may carry a waiver; failed checks cannot be waived")
     if value["review"] is not None:
         review = value["review"]
-        shape(review, "path sha256 independence evidence", "review")
+        # The optional verification block binds the review to a hash-checked
+        # runtime evidence artifact. It is what makes an independent review
+        # more than a self-declared string.
+        shape_extended(review, "path sha256 independence evidence", "review",
+                       optional="verification")
         artifact(root, {key: review[key] for key in ("path", "sha256")}, "review")
+        verification = review.get("verification")
+        if verification is not None:
+            shape(verification, "path sha256", "review.verification")
+            hash_value(verification["sha256"], "review.verification.sha256")
+            relative(verification["path"])
         require(isinstance(review["independence"], str) and review["independence"] in {"independent", "self", "unavailable"}, "invalid review independence")
         string(review["evidence"], "review.evidence")
         saved = read_json(local_file(root, review["path"]), 16 * 1024 * 1024)
@@ -104,6 +206,11 @@ def state(value, root, gate=None, *, migrating=False):
     if required:
         require(value["architecture"] is not None and value["milestone"] is not None, "gate requires architecture and milestone")
         approval(value, "architecture")
+        # The M2 Slice 1 workflow adds an explicit start decision. It is
+        # required only when the state carries task contracts, so legacy
+        # M1a-M1d records keep their previous behaviour unchanged.
+        if _uses_task_contracts(root, value):
+            approval(value, "start")
         policy = set(value["milestone"]["required_checks"])
         actual_policy = {item["name"] for item in value["checks"] if item["required"]}
         require(actual_policy == policy, "checks must match approved required_checks exactly; missing, renamed, demoted or additional mandatory check")
@@ -115,8 +222,15 @@ def state(value, root, gate=None, *, migrating=False):
         if value["profile"] == "rigorous":
             independence_waived = any(item["name"] == "independent_review" and item["status"] == "waived"
                                       for item in mandatory)
-            require(value["review"]["independence"] == "independent" or independence_waived,
-                    "rigorous review requires independent review or a required independent_review check explicitly waived")
+            if not independence_waived:
+                # The M1a wording is preserved byte for byte.
+                require(value["review"]["independence"] == "independent",
+                        "rigorous review requires independent review or a required independent_review check explicitly waived")
+                # An independent claim is only accepted with hash-bound
+                # runtime evidence behind it.
+                verified, reason = _verified_independent_review(root, value)
+                require(verified,
+                        f"rigorous review requires verified runtime evidence: {reason}")
     if required >= 3:
         approval(value, "iteration", value["review"]["sha256"])
 

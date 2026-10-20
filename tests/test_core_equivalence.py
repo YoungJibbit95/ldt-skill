@@ -9,6 +9,7 @@ import hashlib
 import importlib.util
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -72,6 +73,73 @@ class Equivalence(unittest.TestCase):
         self.assertEqual(old.returncode, expected, old.stderr)
         return old
 
+    # The M2 slice extends the command line surface. The M1a oracle file
+    # stays byte-identical; the comparison tolerates exactly the documented
+    # additional subcommands and nothing else.
+    M2_SUBCOMMANDS = ("intake", "arch-team", "research", "task-contracts",
+                      "project-view", "pair-exec", "integration", "runtime",
+                      "lead", "critic-report")
+
+    def _command_list(self, stream):
+        """Extract the top-level command list from a usage message."""
+        text = stream.decode("utf-8", "replace")
+        match = re.search(r"\{([a-z,-]+)\}", text)
+        if match:
+            return {item for item in match.group(1).split(",") if item}
+        match = re.search(r"\(choose from '([^)]*)'\)", text)
+        if match:
+            return {item.strip().strip("'") for item in match.group(1).split(",") if item.strip()}
+        return None
+
+    def _without_command_list(self, stream):
+        """Replace the command choice lists with a placeholder.
+
+        argparse prints the choices twice: as `{a,b,c}` in the usage line
+        and as `(choose from 'a', 'b', ...)` in the error message.
+        """
+        text = stream.decode("utf-8", "replace")
+        text = re.sub(r"\{[a-z,-]+\}", "{COMMANDS}", text)
+        text = re.sub(r"\(choose from '[^)]*\)", "(CHOICES)", text)
+        return text
+
+    # The M1a top-level commands. A list containing these is the extensible
+    # surface; any other list (a subcommand's own choices) must stay equal.
+    M1A_TOP_LEVEL = {"package", "registry", "digest", "scope", "state",
+                      "migrate-state", "snapshot"}
+
+    def cli_equal_with_extension(self, args, expected):
+        """Compare M1a behaviour while tolerating the documented additions.
+
+        The M1a command set and every byte outside the top-level command
+        list must match the frozen oracle exactly. The added commands must
+        be exactly the documented set, so a silent CLI change is still
+        caught.
+        """
+        old = self.run_cli(BASELINE, args)
+        new = self.run_cli(SCRIPT, args)
+        self.assertEqual(old.returncode, expected, old.stderr)
+        self.assertEqual(new.returncode, expected, new.stderr)
+
+        old_commands = self._command_list(old.stdout) or self._command_list(old.stderr)
+        new_commands = self._command_list(new.stdout) or self._command_list(new.stderr)
+
+        def is_top_level(commands):
+            return commands is not None and self.M1A_TOP_LEVEL <= commands
+
+        if is_top_level(old_commands) and is_top_level(new_commands):
+            added = new_commands - old_commands
+            self.assertEqual(added, set(self.M2_SUBCOMMANDS))
+            # The M1a command set must be unchanged.
+            self.assertEqual(old_commands, new_commands - added)
+            self.assertEqual(self._without_command_list(old.stdout),
+                             self._without_command_list(new.stdout))
+            self.assertEqual(self._without_command_list(old.stderr),
+                             self._without_command_list(new.stderr))
+        else:
+            # Not the extensible surface: byte-for-byte parity is required.
+            self.assertEqual((old.stdout, old.stderr), (new.stdout, new.stderr), args)
+        return old
+
     def write_state(self, value=None):
         self.path.write_text(json.dumps(self.value if value is None else value,
                                         ensure_ascii=False), encoding="utf-8")
@@ -109,7 +177,10 @@ class Equivalence(unittest.TestCase):
                            (["state", "x"], 2), (["state", "x", "--root", ".", "--gate", "bad"], 2),
                            (["digest"], 2), (["snapshot", ".", "--extra"], 2)]:
             with self.subTest(args=args):
-                self.cli_equal(args, code)
+                # Every parser diagnostic prints the top-level command list,
+                # which the M2 slice extends by a documented set. The M1a
+                # command set and all other bytes are compared exactly.
+                self.cli_equal_with_extension(args, code)
         for command in ("package", "registry", "digest", "scope", "state", "migrate-state", "snapshot"):
             with self.subTest(help=command):
                 if command == "registry":
@@ -269,7 +340,11 @@ if len(sys.argv) > 2:
             self.assertEqual((result.returncode, result.stdout, result.stderr), (0, b"", b""))
         old = self.run_cli(BASELINE, ["--help"])
         new = self.run_cli(relocated / "scripts/validate.py", ["--help"])
-        self.assertEqual((old.returncode, old.stdout, old.stderr), (new.returncode, new.stdout, new.stderr))
+        self.assertEqual(old.returncode, new.returncode)
+        self.assertEqual(self._without_command_list(old.stdout),
+                         self._without_command_list(new.stdout))
+        self.assertEqual(self._without_command_list(old.stderr),
+                         self._without_command_list(new.stderr))
 
     def test_missing_core_files_are_justified_package_completeness_difference(self):
         # Extraction adds runtime files. The historical monolith accepted their

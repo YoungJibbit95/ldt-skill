@@ -28,6 +28,9 @@ def scope(state):
     return digest_bytes(canonical({"architecture": state["architecture"], "milestone": state["milestone"], "profile": state["profile"]}))
 
 
+APPROVAL_KINDS = ("architecture", "start", "iteration")
+
+
 def approval(state, kind, review=None):
     decisions = [item for item in state["approvals"] if item["kind"] == kind]
     require(bool(decisions), f"missing {kind} approval")
@@ -36,3 +39,7 @@ def approval(state, kind, review=None):
     require(latest["scope_sha256"] == scope(state), f"stale {kind} approval scope")
     if kind == "iteration":
         require(latest["review_sha256"] == review, "stale iteration review approval")
+    if kind == "start":
+        # A start decision stands only on an approved architecture for the same
+        # scope. It is an additional gate, not a replacement for it.
+        approval(state, "architecture")
