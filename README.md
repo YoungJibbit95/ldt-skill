@@ -12,8 +12,8 @@
 
 
 <p align="center">
-  <a href="https://youngjibbit95.github.io/ldt-skill/de/">Website</a> ·
-  <a href="https://youngjibbit95.github.io/ldt-skill/de/docs/install/">Installation</a> ·
+  <a href="https://youngjibbit95.github.io/ldt-skill/en/">Website</a> ·
+  <a href="https://youngjibbit95.github.io/ldt-skill/en/docs/install/">Installation</a> ·
   <a href="https://youngjibbit95.github.io/ldt-skill/de/docs/guide/">Guide</a> ·
   <a href="https://youngjibbit95.github.io/ldt-skill/de/demo/">Demo</a> ·
   <a href="https://youngjibbit95.github.io/ldt-skill/en/">English docs</a> ·
@@ -52,29 +52,23 @@
   </a>
 </p>
 
-## 🚀 Direkt in deinem Projekt starten
+# LittleDevTeam
 
-Öffne dein bestehendes Projekt in Codex und kopiere diesen Prompt in einen Chat. Codex übernimmt damit den vollständigen Skill in dein Projekt, prüft die Installation und beginnt anschließend mit der Planung deines Auftrags.
+A skill for Codex that turns an idea into an architecture proposal and a verified milestone. You approve the plan and review the result.
 
-> [!TIP]
-> Du brauchst keine Shell-Befehle anzupassen. Gib dein Ziel direkt unter dem Prompt an oder lass Codex danach fragen. Für die Paketprüfung braucht deine Umgebung Python ab 3.10.
+## Quickstart
 
-Deutsch:
+Open your project in Codex and paste this prompt:
 
 ```text
-Installiere LittleDevTeam von https://github.com/YoungJibbit95/ldt-skill in diesem Projekt.
-Verwende die neueste stabile Version, prüfe die Installation und starte anschließend mit $architect-dev-team die Projektplanung.
-Frage mich nach meinem Vorhaben.
+Install LittleDevTeam from https://github.com/YoungJibbit95/ldt-skill into this project. Use the latest stable version, verify the installation, then start project planning with $architect-dev-team. Ask me what I want to build.
 ```
 
-Englisch:
-```text
-Install LittleDevTeam from https://github.com/YoungJibbit95/ldt-skill into this project.
-Use the latest stable version, verify the installation, then start project planning with $architect-dev-team.
-Ask me what I want to build.
-```
+**No stable release is available as of 20 October 2026.** The agent must check [Releases](https://github.com/YoungJibbit95/ldt-skill/releases), offer a verified development revision if needed, and record its exact commit. Existing installations must be compared before an update. Python 3.10+ is required for package verification.
 
-Der Prompt verwendet den dokumentierten Entwicklungsstand der [Installationsanleitung](https://youngjibbit95.github.io/ldt-skill/de/docs/install/). Codex erkennt neue Skills automatisch; falls der Skill nicht erscheint, starte Codex neu. Der Projektpfad `.agents/skills` ist in den [offiziellen Codex-Skill-Hinweisen](https://learn.chatgpt.com/docs/build-skills) beschrieben.
+[Manual installation and troubleshooting](https://youngjibbit95.github.io/ldt-skill/en/docs/install/) · [Features](https://youngjibbit95.github.io/ldt-skill/en/docs/#how-the-skill-works) · [Workflow](https://youngjibbit95.github.io/ldt-skill/en/docs/workflow/) · [Examples](https://youngjibbit95.github.io/ldt-skill/en/docs/guide/)
+
+The published skill supports project discovery, architecture proposals, optional specialist delegation, verification, and saved context. Structured intake helpers and the newer team/runtime workflows remain unpublished; see the [capability and release proposal](docs/onboarding-skill-release-proposal.md). Package validation does not prove Codex discovery.
 
 
 ## 🪐 Was ist LittleDevTeam?

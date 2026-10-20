@@ -22,6 +22,18 @@ def run(arguments):
 
 
 def main():
+    prompts = json.loads((WEBSITE / "src/data/quickstart.json").read_text(encoding="utf-8"))
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    quickstart = readme.split("## Quickstart\n", 1)[1].split("## ", 1)[0]
+    copied = re.search(r"```text\n(.*?)\n```", quickstart, re.S).group(1)
+    if copied != prompts["en"] or prompts["de"] in quickstart:
+        raise RuntimeError("README Quickstart must contain only the shared English prompt")
+    for locale, prompt in prompts.items():
+        if "https://github.com/YoungJibbit95/ldt-skill" not in prompt or "$architect-dev-team" not in prompt:
+            raise RuntimeError(f"Wrong repository or skill identifier: {locale}")
+        if re.search(r"\b[0-9a-f]{40}\b", prompt):
+            raise RuntimeError(f"Primary Quickstart must not pin a commit: {locale}")
+    print("Quickstart: shared English README copy, DE/EN repository and identifier checked.")
     # A documented pin is useful only while the actual described sources match it.
     tracked = run(["git", "ls-tree", "-r", "--name-only", PIN, "--", ".agents/skills/architect-dev-team"]).splitlines()
     for relative in tracked:
